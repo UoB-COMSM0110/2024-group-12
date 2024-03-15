@@ -7,6 +7,7 @@ final static float SPRITE_SIZE = 50.0;
 
 
 PImage grave;
+Sprite player;
 
 ArrayList<Sprite> platforms;
 
@@ -16,6 +17,7 @@ void setup() {
   
   grave = loadImage("./data/grave.png");
   platforms = new ArrayList<>();
+  player = new Sprite("./data/player1.png", SPRITE_SCALE, 100.0, 100.0);
   
   createPlatforms("./data/map.csv");
 }
@@ -26,6 +28,9 @@ void draw() {
   for (Sprite platform : platforms) {
     platform.display();
   }
+  
+  player.display();
+  player.update();
 }
 
 void createPlatforms(String file_name) {
@@ -45,4 +50,26 @@ void createPlatforms(String file_name) {
       }
     }
   }
+}
+
+void keyPressed() {
+  switch (keyCode) {
+    case RIGHT:
+      player.setChangeX(player.getChangeX() + MOVE_SPEED);
+      break;
+    case LEFT:
+      player.setChangeX(player.getChangeX() - MOVE_SPEED);
+      break;
+    case UP:
+        player.setChangeY(player.getChangeY() - MOVE_SPEED);
+        break;
+    case DOWN:
+      player.setChangeY(player.getChangeY() + MOVE_SPEED);
+      break;
+  }
+}
+
+public void keyReleased() {
+  player.setChangeX(0);
+  player.setChangeY(0);
 }
