@@ -32,10 +32,25 @@ public class Sprite{
      image(image, center_x, center_y, w, h); 
   }
   
-  public void update()
-  {
+  public void update() {
      center_x += change_x;
      center_y += change_y;
+  }
+  
+  void setCenter_x(float x) {
+    center_x = x;
+  }
+  
+  float getCenter_x() {
+    return center_x;
+  }
+  
+  void setCenter_y(float y) {
+    center_y = y;
+  }
+  
+  float getCenter_y() {
+    return center_y;
   }
   
   void setLeft(float left) {
@@ -68,5 +83,29 @@ public class Sprite{
   
   float getBottom() {
     return center_y + h / 2;
+  }
+  
+  float getChangeX() {
+    return change_x;
+  }
+
+  void setChangeX(float cx) {
+    change_x = cx;
+  }
+
+  float getChangeY() {
+    return change_y;
+  }
+
+  void setChangeY(float cy) {
+    change_y = cy;
+  }
+
+  public PImage getImage() {
+    return image;
+  }
+
+  public void setImage(PImage image) {
+    this.image = image;
   }
 }
