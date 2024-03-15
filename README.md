@@ -89,8 +89,13 @@ As a speed runner, I want to have a timer feature to track my completion time fo
 
 
 
-**CLASS DIAGRAM **
 
-![GameClassDiagram](https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/e696076e-daf6-4bad-82e8-7364a02f8592)
+
+**CLASS DIAGRAM**
+
+
+
+![Game Class Diagram](https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/fb6f8e37-a65f-4c2a-bbaf-8083a01caa8a)
+
 
 
