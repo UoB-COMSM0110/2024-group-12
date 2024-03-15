@@ -99,3 +99,29 @@ As a speed runner, I want to have a timer feature to track my completion time fo
 
 
 
+**Evaluation**
+
+
+**Think Aloud Evaluation:**
+
+**Tasks**
+1. Try and collect as many pumpkins as you can
+2. Traverse the game until you reach the finish point
+   
+Participant1: Feedback
+
++ The controls were intuative and simple
++ Good Asthetic
++ Jump Speed was set at the right pace - not too large of a jump or small
+- Make the background less generic and
+- Be able to add player name fully
+- No implementation of the "Flappy Bird" component of the game i.e. the donuts were not resolved
+- Have a tutorial of the the games functionality and use, what do the pumpkins do? what do the donuts do?
+
+Participant2: Feedback:
+
++ Good asthetic to the game
+- Would like the functionality of respawing where I died rather then the start of the game
+- Would like enimes to be chasing the character rather then static obstacles
+- Increase the speed to land faster
+  
