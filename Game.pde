@@ -23,13 +23,14 @@ void setup() {
   
   grave = loadImage("./data/grave.png");
   platforms = new ArrayList<>();
-  player = new Sprite("./data/player1.png", SPRITE_SCALE, 650.0, 100.0);
+  player = new Sprite("./data/player1.png", SPRITE_SCALE);
   
   createPlatforms("./data/map_test.csv");
 }
 
 void draw() {
   background(255);
+  scroll();
   player.display();
   resolvePlatformCollisions(player, platforms);
   for (Sprite platform : platforms) {
@@ -130,7 +131,7 @@ void scroll() {
   }
 
   translate(-view_x, -view_y);
-  }
+}
 
 
 void createPlatforms(String file_name) {
