@@ -11,18 +11,25 @@ final static float VERTICAL_MARGIN = 40;
 float view_x = 0;
 float view_y = 0;
 
+int score;
 
 PImage grave;
+PImage pumpkin;
+
 Sprite player;
 
 ArrayList<Sprite> platforms;
+ArrayList<Pumpkin> pumpkins;
 
 void setup() {
   size(800, 600);
   imageMode(CENTER);
   
   grave = loadImage("./data/grave.png");
+  pumpkin = loadImage("./data/pumpkin/pumpkin1.png");
+  
   platforms = new ArrayList<>();
+  pumpkins = new ArrayList<>();
   player = new Sprite("./data/player1.png", SPRITE_SCALE);
   
   createPlatforms("./data/map_test.csv");
@@ -30,15 +37,34 @@ void setup() {
 
 void draw() {
   background(255);
+  textSize(32);
+  fill(255, 0, 0);
+  text("Pumpkins: " + score, 50, 50);
+  
   scroll();
   player.display();
   resolvePlatformCollisions(player, platforms);
+  pumpkinCollisions();
+  
   for (Sprite platform : platforms) {
     platform.display();
   }
-
+  
+  for (Pumpkin pk : pumpkins) {
+    pk.display();
+    pk.updateAnimation();
+  }
 }
 
+void pumpkinCollisions() {
+  ArrayList<Sprite> pumpkinList = checkCollisionList(player, pumpkins);
+  if (pumpkinList.size() > 0) {
+    for (Sprite pk: pumpkinList) {
+      score++;
+      pumpkins.remove(pk);
+    }
+  }
+}
 
 // returns true if sprite is one a platform.
 public boolean isOnPlatforms(Sprite s, ArrayList<Sprite> walls){
@@ -97,14 +123,18 @@ boolean checkCollision(Sprite s1, Sprite s2) {
   return !(noXOverlap || noYOverlap); 
 }
 
-ArrayList<Sprite> checkCollisionList(Sprite s, ArrayList<Sprite> list) {
+ArrayList<Sprite> checkCollisionList(Sprite s, ArrayList<? extends Sprite> list) {
   ArrayList<Sprite> collisionList = new ArrayList<>();
 
-  for (Sprite p : list) {
-    if (checkCollision(s, p)) {
-      collisionList.add(p);
+  for (Object obj : list) {
+    if (obj instanceof Sprite) {
+      Sprite p = (Sprite) obj;
+      if (checkCollision(s, p)) {
+        collisionList.add(p);
+      }
     }
   }
+  
   return collisionList;
 }
 
@@ -143,10 +173,21 @@ void createPlatforms(String file_name) {
     for (int col = 0; col < values.length; col++) {
       switch (values[col]) {
         case "1": {
+          System.out.println(values[col]);
             Sprite s = new Sprite(grave, SPRITE_SCALE);
             s.center_x = ((float) (SPRITE_SIZE / 2 + col * SPRITE_SIZE));
             s.center_y = ((float) (SPRITE_SIZE / 2 + row * SPRITE_SIZE));
             platforms.add(s);
+            break;
+        }
+        
+        case "5": {
+          System.out.println(values[col]);
+          Pumpkin pk = new Pumpkin(pumpkin, SPRITE_SCALE / 2);
+          pk.center_x = ((float) (SPRITE_SIZE / 2 + col * SPRITE_SIZE));
+          pk.center_y = ((float) (SPRITE_SIZE / 2 + row * SPRITE_SIZE));
+          pumpkins.add(pk);
+          break;
         }
       }
     }
