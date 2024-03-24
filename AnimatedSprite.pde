@@ -4,6 +4,8 @@ public class AnimatedSprite extends Sprite {
   PImage[] standNeutral;
   PImage[] moveLeft;
   PImage[] moveRight;
+  PImage[] death;
+  PImage[] jump;
   int direction;
   int index;
   int frame;
