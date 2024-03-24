@@ -42,7 +42,7 @@ void setup() {
   platforms = new ArrayList<>();
   pumpkins = new ArrayList<>();
   enemies = new ArrayList<>();
-  player = new Sprite("./data/player1.png", SPRITE_SCALE);
+  player = new Sprite("/data/player/GhostWalk/walk1.png", SPRITE_SCALE);
   
   createPlatforms("./data/map_test.csv");
 }
