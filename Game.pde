@@ -8,10 +8,16 @@ final static float GRAVITY = .8;
 final static float RIGHT_MARGIN = 400;
 final static float LEFT_MARGIN = 60;
 final static float VERTICAL_MARGIN = 40;
+final static float HEIGHT = SPRITE_SIZE * 12;
+final static float GROUND_LEVEL = HEIGHT - SPRITE_SIZE;
+
 float view_x = 0;
 float view_y = 0;
 
 int score;
+int life;
+
+boolean isGameOver;
 
 PImage grave;
 PImage pumpkin;
@@ -20,6 +26,7 @@ Sprite player;
 
 ArrayList<Sprite> platforms;
 ArrayList<Pumpkin> pumpkins;
+ArrayList<Enemy> enemies;
 
 void setup() {
   size(800, 600);
@@ -28,8 +35,13 @@ void setup() {
   grave = loadImage("./data/grave.png");
   pumpkin = loadImage("./data/pumpkin/pumpkin1.png");
   
+  life = 3;
+  score = 0;
+  isGameOver = false;
+  
   platforms = new ArrayList<>();
   pumpkins = new ArrayList<>();
+  enemies = new ArrayList<>();
   player = new Sprite("./data/player1.png", SPRITE_SCALE);
   
   createPlatforms("./data/map_test.csv");
@@ -39,12 +51,13 @@ void draw() {
   background(255);
   textSize(32);
   fill(255, 0, 0);
-  text("Pumpkins: " + score, 50, 50);
+  text("Life: " + life + "   Pumpkins: " + score, 50, 50);
   
   scroll();
   player.display();
   resolvePlatformCollisions(player, platforms);
   pumpkinCollisions();
+  checkDeath();
   
   for (Sprite platform : platforms) {
     platform.display();
@@ -54,7 +67,36 @@ void draw() {
     pk.display();
     pk.updateAnimation();
   }
+  
+  for (Enemy e : enemies) {
+    e.display();
+    e.update();
+    e.updateAnimation();
+  }
 }
+
+
+void checkDeath() {
+  boolean collidedEnemy = enemyCollisions();
+  boolean fallOffCliff = player.getBottom() > GROUND_LEVEL;
+  
+  if (collidedEnemy || fallOffCliff) {
+    life--;
+    if (life == 0) {
+      isGameOver = true;
+    }
+    else {
+      player.center_x = 0;
+      player.setBottom(0);
+    }
+  }
+  
+}
+
+boolean enemyCollisions() {
+  return (checkCollisionList(player, enemies).size() > 0);
+}
+
 
 void pumpkinCollisions() {
   ArrayList<Sprite> pumpkinList = checkCollisionList(player, pumpkins);
@@ -173,7 +215,6 @@ void createPlatforms(String file_name) {
     for (int col = 0; col < values.length; col++) {
       switch (values[col]) {
         case "1": {
-          System.out.println(values[col]);
             Sprite s = new Sprite(grave, SPRITE_SCALE);
             s.center_x = ((float) (SPRITE_SIZE / 2 + col * SPRITE_SIZE));
             s.center_y = ((float) (SPRITE_SIZE / 2 + row * SPRITE_SIZE));
@@ -182,12 +223,20 @@ void createPlatforms(String file_name) {
         }
         
         case "5": {
-          System.out.println(values[col]);
           Pumpkin pk = new Pumpkin(pumpkin, SPRITE_SCALE / 2);
           pk.center_x = ((float) (SPRITE_SIZE / 2 + col * SPRITE_SIZE));
           pk.center_y = ((float) (SPRITE_SIZE / 2 + row * SPRITE_SIZE));
           pumpkins.add(pk);
           break;
+        }
+        
+        case "6": {
+          float bLeft = col * (float) SPRITE_SIZE;
+          float bRight = bLeft + 4 * (float) SPRITE_SIZE;
+          Enemy witch = new Witch(loadImage("./data/witch/neutral/witch1.png"), (float) 50 / 72, bLeft, bRight);
+          witch.center_x = ((float) (SPRITE_SIZE / 2 + col * SPRITE_SIZE));
+          witch.center_y = ((float) (SPRITE_SIZE / 2 + row * SPRITE_SIZE));
+          enemies.add(witch);
         }
       }
     }
