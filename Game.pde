@@ -237,6 +237,17 @@ void createPlatforms(String file_name) {
           witch.center_x = ((float) (SPRITE_SIZE / 2 + col * SPRITE_SIZE));
           witch.center_y = ((float) (SPRITE_SIZE / 2 + row * SPRITE_SIZE));
           enemies.add(witch);
+          break;
+        }
+        
+        case "7": {
+          float bLeft = col * (float) SPRITE_SIZE;
+          float bRight = bLeft + 4 * (float) SPRITE_SIZE;
+          Enemy redSmile = new RedSmile(loadImage("./data/redsmile/redsmile1.png"), (float) 50 / 230, bLeft, bRight);
+          redSmile.center_x = ((float) (SPRITE_SIZE / 2 + col * SPRITE_SIZE));
+          redSmile.center_y = ((float) (SPRITE_SIZE / 2 + row * SPRITE_SIZE));
+          enemies.add(redSmile);
+          break;
         }
       }
     }
