@@ -100,7 +100,7 @@ public class PumpkinMonster extends Enemy {
 
   float easeInOutQuad(float t) {
       float result = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-      return (1 - result) * 0.01;
+      return (1 - result) * 0.03;
   }
 
   boolean detect(Sprite player) {
