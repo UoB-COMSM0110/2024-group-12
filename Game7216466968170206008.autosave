@@ -14,9 +14,10 @@ final static float GROUND_LEVEL = HEIGHT - SPRITE_SIZE;
 
 float view_x = 0;
 float view_y = 0;
-float GRAVITY = .8;
 
 int score;
+//temp: orb obtained score:
+int orb_score;
 int life;
 
 boolean isGameOver;
@@ -24,19 +25,13 @@ boolean isGameOver;
 PImage grave;
 PImage pumpkin;
 PImage ghost;
-PImage redsmile;
-PImage witch;
-PImage ladder;
-PImage whitewall;
 PImage orb;
 
 Player player;
 
 ArrayList<Sprite> platforms;
 ArrayList<Pumpkin> pumpkins;
-ArrayList<Enemy> flyEnemies;
-ArrayList<Enemy> groundEnemies;
-ArrayList<Sprite> ladders;
+ArrayList<Enemy> enemies;
 ArrayList<Orb> orbs;
 
 void setup() {
@@ -46,19 +41,14 @@ void setup() {
   grave = loadImage("./data/grave.png");
   pumpkin = loadImage("./data/pumpkin/pumpkin1.png");
   ghost = loadImage("./data/player/GhostWalk/walk1.png");
-  redsmile = loadImage("./data/redsmile/redsmile1.png");
-  witch = loadImage("./data/witch/neutral/witch1.png");
-  ladder = loadImage("./data/ladder.png");
-  whitewall = loadImage("./data/whitewall.png");
   orb = loadImage("./data/PowerUpOrb/powerOrb1.png");
   
   score = 0;
   isGameOver = false;
   platforms = new ArrayList<>();
-  ladders = new ArrayList<>();
   pumpkins = new ArrayList<>();
-  flyEnemies = new ArrayList<>();
-  groundEnemies = new ArrayList<>();
+  orbs = new ArrayList<>();
+  enemies = new ArrayList<>();
   player = new Player(ghost, SPRITE_SCALE);
   createPlatforms("./data/map_test.csv");
   
@@ -70,14 +60,18 @@ void draw() {
   textSize(32);
   fill(255, 0, 0);
   text("Life: " + player.lives + "   Pumpkins: " + score, 50, 50);
+  text("    PowerUps: " + orb_score, 300, 50);
   
   scroll();
+  player.display();
+  player.updateAnimation();
+  resolvePlatformCollisions(player, platforms);
+  pumpkinCollisions();
+  checkPowerUp();
+  checkDeath();
+
   
   for (Sprite platform : platforms) {
-    platform.display();
-  }
-  
-  for (Sprite platform : ladders) {
     platform.display();
   }
   
@@ -86,39 +80,16 @@ void draw() {
     pk.updateAnimation();
   }
   
-  for (Enemy e : flyEnemies) {
+  for (Enemy e : enemies) {
     e.display();
-    e.updateAnimation(); 
-    e.update(); 
+    e.update();
+    e.updateAnimation();
   }
   
-  for (Enemy e : groundEnemies) {
-    e.display();
-    
-    if (e instanceof PumpkinMonster) {
-      ((PumpkinMonster) e).updateAnimation(player);
-      ((PumpkinMonster) e).update(player);
-    }
-    
-    else {
-      e.updateAnimation(); 
-      e.update();
-    }
+  for (Orb o : orbs) {
+    o.display();
+    o.updateAnimation();
   }
-  
-  player.display();
-  player.updateAnimation();
-  resolvePlatformCollisions(player, platforms);
-  resolveLadderCollisions(player, ladders);
-  resolvePlatformCollisionsForEnemies(groundEnemies, platforms);
-
-  pumpkinCollisions();
-  checkDeath();
-  //for (Orb o : orbs) {
-  //  o.display();
-  //  o.updateAnimation();
-  //}
-  
   
 }
 
@@ -130,32 +101,34 @@ public void GameOver() {
 
 // Logic for Flappy Bird Mode: 
 void checkPowerUp() {
-  // Check if the player has obtained Orb
-boolean powerUpObtained = orbCollision();
-// if Orb is obtained:
-if (powerUpObtained) {
-  // and the player is not onPlatform,
-    if (!player.onPlatform) {
-      // and whent the keyPressed is UP
-      if (keyCode == UP) {
-        player.change_y += -FLY_SPEED;
-      }
-    }    
+ArrayList<Sprite> orbList = checkCollisionList(player, orbs);
+// check orbList is bigger than 0
+if (orbList.size() > 0) {
+  // for every orb that you encounter: 
+  for (Sprite o : orbList) {
+  // increase orb_score: 
+  orb_score++;
+  // remove orb from list 
+  orbs.remove(o);
+  // Set player.Fly to true:
+  player.isFLying = true;
+  // reduce gravity: 
+  GRAVITY = 0.005;
+  // timeOut(); // reset gravity back to 0.8; 
+    
   }
+  
+}
+
 }
 
 void checkDeath() {
-  ArrayList<Sprite> groundCollision = checkCollisionList(player, groundEnemies);
-  ArrayList<Sprite> airCollision = checkCollisionList(player, flyEnemies);
-  
+  boolean collidedEnemy = enemyCollisions();
   boolean fallOffCliff = player.getBottom() > GROUND_LEVEL;
   
-  if (groundCollision.size() > 0 || airCollision.size() > 0 || fallOffCliff) {
-    if (groundCollision.size() > 0 && groundCollision.get(0) instanceof PumpkinMonster) {
-      ((PumpkinMonster) groundCollision.get(0)).timer = 0;
-    }
-    
+  if (collidedEnemy || fallOffCliff) {
     player.lives--;
+    player.onLifeLoss();
     if (player.lives == 0) {
       GameOver();
     }
@@ -163,11 +136,12 @@ void checkDeath() {
       player.center_x = 0;
       player.setBottom(0);
     }
-  }  
+  }
+  
 }
 
-boolean orbCollision() {
-return (checkCollisionList(player, orbs).size() > 0);
+boolean enemyCollisions() {
+  return (checkCollisionList(player, enemies).size() > 0);
 }
 
 void pumpkinCollisions() {
@@ -228,42 +202,6 @@ void resolvePlatformCollisions(Sprite s, ArrayList<Sprite> walls) {
       s.setLeft(collided.getRight());
     }
     s.change_x = 0;
-  }
-}
-
-void resolveLadderCollisions(Sprite s, ArrayList<Sprite> ladders) {
-  s.center_x += s.change_x;
-  ArrayList<Sprite> collisionList = checkCollisionList(s, ladders);
-  
-  player.isOnLadder = (!collisionList.isEmpty()) ? true : false;
-}
-
-void resolvePlatformCollisionsForEnemies(ArrayList<Enemy> groundEnemies, ArrayList<Sprite> walls) {
-  for (Enemy e : groundEnemies) {
-    e.change_y += (GRAVITY + 5);
-    e.center_y += e.change_y;
-    ArrayList<Sprite> collisionList = checkCollisionList(e, walls);
-    
-    if (!collisionList.isEmpty()) {
-      Sprite collided = collisionList.get(0);
-      if (e.change_y > 0) {
-        e.setBottom(collided.getTop());
-      }
-
-      e.change_y = 0;
-    }
-    
-    collisionList = checkCollisionList(e, walls);
-    if (!collisionList.isEmpty()) {
-   
-      Sprite collided = collisionList.get(0);
-      if (e.change_x > 0) {
-        e.setRight(collided.getLeft());
-      }
-      else if (e.change_x < 0) {
-        e.setLeft(collided.getRight());
-      }
-    }
   }
 }
 
@@ -330,22 +268,6 @@ void createPlatforms(String file_name) {
             break;
         }
         
-        case "2": {
-            Sprite s = new Sprite(ladder, SPRITE_SCALE);
-            s.center_x = ((float) (SPRITE_SIZE / 2 + col * SPRITE_SIZE));
-            s.center_y = ((float) (SPRITE_SIZE / 2 + row * SPRITE_SIZE));
-            ladders.add(s);
-            break;
-        }
-        
-        case "3": {
-            Sprite s = new Sprite(whitewall, 0.001);
-            s.center_x = ((float) (SPRITE_SIZE / 2 + col * SPRITE_SIZE));
-            s.center_y = ((float) (SPRITE_SIZE / 2 + row * SPRITE_SIZE));
-            platforms.add(s);
-            break;
-        }
-        
         case "5": {
           Pumpkin pk = new Pumpkin(pumpkin, SPRITE_SCALE / 2);
           pk.center_x = ((float) (SPRITE_SIZE / 2 + col * SPRITE_SIZE));
@@ -357,86 +279,60 @@ void createPlatforms(String file_name) {
         case "6": {
           float bLeft = col * (float) SPRITE_SIZE;
           float bRight = bLeft + 4 * (float) SPRITE_SIZE;
-          Enemy w = new Witch(witch, (float) 50 / 72, bLeft, bRight);
-          w.center_x = ((float) (SPRITE_SIZE / 2 + col * SPRITE_SIZE));
-          w.center_y = ((float) (SPRITE_SIZE / 2 + row * SPRITE_SIZE));
-          flyEnemies.add(w);
+          Enemy witch = new Witch(loadImage("./data/witch/neutral/witch1.png"), (float) 50 / 72, bLeft, bRight);
+          witch.center_x = ((float) (SPRITE_SIZE / 2 + col * SPRITE_SIZE));
+          witch.center_y = ((float) (SPRITE_SIZE / 2 + row * SPRITE_SIZE));
+          enemies.add(witch);
           break;
         }
         
         case "7": {
           float bLeft = col * (float) SPRITE_SIZE;
           float bRight = bLeft + 4 * (float) SPRITE_SIZE;
-          Enemy redSmile = new RedSmile(redsmile, (float) 50 / 230, bLeft, bRight);
+          Enemy redSmile = new RedSmile(loadImage("./data/redsmile/redsmile1.png"), (float) 50 / 230, bLeft, bRight);
           redSmile.center_x = ((float) (SPRITE_SIZE / 2 + col * SPRITE_SIZE));
           redSmile.center_y = ((float) (SPRITE_SIZE / 2 + row * SPRITE_SIZE));
-          groundEnemies.add(redSmile);
+          enemies.add(redSmile);
           break;
         }
-
-        case "8": {
-          float bLeft = col * (float) SPRITE_SIZE;
-          float bRight = bLeft + 4 * (float) SPRITE_SIZE;
-          Enemy pumpkinMonster = new PumpkinMonster(pumpkin, SPRITE_SCALE / 2, bLeft, bRight);
-          pumpkinMonster.center_x = ((float) (SPRITE_SIZE / 2 + col * SPRITE_SIZE));
-          pumpkinMonster.center_y = ((float) (SPRITE_SIZE / 2 + row * SPRITE_SIZE));
-          groundEnemies.add(pumpkinMonster);
-          break;
-        }
-        case "8": {
-          Orb o = new Orb(orb, SPRITE_SCALE / 2);
-          o.center_x = ((float) (SPRITE_SIZE / 2 + col * SPRITE_SIZE));
-          o.center_y = ((float) (SPRITE_SIZE / 2 + row * SPRITE_SIZE));
+        
+        case "9": { // Will cause conflict with GunHo's change this to 9;
+          Orb o = new Orb(orb, SPRITE_SCALE);
+          o.center_x = ((SPRITE_SIZE / 2 + col * SPRITE_SIZE));
+          o.center_y = ((SPRITE_SIZE / 2 + row * SPRITE_SIZE));
           orbs.add(o);
           break;
         }
+        
       }
     }
   }
 }
 
-
 void keyPressed() {
   switch (keyCode) {
     case RIGHT:
       player.change_x = MOVE_SPEED;
-      GRAVITY = 0.8;
       break;
     case LEFT:
       player.change_x = -MOVE_SPEED;
-      GRAVITY = 0.8;
       break;
     case UP:
+    if (player.isFLying) {
+      player.change_y = -FLY_SPEED;
+    }
       if (isOnPlatforms(player, platforms)) {
-        if (player.isOnLadder) {
-          player.change_y = -LADDER_SPEED;
-          GRAVITY = 0;
-        }
-        else {
-          player.change_y = -JUMP_SPEED;
-          GRAVITY = 0.8;
-        }
-      }
-      else if (player.isOnLadder) {
-        player.change_y = -LADDER_SPEED;
-        GRAVITY = 0;
+        player.change_y = -JUMP_SPEED;
       }
       break;
     case DOWN:
-      if (player.isOnLadder) {
-        player.change_y = LADDER_SPEED;
-        GRAVITY = 0;
-      }
-      else {
-        player.change_y = MOVE_SPEED;
-        GRAVITY = 0.8;
-      }
+      player.change_y = MOVE_SPEED;
       break;
   }
 }
 
 public void keyReleased() {
+ 
   player.change_x = 0;
   player.change_y = 0;
 }
-ArrayList<Enemy> enemies;
