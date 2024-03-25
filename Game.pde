@@ -1,10 +1,10 @@
 import java.util.Collections;
 
 final static float MOVE_SPEED = 5;
-final static float JUMP_SPEED = 14;
+final static float JUMP_SPEED = 15;
 final static float SPRITE_SCALE = 50.0 / 30.0;
 final static float SPRITE_SIZE = 50.0;
-final static float GRAVITY = .8;
+final static float LADDER_SPEED = 3;
 final static float RIGHT_MARGIN = 400;
 final static float LEFT_MARGIN = 60;
 final static float VERTICAL_MARGIN = 40;
@@ -13,6 +13,7 @@ final static float GROUND_LEVEL = HEIGHT - SPRITE_SIZE;
 
 float view_x = 0;
 float view_y = 0;
+float GRAVITY = .8;
 
 int score;
 int life;
@@ -24,6 +25,7 @@ PImage pumpkin;
 PImage ghost;
 PImage redsmile;
 PImage witch;
+PImage ladder;
 
 Player player;
 
@@ -31,6 +33,7 @@ ArrayList<Sprite> platforms;
 ArrayList<Pumpkin> pumpkins;
 ArrayList<Enemy> flyEnemies;
 ArrayList<Enemy> groundEnemies;
+ArrayList<Sprite> ladders;
 
 void setup() {
   size(800, 600);
@@ -41,9 +44,11 @@ void setup() {
   ghost = loadImage("./data/player/GhostWalk/walk1.png");
   redsmile = loadImage("./data/redsmile/redsmile1.png");
   witch = loadImage("./data/witch/neutral/witch1.png");
+  ladder = loadImage("./data/ladder.png");
   score = 0;
   isGameOver = false;
   platforms = new ArrayList<>();
+  ladders = new ArrayList<>();
   pumpkins = new ArrayList<>();
   flyEnemies = new ArrayList<>();
   groundEnemies = new ArrayList<>();
@@ -58,16 +63,12 @@ void draw() {
   text("Life: " + player.lives + "   Pumpkins: " + score, 50, 50);
   
   scroll();
-  player.display();
-  player.updateAnimation();
-  resolvePlatformCollisions(player, platforms);
-  resolvePlatformCollisionsForEnemies(groundEnemies, platforms);
-
-  pumpkinCollisions();
-  checkDeath();
-
   
   for (Sprite platform : platforms) {
+    platform.display();
+  }
+  
+  for (Sprite platform : ladders) {
     platform.display();
   }
   
@@ -95,6 +96,15 @@ void draw() {
       e.update();
     }
   }
+  
+  player.display();
+  player.updateAnimation();
+  resolvePlatformCollisions(player, platforms);
+  resolveLadderCollisions(player, ladders);
+  resolvePlatformCollisionsForEnemies(groundEnemies, platforms);
+
+  pumpkinCollisions();
+  checkDeath();
 }
 
 
@@ -190,9 +200,33 @@ void resolvePlatformCollisions(Sprite s, ArrayList<Sprite> walls) {
   }
 }
 
+void resolveLadderCollisions(Sprite s, ArrayList<Sprite> ladders) {
+  s.center_x += s.change_x;
+  ArrayList<Sprite> collisionList = checkCollisionList(s, ladders);
+  
+  player.isOnLadder = (!collisionList.isEmpty()) ? true : false;
+  
+  if (player.isOnLadder) {
+    s.center_y += s.change_y;
+    collisionList = checkCollisionList(s, ladders);
+    
+    if (!collisionList.isEmpty()) {
+      Sprite collided = collisionList.get(0);
+      if (s.change_y < 0) {
+        s.setBottom(collided.getTop());
+      }
+      else if (s.change_y > 0) {
+        s.setTop(collided.getBottom());
+      }
+      
+      s.change_y = 0;
+    }
+  }
+}
+
 void resolvePlatformCollisionsForEnemies(ArrayList<Enemy> groundEnemies, ArrayList<Sprite> walls) {
   for (Enemy e : groundEnemies) {
-    e.change_y += (GRAVITY * 6);
+    e.change_y += (GRAVITY + 5);
     e.center_y += e.change_y;
     ArrayList<Sprite> collisionList = checkCollisionList(e, walls);
     
@@ -282,6 +316,14 @@ void createPlatforms(String file_name) {
             break;
         }
         
+        case "2": {
+            Sprite s = new Sprite(ladder, SPRITE_SCALE);
+            s.center_x = ((float) (SPRITE_SIZE / 2 + col * SPRITE_SIZE));
+            s.center_y = ((float) (SPRITE_SIZE / 2 + row * SPRITE_SIZE));
+            ladders.add(s);
+            break;
+        }
+        
         case "5": {
           Pumpkin pk = new Pumpkin(pumpkin, SPRITE_SCALE / 2);
           pk.center_x = ((float) (SPRITE_SIZE / 2 + col * SPRITE_SIZE));
@@ -328,17 +370,37 @@ void keyPressed() {
   switch (keyCode) {
     case RIGHT:
       player.change_x = MOVE_SPEED;
+      GRAVITY = 0.8;
       break;
     case LEFT:
       player.change_x = -MOVE_SPEED;
+      GRAVITY = 0.8;
       break;
     case UP:
       if (isOnPlatforms(player, platforms)) {
-        player.change_y = -JUMP_SPEED;
+        if (player.isOnLadder) {
+          player.change_y = -LADDER_SPEED;
+          GRAVITY = 0;
+        }
+        else {
+          player.change_y = -JUMP_SPEED;
+          GRAVITY = 0.8;
+        }
+      }
+      else if (player.isOnLadder) {
+        player.change_y = -LADDER_SPEED;
+        GRAVITY = 0;
       }
       break;
     case DOWN:
-      player.change_y = MOVE_SPEED;
+      if (player.isOnLadder) {
+        player.change_y = LADDER_SPEED;
+        GRAVITY = 0;
+      }
+      else {
+        player.change_y = MOVE_SPEED;
+        GRAVITY = 0.8;
+      }
       break;
   }
 }
