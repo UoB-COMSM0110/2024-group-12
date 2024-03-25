@@ -7,6 +7,7 @@ public class AnimatedSprite extends Sprite {
   int direction;
   int index;
   int frame;
+  int speed = 5;
   static final int NEUTRAL_FACING = 0;
   static final int RIGHT_FACING = 1;
   static final int LEFT_FACING = 2;
@@ -19,7 +20,7 @@ public class AnimatedSprite extends Sprite {
   }
 
   void updateAnimation() {
-    if (frame++ % 5 == 0) {
+    if (frame++ % speed == 0) {
       selectDirection();
       selectCurrentImages();
       advanceToNextImage();

@@ -22,12 +22,15 @@ boolean isGameOver;
 PImage grave;
 PImage pumpkin;
 PImage ghost;
+PImage redsmile;
+PImage witch;
 
 Player player;
 
 ArrayList<Sprite> platforms;
 ArrayList<Pumpkin> pumpkins;
-ArrayList<Enemy> enemies;
+ArrayList<Enemy> flyEnemies;
+ArrayList<Enemy> groundEnemies;
 
 void setup() {
   size(800, 600);
@@ -36,11 +39,14 @@ void setup() {
   grave = loadImage("./data/grave.png");
   pumpkin = loadImage("./data/pumpkin/pumpkin1.png");
   ghost = loadImage("./data/player/GhostWalk/walk1.png");
+  redsmile = loadImage("./data/redsmile/redsmile1.png");
+  witch = loadImage("./data/witch/neutral/witch1.png");
   score = 0;
   isGameOver = false;
   platforms = new ArrayList<>();
   pumpkins = new ArrayList<>();
-  enemies = new ArrayList<>();
+  flyEnemies = new ArrayList<>();
+  groundEnemies = new ArrayList<>();
   player = new Player(ghost, SPRITE_SCALE);
   createPlatforms("./data/map_test.csv");
 }
@@ -55,6 +61,8 @@ void draw() {
   player.display();
   player.updateAnimation();
   resolvePlatformCollisions(player, platforms);
+  resolvePlatformCollisionsForEnemies(groundEnemies, platforms);
+
   pumpkinCollisions();
   checkDeath();
 
@@ -68,10 +76,24 @@ void draw() {
     pk.updateAnimation();
   }
   
-  for (Enemy e : enemies) {
+  for (Enemy e : flyEnemies) {
     e.display();
-    e.update();
-    e.updateAnimation();
+    e.updateAnimation(); 
+    e.update(); 
+  }
+  
+  for (Enemy e : groundEnemies) {
+    e.display();
+    
+    if (e instanceof PumpkinMonster) {
+      ((PumpkinMonster) e).updateAnimation(player);
+      ((PumpkinMonster) e).update(player);
+    }
+    
+    else {
+      e.updateAnimation(); 
+      e.update();
+    }
   }
 }
 
@@ -85,10 +107,16 @@ public void GameOver() {
 
 
 void checkDeath() {
-  boolean collidedEnemy = enemyCollisions();
+  ArrayList<Sprite> groundCollision = checkCollisionList(player, groundEnemies);
+  ArrayList<Sprite> airCollision = checkCollisionList(player, flyEnemies);
+  
   boolean fallOffCliff = player.getBottom() > GROUND_LEVEL;
   
-  if (collidedEnemy || fallOffCliff) {
+  if (groundCollision.size() > 0 || airCollision.size() > 0 || fallOffCliff) {
+    if (groundCollision.size() > 0 && groundCollision.get(0) instanceof PumpkinMonster) {
+      ((PumpkinMonster) groundCollision.get(0)).timer = 0;
+    }
+    
     player.lives--;
     if (player.lives == 0) {
       GameOver();
@@ -97,12 +125,7 @@ void checkDeath() {
       player.center_x = 0;
       player.setBottom(0);
     }
-  }
-  
-}
-
-boolean enemyCollisions() {
-  return (checkCollisionList(player, enemies).size() > 0);
+  }  
 }
 
 
@@ -164,6 +187,35 @@ void resolvePlatformCollisions(Sprite s, ArrayList<Sprite> walls) {
       s.setLeft(collided.getRight());
     }
     s.change_x = 0;
+  }
+}
+
+void resolvePlatformCollisionsForEnemies(ArrayList<Enemy> groundEnemies, ArrayList<Sprite> walls) {
+  for (Enemy e : groundEnemies) {
+    e.change_y += (GRAVITY * 6);
+    e.center_y += e.change_y;
+    ArrayList<Sprite> collisionList = checkCollisionList(e, walls);
+    
+    if (!collisionList.isEmpty()) {
+      Sprite collided = collisionList.get(0);
+      if (e.change_y > 0) {
+        e.setBottom(collided.getTop());
+      }
+
+      e.change_y = 0;
+    }
+    
+    collisionList = checkCollisionList(e, walls);
+    if (!collisionList.isEmpty()) {
+   
+      Sprite collided = collisionList.get(0);
+      if (e.change_x > 0) {
+        e.setRight(collided.getLeft());
+      }
+      else if (e.change_x < 0) {
+        e.setLeft(collided.getRight());
+      }
+    }
   }
 }
 
@@ -241,20 +293,30 @@ void createPlatforms(String file_name) {
         case "6": {
           float bLeft = col * (float) SPRITE_SIZE;
           float bRight = bLeft + 4 * (float) SPRITE_SIZE;
-          Enemy witch = new Witch(loadImage("./data/witch/neutral/witch1.png"), (float) 50 / 72, bLeft, bRight);
-          witch.center_x = ((float) (SPRITE_SIZE / 2 + col * SPRITE_SIZE));
-          witch.center_y = ((float) (SPRITE_SIZE / 2 + row * SPRITE_SIZE));
-          enemies.add(witch);
+          Enemy w = new Witch(witch, (float) 50 / 72, bLeft, bRight);
+          w.center_x = ((float) (SPRITE_SIZE / 2 + col * SPRITE_SIZE));
+          w.center_y = ((float) (SPRITE_SIZE / 2 + row * SPRITE_SIZE));
+          flyEnemies.add(w);
           break;
         }
         
         case "7": {
           float bLeft = col * (float) SPRITE_SIZE;
           float bRight = bLeft + 4 * (float) SPRITE_SIZE;
-          Enemy redSmile = new RedSmile(loadImage("./data/redsmile/redsmile1.png"), (float) 50 / 230, bLeft, bRight);
+          Enemy redSmile = new RedSmile(redsmile, (float) 50 / 230, bLeft, bRight);
           redSmile.center_x = ((float) (SPRITE_SIZE / 2 + col * SPRITE_SIZE));
           redSmile.center_y = ((float) (SPRITE_SIZE / 2 + row * SPRITE_SIZE));
-          enemies.add(redSmile);
+          groundEnemies.add(redSmile);
+          break;
+        }
+
+        case "8": {
+          float bLeft = col * (float) SPRITE_SIZE;
+          float bRight = bLeft + 4 * (float) SPRITE_SIZE;
+          Enemy pumpkinMonster = new PumpkinMonster(pumpkin, SPRITE_SCALE / 2, bLeft, bRight);
+          pumpkinMonster.center_x = ((float) (SPRITE_SIZE / 2 + col * SPRITE_SIZE));
+          pumpkinMonster.center_y = ((float) (SPRITE_SIZE / 2 + row * SPRITE_SIZE));
+          groundEnemies.add(pumpkinMonster);
           break;
         }
       }
