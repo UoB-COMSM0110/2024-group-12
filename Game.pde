@@ -21,8 +21,9 @@ boolean isGameOver;
 
 PImage grave;
 PImage pumpkin;
+PImage ghost;
 
-Sprite player;
+Player player;
 
 ArrayList<Sprite> platforms;
 ArrayList<Pumpkin> pumpkins;
@@ -34,16 +35,13 @@ void setup() {
   
   grave = loadImage("./data/grave.png");
   pumpkin = loadImage("./data/pumpkin/pumpkin1.png");
-  
-  life = 3;
+  ghost = loadImage("./data/player/GhostWalk/walk1.png");
   score = 0;
   isGameOver = false;
-  
   platforms = new ArrayList<>();
   pumpkins = new ArrayList<>();
   enemies = new ArrayList<>();
-  player = new Sprite("/data/player/GhostWalk/walk1.png", SPRITE_SCALE);
-  
+  player = new Player(ghost, SPRITE_SCALE);
   createPlatforms("./data/map_test.csv");
 }
 
@@ -51,10 +49,11 @@ void draw() {
   background(255);
   textSize(32);
   fill(255, 0, 0);
-  text("Life: " + life + "   Pumpkins: " + score, 50, 50);
+  text("Life: " + player.lives + "   Pumpkins: " + score, 50, 50);
   
   scroll();
   player.display();
+  player.updateAnimation();
   resolvePlatformCollisions(player, platforms);
   pumpkinCollisions();
   checkDeath();
@@ -76,14 +75,22 @@ void draw() {
 }
 
 
+public void GameOver() {
+  player.Alive = false;
+  score = 0;
+}
+
+
+
 void checkDeath() {
   boolean collidedEnemy = enemyCollisions();
   boolean fallOffCliff = player.getBottom() > GROUND_LEVEL;
   
   if (collidedEnemy || fallOffCliff) {
-    life--;
-    if (life == 0) {
+    player.lives--;
+    if (player.lives == 0) {
       isGameOver = true;
+      player.setAlive(false);
     }
     else {
       player.center_x = 0;
