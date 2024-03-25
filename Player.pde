@@ -1,6 +1,6 @@
 public class Player extends AnimatedSprite {
   int lives;
-  boolean onPlatform, inPlace;
+  boolean onPlatform, inPlace, isOnLadder;
   private boolean Alive = true;
   PImage[] jump;
   PImage[] jumpLeft;
@@ -11,6 +11,7 @@ public class Player extends AnimatedSprite {
   direction = RIGHT_FACING;
   onPlatform = true;
   inPlace = true;
+  isOnLadder = false;
   super.moveRight = new PImage[4];
   PImage[] moveRight = super.moveRight;
   
