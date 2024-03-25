@@ -29,7 +29,12 @@ public class Sprite{
   }
   
   public void display() {
-     image(image, center_x, center_y, w, h); 
+    if (image != null) {
+      image(image, center_x, center_y, w, h); 
+    }
+    else {
+      System.out.println("Image loading error");
+    }
   }
   
   public void update() {
