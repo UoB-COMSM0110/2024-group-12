@@ -1,4 +1,7 @@
 public class Player extends AnimatedSprite {
+  
+  // TODO: When player dies, play the ghost animation. 
+  
   int lives;
   boolean onPlatform, inPlace;
   private boolean Alive = true;

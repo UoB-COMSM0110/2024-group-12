@@ -22,6 +22,7 @@ boolean isGameOver;
 PImage grave;
 PImage pumpkin;
 PImage ghost;
+PImage orb;
 
 Player player;
 
@@ -36,6 +37,7 @@ void setup() {
   grave = loadImage("./data/grave.png");
   pumpkin = loadImage("./data/pumpkin/pumpkin1.png");
   ghost = loadImage("./data/player/GhostWalk/walk1.png");
+  orb = loadImage("./data/PowerUpOrb/powerOrb1.png");
   score = 0;
   isGameOver = false;
   platforms = new ArrayList<>();
