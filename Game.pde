@@ -57,6 +57,7 @@ void draw() {
   resolvePlatformCollisions(player, platforms);
   pumpkinCollisions();
   checkDeath();
+
   
   for (Sprite platform : platforms) {
     platform.display();
@@ -78,6 +79,7 @@ void draw() {
 public void GameOver() {
   player.Alive = false;
   score = 0;
+  player.onDeath();
 }
 
 
@@ -89,8 +91,7 @@ void checkDeath() {
   if (collidedEnemy || fallOffCliff) {
     player.lives--;
     if (player.lives == 0) {
-      isGameOver = true;
-      player.setAlive(false);
+      GameOver();
     }
     else {
       player.center_x = 0;
