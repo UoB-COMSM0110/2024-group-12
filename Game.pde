@@ -26,6 +26,7 @@ PImage ghost;
 PImage redsmile;
 PImage witch;
 PImage ladder;
+PImage whitewall;
 
 Player player;
 
@@ -45,6 +46,7 @@ void setup() {
   redsmile = loadImage("./data/redsmile/redsmile1.png");
   witch = loadImage("./data/witch/neutral/witch1.png");
   ladder = loadImage("./data/ladder.png");
+  whitewall = loadImage("./data/whitewall.png");
   score = 0;
   isGameOver = false;
   platforms = new ArrayList<>();
@@ -205,23 +207,6 @@ void resolveLadderCollisions(Sprite s, ArrayList<Sprite> ladders) {
   ArrayList<Sprite> collisionList = checkCollisionList(s, ladders);
   
   player.isOnLadder = (!collisionList.isEmpty()) ? true : false;
-  
-  if (player.isOnLadder) {
-    s.center_y += s.change_y;
-    collisionList = checkCollisionList(s, ladders);
-    
-    if (!collisionList.isEmpty()) {
-      Sprite collided = collisionList.get(0);
-      if (s.change_y < 0) {
-        s.setBottom(collided.getTop());
-      }
-      else if (s.change_y > 0) {
-        s.setTop(collided.getBottom());
-      }
-      
-      s.change_y = 0;
-    }
-  }
 }
 
 void resolvePlatformCollisionsForEnemies(ArrayList<Enemy> groundEnemies, ArrayList<Sprite> walls) {
@@ -321,6 +306,14 @@ void createPlatforms(String file_name) {
             s.center_x = ((float) (SPRITE_SIZE / 2 + col * SPRITE_SIZE));
             s.center_y = ((float) (SPRITE_SIZE / 2 + row * SPRITE_SIZE));
             ladders.add(s);
+            break;
+        }
+        
+        case "3": {
+            Sprite s = new Sprite(whitewall, 0.001);
+            s.center_x = ((float) (SPRITE_SIZE / 2 + col * SPRITE_SIZE));
+            s.center_y = ((float) (SPRITE_SIZE / 2 + row * SPRITE_SIZE));
+            platforms.add(s);
             break;
         }
         
