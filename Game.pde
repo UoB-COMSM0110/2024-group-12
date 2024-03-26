@@ -77,13 +77,17 @@ void draw() {
   text("Life: " + player.lives + "   Pumpkins: " + score, 50, 50);
   
   scroll();
-    
   for (Sprite platform : platforms) {
     platform.display();
   }
   
   for (Sprite platform : ladders) {
     platform.display();
+  }
+  
+  for (Orb o : orbs) {
+    o.display();
+    o.updateAnimation();
   }
   
   for (Pumpkin pk : pumpkins) {
@@ -119,13 +123,7 @@ void draw() {
 
   pumpkinCollisions();
   checkPowerUp();
-  checkDeath();
-  for (Orb o : orbs) {
-    o.display();
-    o.updateAnimation();
-  }
-  
-  
+  checkDeath();  
 }
 
 public void GameOver() {
@@ -440,25 +438,16 @@ void keyPressed() {
   switch (keyCode) {
     case RIGHT:
       player.change_x = MOVE_SPEED;
-      if (player.isFLying) {
-      }
-      else {
-        GRAVITY = 0.8;
-      }
+      GRAVITY = (player.isFLying) ? 0 : 0.8;
       break;
     case LEFT:
       player.change_x = -MOVE_SPEED;
-      if (player.isFLying) {
-      }
-      else {
-        GRAVITY = 0.8;
-      }
+      GRAVITY = (player.isFLying) ? 0 : 0.8;
       break;
     case UP: 
       if (player.isFLying) {
         player.change_y = -FLY_SPEED;
       }
-    
       else if (!player.isFLying && isOnPlatforms(player, platforms)) {
         if (player.isOnLadder) {
           player.change_y = -LADDER_SPEED;
@@ -472,15 +461,12 @@ void keyPressed() {
       else if (player.isOnLadder && !isOnPlatforms(player, platforms)) {
         player.change_y = -LADDER_SPEED;
         GRAVITY = 0;
-      }
-      
+      } 
       else {
         GRAVITY = 0.8;
       }
       
-      if (player.getTop() < CEILING) {
-        player.change_y = 0;
-      }
+      player.change_y = (player.getTop() < CEILING) ? 0 : player.change_y;
       break;
     case DOWN:
       if (player.isOnLadder) {
@@ -503,4 +489,3 @@ public void keyReleased() {
   player.change_x = 0;
   player.change_y = 0;
 }
-ArrayList<Enemy> enemies;
