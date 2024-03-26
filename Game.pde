@@ -11,6 +11,8 @@ final static float VERTICAL_MARGIN = 40;
 final static float HEIGHT = SPRITE_SIZE * 12;
 final static float LADDER_SPEED = 3;
 final static float GROUND_LEVEL = HEIGHT - SPRITE_SIZE;
+final static float CEILING = -HEIGHT / 3;
+final static long FLY_DURATION = 5000;
 
 float view_x = 0;
 float view_y = 0;
@@ -19,7 +21,10 @@ float GRAVITY = .8;
 int score;
 int life;
 
-boolean isGameOver;
+long flyStartTime;
+
+boolean isGameOver = false;
+boolean timeOutHasStarted = false;
 
 PImage grave;
 PImage pumpkin;
@@ -66,7 +71,6 @@ void setup() {
 }
 
 void draw() {
-  
   background(255);
   textSize(32);
   fill(255, 0, 0);
@@ -132,23 +136,49 @@ public void GameOver() {
 
 // Logic for Flappy Bird Mode: 
 void checkPowerUp() {
-ArrayList<Sprite> orbList = checkCollisionList(player, orbs);
-// check orbList is bigger than 0
-if (orbList.size() > 0) {
-  // for every orb that you encounter: 
-  for (Sprite o : orbList) {
-  // remove orb from list 
-  orbs.remove(o);
-  // Set player.Fly to true:
-  player.isFLying = true;
-  // reduce gravity: 
-  GRAVITY = 0.005;
-  // timeOut(); // reset gravity back to 0.8; 
-    
+  ArrayList<Sprite> orbList = checkCollisionList(player, orbs);
+  // check orbList is bigger than 0
+  if (orbList.size() > 0) {
+    flyStartTime = millis();
+    timeOutHasStarted = true;
+    GRAVITY = 0.005;
+    player.isFLying = true;
+    // for every orb that you encounter: 
+    for (Sprite o : orbList) {
+      // remove orb from list 
+      orbs.remove(o);
+    }
   }
   
+  if (timeOutHasStarted) {
+    timeOut();
+  }
 }
 
+void timeOut() {
+  long elapsedTime = millis() - flyStartTime;
+  if (elapsedTime < FLY_DURATION) {
+    float timerX = player.center_x + 30; // Adjust as needed
+    float timerY = player.center_y - 70; // Adjust as needed
+    
+    // Draw the timer at the calculated position
+    pushMatrix();
+    translate(timerX, timerY);
+    strokeWeight(10.0);
+    fill(255);
+    stroke(0, 0, 0);
+    float endAngle = map(elapsedTime, 0, FLY_DURATION, 0, TWO_PI);
+    arc(0, 0, 50, 50, 0, endAngle, OPEN);
+    popMatrix();
+  }
+ 
+  else {
+    player.isFLying = false;
+    timeOutHasStarted = false;
+    GRAVITY = 0.8;
+    view_x = 0;
+    view_y = 0;
+  }
 }
 
 void checkDeath() {
@@ -170,6 +200,9 @@ void checkDeath() {
       player.center_x = 0;
       player.setBottom(0);
     }
+    
+    player.isFLying = false;
+    timeOutHasStarted = false;
   }  
 }
 
@@ -407,11 +440,19 @@ void keyPressed() {
   switch (keyCode) {
     case RIGHT:
       player.change_x = MOVE_SPEED;
-      GRAVITY = 0.8;
+      if (player.isFLying) {
+      }
+      else {
+        GRAVITY = 0.8;
+      }
       break;
     case LEFT:
       player.change_x = -MOVE_SPEED;
-      GRAVITY = 0.8;
+      if (player.isFLying) {
+      }
+      else {
+        GRAVITY = 0.8;
+      }
       break;
     case UP:
       if (player.isFLying) {
@@ -431,6 +472,10 @@ void keyPressed() {
       else if (player.isOnLadder) {
         player.change_y = -LADDER_SPEED;
         GRAVITY = 0;
+      }
+      
+      if (player.getTop() < CEILING) {
+        player.change_y = 0;
       }
       break;
     case DOWN:
