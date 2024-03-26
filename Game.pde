@@ -2,9 +2,10 @@ import java.util.Collections;
 
 final static float MOVE_SPEED = 5;
 final static float JUMP_SPEED = 14;
+final static float FLY_SPEED = 15;
 final static float SPRITE_SCALE = 50.0 / 30.0;
 final static float SPRITE_SIZE = 50.0;
-final static float GRAVITY = .8;
+static float GRAVITY = .8;
 final static float RIGHT_MARGIN = 400;
 final static float LEFT_MARGIN = 60;
 final static float VERTICAL_MARGIN = 40;
@@ -29,6 +30,7 @@ Player player;
 ArrayList<Sprite> platforms;
 ArrayList<Pumpkin> pumpkins;
 ArrayList<Enemy> enemies;
+ArrayList<Orb> orbs;
 
 void setup() {
   size(800, 600);
@@ -38,6 +40,7 @@ void setup() {
   pumpkin = loadImage("./data/pumpkin/pumpkin1.png");
   ghost = loadImage("./data/player/GhostWalk/walk1.png");
   orb = loadImage("./data/PowerUpOrb/powerOrb1.png");
+  
   score = 0;
   isGameOver = false;
   platforms = new ArrayList<>();
@@ -45,9 +48,11 @@ void setup() {
   enemies = new ArrayList<>();
   player = new Player(ghost, SPRITE_SCALE);
   createPlatforms("./data/map_test.csv");
+  
 }
 
 void draw() {
+  
   background(255);
   textSize(32);
   fill(255, 0, 0);
@@ -75,8 +80,14 @@ void draw() {
     e.update();
     e.updateAnimation();
   }
+  
+  //for (Orb o : orbs) {
+  //  o.display();
+  //  o.updateAnimation();
+  //}
+  
+  
 }
-
 
 public void GameOver() {
   player.Alive = false;
@@ -84,7 +95,21 @@ public void GameOver() {
   player.onDeath();
 }
 
-
+// Logic for Flappy Bird Mode: 
+void checkPowerUp() {
+  // Check if the player has obtained Orb
+boolean powerUpObtained = orbCollision();
+// if Orb is obtained:
+if (powerUpObtained) {
+  // and the player is not onPlatform,
+    if (!player.onPlatform) {
+      // and whent the keyPressed is UP
+      if (keyCode == UP) {
+        player.change_y += -FLY_SPEED;
+      }
+    }    
+  }
+}
 
 void checkDeath() {
   boolean collidedEnemy = enemyCollisions();
@@ -107,6 +132,9 @@ boolean enemyCollisions() {
   return (checkCollisionList(player, enemies).size() > 0);
 }
 
+boolean orbCollision() {
+return (checkCollisionList(player, orbs).size() > 0);
+}
 
 void pumpkinCollisions() {
   ArrayList<Sprite> pumpkinList = checkCollisionList(player, pumpkins);
@@ -259,10 +287,18 @@ void createPlatforms(String file_name) {
           enemies.add(redSmile);
           break;
         }
+        case "8": {
+          Orb o = new Orb(orb, SPRITE_SCALE / 2);
+          o.center_x = ((float) (SPRITE_SIZE / 2 + col * SPRITE_SIZE));
+          o.center_y = ((float) (SPRITE_SIZE / 2 + row * SPRITE_SIZE));
+          orbs.add(o);
+          break;
+        }
       }
     }
   }
 }
+
 
 void keyPressed() {
   switch (keyCode) {
