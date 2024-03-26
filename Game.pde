@@ -1,8 +1,8 @@
 import java.util.Collections;
 
 final static float MOVE_SPEED = 5;
-final static float JUMP_SPEED = 14;
-final static float FLY_SPEED = 15;
+final static float JUMP_SPEED = 13;
+final static float FLY_SPEED = 8;
 final static float SPRITE_SCALE = 50.0 / 30.0;
 final static float SPRITE_SIZE = 50.0;
 final static float RIGHT_MARGIN = 400;
@@ -11,7 +11,7 @@ final static float VERTICAL_MARGIN = 40;
 final static float HEIGHT = SPRITE_SIZE * 12;
 final static float LADDER_SPEED = 3;
 final static float GROUND_LEVEL = HEIGHT - SPRITE_SIZE;
-final static float CEILING = -HEIGHT / 3;
+final static float CEILING = -HEIGHT / 4;
 final static long FLY_DURATION = 5000;
 
 float view_x = 0;
@@ -77,7 +77,7 @@ void draw() {
   text("Life: " + player.lives + "   Pumpkins: " + score, 50, 50);
   
   scroll();
-  
+    
   for (Sprite platform : platforms) {
     platform.display();
   }
@@ -454,7 +454,7 @@ void keyPressed() {
         GRAVITY = 0.8;
       }
       break;
-    case UP:
+    case UP: 
       if (player.isFLying) {
         player.change_y = -FLY_SPEED;
       }
@@ -469,9 +469,13 @@ void keyPressed() {
           GRAVITY = 0.8;
         }
       }
-      else if (player.isOnLadder) {
+      else if (player.isOnLadder && !isOnPlatforms(player, platforms)) {
         player.change_y = -LADDER_SPEED;
         GRAVITY = 0;
+      }
+      
+      else {
+        GRAVITY = 0.8;
       }
       
       if (player.getTop() < CEILING) {
