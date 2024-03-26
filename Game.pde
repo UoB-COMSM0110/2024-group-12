@@ -5,11 +5,11 @@ final static float JUMP_SPEED = 14;
 final static float FLY_SPEED = 15;
 final static float SPRITE_SCALE = 50.0 / 30.0;
 final static float SPRITE_SIZE = 50.0;
-static float GRAVITY = .8;
 final static float RIGHT_MARGIN = 400;
 final static float LEFT_MARGIN = 60;
 final static float VERTICAL_MARGIN = 40;
 final static float HEIGHT = SPRITE_SIZE * 12;
+final static float LADDER_SPEED = 3;
 final static float GROUND_LEVEL = HEIGHT - SPRITE_SIZE;
 
 float view_x = 0;
@@ -57,6 +57,7 @@ void setup() {
   platforms = new ArrayList<>();
   ladders = new ArrayList<>();
   pumpkins = new ArrayList<>();
+  orbs = new ArrayList<>();
   flyEnemies = new ArrayList<>();
   groundEnemies = new ArrayList<>();
   player = new Player(ghost, SPRITE_SCALE);
@@ -113,11 +114,12 @@ void draw() {
   resolvePlatformCollisionsForEnemies(groundEnemies, platforms);
 
   pumpkinCollisions();
+  checkPowerUp();
   checkDeath();
-  //for (Orb o : orbs) {
-  //  o.display();
-  //  o.updateAnimation();
-  //}
+  for (Orb o : orbs) {
+    o.display();
+    o.updateAnimation();
+  }
   
   
 }
@@ -130,18 +132,23 @@ public void GameOver() {
 
 // Logic for Flappy Bird Mode: 
 void checkPowerUp() {
-  // Check if the player has obtained Orb
-boolean powerUpObtained = orbCollision();
-// if Orb is obtained:
-if (powerUpObtained) {
-  // and the player is not onPlatform,
-    if (!player.onPlatform) {
-      // and whent the keyPressed is UP
-      if (keyCode == UP) {
-        player.change_y += -FLY_SPEED;
-      }
-    }    
+ArrayList<Sprite> orbList = checkCollisionList(player, orbs);
+// check orbList is bigger than 0
+if (orbList.size() > 0) {
+  // for every orb that you encounter: 
+  for (Sprite o : orbList) {
+  // remove orb from list 
+  orbs.remove(o);
+  // Set player.Fly to true:
+  player.isFLying = true;
+  // reduce gravity: 
+  GRAVITY = 0.005;
+  // timeOut(); // reset gravity back to 0.8; 
+    
   }
+  
+}
+
 }
 
 void checkDeath() {
@@ -383,10 +390,10 @@ void createPlatforms(String file_name) {
           groundEnemies.add(pumpkinMonster);
           break;
         }
-        case "8": {
-          Orb o = new Orb(orb, SPRITE_SCALE / 2);
-          o.center_x = ((float) (SPRITE_SIZE / 2 + col * SPRITE_SIZE));
-          o.center_y = ((float) (SPRITE_SIZE / 2 + row * SPRITE_SIZE));
+        case "9": {
+          Orb o = new Orb(orb, SPRITE_SCALE);
+          o.center_x = ((SPRITE_SIZE / 2 + col * SPRITE_SIZE));
+          o.center_y = ((SPRITE_SIZE / 2 + row * SPRITE_SIZE));
           orbs.add(o);
           break;
         }
@@ -407,7 +414,11 @@ void keyPressed() {
       GRAVITY = 0.8;
       break;
     case UP:
-      if (isOnPlatforms(player, platforms)) {
+      if (player.isFLying) {
+        player.change_y = -FLY_SPEED;
+      }
+    
+      else if (!player.isFLying && isOnPlatforms(player, platforms)) {
         if (player.isOnLadder) {
           player.change_y = -LADDER_SPEED;
           GRAVITY = 0;
@@ -426,6 +437,10 @@ void keyPressed() {
       if (player.isOnLadder) {
         player.change_y = LADDER_SPEED;
         GRAVITY = 0;
+      }
+      
+      else if (player.isFLying) {
+        player.change_y = FLY_SPEED;
       }
       else {
         player.change_y = MOVE_SPEED;
