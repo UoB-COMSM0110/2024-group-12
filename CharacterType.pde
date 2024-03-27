@@ -1,0 +1,6 @@
+enum CharacterType {
+  GHOST,
+  WITCH,
+
+
+}

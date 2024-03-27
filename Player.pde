@@ -3,13 +3,14 @@ public class Player extends AnimatedSprite {
   // TODO: When player dies, play the ghost animation. 
   
   int lives;
+  int Playertype;
   boolean onPlatform, inPlace, isOnLadder;
   boolean isFLying = false;
   private boolean Alive = true;
   PImage[] jump;
   PImage[] jumpLeft;
  
-  public Player(PImage img, float scale) {
+  public Player(PImage img, float scale, int Playertype) {
   super(img, scale);
   lives = 3;
   direction = RIGHT_FACING;
@@ -18,6 +19,7 @@ public class Player extends AnimatedSprite {
   super.moveRight = new PImage[4];
   PImage[] moveRight = super.moveRight;
   
+  if (Playertype == 1) {
   moveRight[0] = loadImage("./data/player/GhostWalk/walk1.png");
   moveRight[1] = loadImage("./data/player/GhostWalk/walk2.png");
   moveRight[2] = loadImage("./data/player/GhostWalk/walk3.png");
@@ -40,6 +42,32 @@ public class Player extends AnimatedSprite {
    jumpLeft[0] = loadImage("./data/player/GhostJumpLeft/GhostJumpLeft/Jump1.png");
    jumpLeft[1] = loadImage("./data/player/GhostJumpLeft/GhostJumpLeft/Jump2.png");
    jumpLeft[2] = loadImage("./data/player/GhostJumpLeft/GhostJumpLeft/Jump3.png");
+  }else if (Playertype == 2) {
+    moveRight[0] = loadImage("./data/witch/fly/witch5.png");
+  moveRight[1] = loadImage("./data/witch/fly/witch6.png");
+  moveRight[2] = loadImage("./data/witch/fly/witch7.png");
+  moveRight[3] = loadImage("./data/witch/fly/witch8.png");
+  
+  super.moveLeft = new PImage[4];
+  PImage[] moveLeft = super.moveLeft;
+  moveLeft[0] =loadImage("./data/witch/fly/witch1.png");
+  moveLeft[1] = loadImage("./data/witch/fly/witch2.png");
+  moveLeft[2] = loadImage("./data/witch/fly/witch3.png");
+  moveLeft[3] = loadImage("./data/witch/fly/witch4.png");
+  
+
+  jump = new PImage[3];
+  jump[0] = loadImage("./data/witch/fly/witch5.png");
+  jump[1] = loadImage("./data/witch/fly/witch6.png");
+  jump[2] = loadImage("./data/witch/fly/witch7.png");
+  
+  jumpLeft = new PImage[3];
+   jumpLeft[0] = loadImage("./data/witch/fly/witch1.png");
+   jumpLeft[1] = loadImage("./data/witch/fly/witch2.png");
+   jumpLeft[2] = loadImage("./data/witch/fly/witch3.png");
+  }
+  
+
  
   
  super.currentImages = moveRight;

@@ -44,6 +44,9 @@ ArrayList<Enemy> groundEnemies;
 ArrayList<Sprite> ladders;
 ArrayList<Orb> orbs;
 
+CharacterType selectedCharacter = CharacterType.GHOST; // Default character type
+boolean isMenuDisplayed = true; // Flag to indicate if the menu is displayed
+
 void setup() {
   size(800, 600);
   imageMode(CENTER);
@@ -65,12 +68,21 @@ void setup() {
   orbs = new ArrayList<>();
   flyEnemies = new ArrayList<>();
   groundEnemies = new ArrayList<>();
-  player = new Player(ghost, SPRITE_SCALE);
+  player = new Player(ghost, SPRITE_SCALE, 0);
   createPlatforms("./data/map_test.csv");
+  
+  initializePlayer();
   
 }
 
 void draw() {
+   
+  if (isMenuDisplayed) {
+    displayMenu(); // Display menu if needed
+  } else {
+    // Your existing draw code
+  
+
   background(255);
   textSize(32);
   fill(255, 0, 0);
@@ -124,6 +136,7 @@ void draw() {
   pumpkinCollisions();
   checkPowerUp();
   checkDeath();  
+  }
 }
 
 public void GameOver() {
@@ -435,6 +448,11 @@ void createPlatforms(String file_name) {
 
 
 void keyPressed() {
+  if (isMenuDisplayed) {
+    handleMenuSelection(); // Handle menu selection if needed
+  } else {
+    // Your existing key press handling code
+  
   switch (keyCode) {
     case RIGHT:
       player.change_x = MOVE_SPEED;
@@ -483,9 +501,56 @@ void keyPressed() {
       }
       break;
   }
+  }
 }
 
 public void keyReleased() {
   player.change_x = 0;
   player.change_y = 0;
+}
+
+
+
+void initializePlayer() {
+  switch (selectedCharacter) {
+    case GHOST:
+      player = new Player(ghost, SPRITE_SCALE, 1);
+      break;
+    case WITCH:
+      player = new Player(witch, SPRITE_SCALE, 2);
+      break;
+    // Add cases for other character types as needed
+  }
+}
+
+void displayMenu() {
+  // 在菜单页面绘制角色选择选项
+  background(0); // 设置菜单页面的背景色为黑色
+  
+  // 绘制角色选择文本
+  fill(255); // 设置文本颜色为白色
+  textSize(24); // 设置文本大小
+  text("Select Your Character:", width/2, height/2 - 50); // 在屏幕中央显示文本
+  
+  // 绘制角色选择提示
+  textSize(18); // 设置提示文本大小
+  text("Press 1 for Ghost", width/2, height/2); // 在屏幕中央显示Ghost提示
+  text("Press 2 for Witch", width/2, height/2 + 30); // 在屏幕中央显示Witch提示
+
+}
+
+
+void handleMenuSelection() {
+  // 检查玩家按下的键并相应地设置选定的角色类型
+  if (keyPressed) {
+    if (keyCode == '1') {
+      selectedCharacter = CharacterType.GHOST;
+      initializePlayer(); // 根据选定的角色类型初始化玩家
+      isMenuDisplayed = false; // 关闭菜单
+    } else if (keyCode == '2') {
+      selectedCharacter = CharacterType.WITCH;
+      initializePlayer(); // 根据选定的角色类型初始化玩家
+      isMenuDisplayed = false; // 关闭菜单
+    }
+  }
 }
