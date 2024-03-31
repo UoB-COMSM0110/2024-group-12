@@ -1,46 +1,73 @@
 public class Witch extends Enemy {
-
   float boundaryLeft;
   float boundaryRight;
-  float t = 0.01;
-
-  public Witch(PImage image, float scale, float bLeft, float bRight) {
-    super(image, scale, bLeft, bRight);
-    super.moveLeft = new PImage[4];
-    PImage[] left = super.moveLeft;
-    left[0] = loadImage("./data/witch/fly/witch1.png");
-    left[1] = loadImage("./data/witch/fly/witch2.png");
-    left[2] = loadImage("./data/witch/fly/witch3.png");
-    left[3] = loadImage("./data/witch/fly/witch4.png");
-    super.currentImages = left;
-    
-    super.moveRight = new PImage[4];
-    PImage[] right = super.moveRight;
-    right[0] = loadImage("./data/witch/fly/witch5.png");
-    right[1] = loadImage("./data/witch/fly/witch6.png");
-    right[2] = loadImage("./data/witch/fly/witch7.png");
-    right[3] = loadImage("./data/witch/fly/witch8.png");
-    
-    super.direction = 1;
+  int now;
+  public Witch(PImage img, int size_x, int size_y, float x, float y, int dam, float ChaseDis, float chase_speed ,float bLeft, float bRight){
+    super(img, size_x,size_y, x, y,dam, ChaseDis,chase_speed);
+    stand = new PImage[1];
+    walk = new PImage[4];
     boundaryLeft = bLeft;
     boundaryRight = bRight;
-    super.change_x = 2;
+    fly = true;
+    this.loadFrames(this.stand, "./data/whitch/stand");
+    this.loadFrames(this.walk, "./data/whitch/walk");
+    now = millis();
   }
-  
   @Override
-  public void update() {
-      float random_x = random(-1, 1);
-      float random_y = random(-1, 1);
-      
-      if (super.getLeft() <= boundaryLeft || super.getRight() >= boundaryRight) {
-          super.change_x = random_x * -1; 
+    public void selectImg(){
+       ms = millis(); 
+       ChackAttack(player);
+       if(Chase(player)){
+         currentImg = walk;
+       }
+       else if (change_x==0) {
+           currentImg = stand;
+       }
+    }
+  @Override
+  boolean Chase(Player player){
+      float dis = 10000;
+      if (collisionTest(player, this)){
+        return false;
       }
-      
-      if (super.getTop() <= boundaryLeft || super.getBottom() >= boundaryRight) {
-          super.change_y = random_y * -1; 
+      dis = sqrt(abs(player.getCenter_x() - this.getCenter_x())*abs(player.getCenter_x() - 
+      this.getCenter_x())+abs(player.getCenter_y() - this.getCenter_y())*abs(player.getCenter_y() - this.getCenter_y()));
+      if (dis<ChaseDis){
+        if(player.getCenter_x()>this.getCenter_x()){
+          this.change_x = + chase_speed;
+        }
+        else{
+          this.change_x = - chase_speed;
+        }
+        
+        if(player.getCenter_y()>this.getCenter_y()){
+         
+          this.change_y = + chase_speed;
+        }
+        else{
+          this.change_y = - chase_speed;
+        }
+        return true;
       }
-  
-      super.center_x += super.change_x;
-      super.center_y += super.change_y;
-  }
+      else{
+         return false;
+      }
+    }
+    @Override
+    public void update() {
+        float random_x = random(-1, 1);
+        float random_y = random(-1, 1);
+        if(!Chase(player)&& (millis() - now)/1000 > 2){
+          now = millis();
+          if(super.getLeft() <= boundaryLeft || super.getRight() >= boundaryRight) {
+              change_x = random_x * -1; 
+          }
+          
+          if(super.getTop() <= boundaryLeft || super.getBottom() >= boundaryRight) {
+              change_y = random_y * -1; 
+          }
+        }
+        center_x += change_x;
+        center_y += change_y;
+    }
 }

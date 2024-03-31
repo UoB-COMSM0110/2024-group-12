@@ -1,42 +1,50 @@
 public class AnimatedSprite extends Sprite {
+    PImage[] currentImg;
+    PImage[] stand;
+    PImage[] move;
+    int facing;
+    int index;
+    int frame;
 
-  PImage[] currentImages;
-  PImage[] standNeutral;
-  PImage[] moveLeft;
-  PImage[] moveRight;
-  int direction;
-  int index;
-  int frame;
-  int speed = 5;
-  static final int NEUTRAL_FACING = 0;
-  static final int RIGHT_FACING = 1;
-  static final int LEFT_FACING = 2;
-
-  public AnimatedSprite(PImage img, float scale) {
-    super(img, scale);
-    direction = NEUTRAL_FACING;
-    index = 0;
-    frame = 0;
-  }
-
-  void updateAnimation() {
-    if (frame++ % speed == 0) {
-      selectDirection();
-      selectCurrentImages();
-      advanceToNextImage();
+    public AnimatedSprite (PImage image, int size_x, int size_y, float x, float y) {
+        super(image, size_x,size_y, x ,y);
+        facing = MIDDLE_FACING;
+        index = 0;
+        frame = 0;
     }
-  }
+    public void updateAnimation() {
+        frame++;
+        if (frame % 9 == 0) {
+            selectImg();
+            moveToNextImg();
+        }
+    }
+    public void selectImg() {
+        if (change_x > 0) {
+            currentImg = move;
+        }
+        else {
+            currentImg = stand;
+        }
+    }
 
-  void selectDirection() {
-    direction = (super.change_x > 0) ? RIGHT_FACING : (super.change_x < 0) ? LEFT_FACING : NEUTRAL_FACING;
-  }
+    public void moveToNextImg() {
+        index = (index + 1) % currentImg.length;
+        image = currentImg[index];
+    }
+    
+    void loadFrames(PImage[] ar, String fname) {
+     for (int i=0; i<ar.length; i++) {
+        PImage frame=loadImage(fname+(i+1)+".png");
+        ar[i]=frame;
+      }
+    }
+    public void setFrames(int size, String name) {
+        if (name.equals("stand")) {
+            stand = new PImage[size];
+        } else if (name.equals("move")) {
+            move = new PImage[size];
+        }
+    }
 
-  void selectCurrentImages() {
-    currentImages = (direction == RIGHT_FACING) ? moveRight : (direction == LEFT_FACING) ? moveLeft : standNeutral;
-  }
-
-  void advanceToNextImage() {
-    index = index % currentImages.length;
-    super.image = currentImages[index++];
-  }
 }
