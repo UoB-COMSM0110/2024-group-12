@@ -1,4 +1,11 @@
 import java.util.Collections;
+import processing.sound.*;
+
+SoundFile backgroundMusic;
+SoundFile collectPumpkinSound;
+SoundFile collectOrbSound;
+SoundFile playerDeathSound;
+SoundFile flyingTimeTickingSound;
 
 final static float MOVE_SPEED = 5;
 final static float JUMP_SPEED = 13;
@@ -48,6 +55,14 @@ CharacterType selectedCharacter = CharacterType.GHOST; // Default character type
 boolean isMenuDisplayed = true; // Flag to indicate if the menu is displayed
 
 void setup() {
+  
+  backgroundMusic = new SoundFile(this, "./data/music/background_music.mp3");
+  collectPumpkinSound = new SoundFile(this, "./data/music/collect_pumpkin.mp3");
+  collectOrbSound = new SoundFile(this, "./data/music/collect_Orb.mp3");
+  playerDeathSound = new SoundFile(this, "./data/music/player_death.mp3");
+  flyingTimeTickingSound = new SoundFile(this, "./data/music/flying_Time_Ticking.mp3");
+  
+  backgroundMusic.loop();
   size(800, 600);
   imageMode(CENTER);
   
@@ -76,7 +91,7 @@ void setup() {
 }
 
 void draw() {
-   
+ 
   if (isMenuDisplayed) {
     displayMenu(); // Display menu if needed
   } else {
@@ -150,10 +165,12 @@ void checkPowerUp() {
   ArrayList<Sprite> orbList = checkCollisionList(player, orbs);
   // check orbList is bigger than 0
   if (orbList.size() > 0) {
+    collectOrbSound.play();
     flyStartTime = millis();
     timeOutHasStarted = true;
     GRAVITY = 0.005;
     player.isFLying = true;
+    flyingTimeTickingSound.play();
     // for every orb that you encounter: 
     for (Sprite o : orbList) {
       // remove orb from list 
@@ -205,6 +222,7 @@ void checkDeath() {
     
     player.lives--;
     if (player.lives == 0) {
+      playerDeathSound.play();
       GameOver();
     }
     else {
@@ -227,6 +245,7 @@ void pumpkinCollisions() {
     for (Sprite pk: pumpkinList) {
       score++;
       pumpkins.remove(pk);
+      collectPumpkinSound.play();
     }
   }
 }
@@ -523,34 +542,42 @@ void initializePlayer() {
   }
 }
 
-void displayMenu() {
-  // 在菜单页面绘制角色选择选项
-  background(0); // 设置菜单页面的背景色为黑色
+ void displayMenu() {
+   
+        PImage backgroundImage; // 背景图像
   
-  // 绘制角色选择文本
-  fill(255); // 设置文本颜色为白色
-  textSize(24); // 设置文本大小
-  text("Select Your Character:", width/2, height/2 - 50); // 在屏幕中央显示文本
-  
-  // 绘制角色选择提示
-  textSize(18); // 设置提示文本大小
-  text("Press 1 for Ghost", width/2, height/2); // 在屏幕中央显示Ghost提示
-  text("Press 2 for Witch", width/2, height/2 + 30); // 在屏幕中央显示Witch提示
+        backgroundImage = loadImage("./data/background_image.png");
 
-}
+        // Display background image
+        image(backgroundImage, width / 2, height/ 2,  width,  height); // 在整个屏幕上显示背景图片
+
+        // Set text properties
+        textSize(35);
+        textAlign(CENTER, CENTER);
+        fill(0); // 设置文本颜色为白色
+
+        // Display menu title
+        text("Select Character", width / 3, height / 4);
+
+        // Display character options
+        // Display character options
+        textSize(25);
+    text("Press 1 for Ghost", width / 3, height / 3 + 30); // 第一个选项
+    text("Press 2 for Witch", width / 3, height / 3 + 70); 
+ }
 
 
 void handleMenuSelection() {
-  // 检查玩家按下的键并相应地设置选定的角色类型
+
   if (keyPressed) {
     if (keyCode == '1') {
       selectedCharacter = CharacterType.GHOST;
-      initializePlayer(); // 根据选定的角色类型初始化玩家
-      isMenuDisplayed = false; // 关闭菜单
+      initializePlayer(); 
+      isMenuDisplayed = false; 
     } else if (keyCode == '2') {
       selectedCharacter = CharacterType.WITCH;
-      initializePlayer(); // 根据选定的角色类型初始化玩家
-      isMenuDisplayed = false; // 关闭菜单
+      initializePlayer(); 
+      isMenuDisplayed = false; 
     }
   }
 }
