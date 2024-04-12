@@ -18,7 +18,7 @@ public class Enemy extends AnimatedSprite{
     @Override
     public void selectImg(){
        ms = millis(); 
-       if (ChackAttack(player)){
+       if (CheckAttack(player)){
          currentImg = attack;
        }
        else if(Chase(player)){
@@ -28,6 +28,9 @@ public class Enemy extends AnimatedSprite{
            currentImg = stand;
        }
     }
+
+    /// if the enemy should chase the player based on their
+    //relative positions and the chase distance
     boolean Chase(Player player){
       float dis = 10000;
       if (collisionTest(player, this)){
@@ -52,7 +55,7 @@ public class Enemy extends AnimatedSprite{
       }
     }
     
-    boolean ChackAttack(Player player){
+    boolean CheckAttack(Player player){
       if (collisionTest(player, this)){
         if ((ms - attms)/1000>=2 ){
         player.lives-=dam;

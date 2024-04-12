@@ -1,3 +1,5 @@
+int pageSize = 10; // Number of entries per page
+int currentpage = 0; // Current page of the leaderboard
 int buttonWidth = 150;
 int buttonHeight = 50;
 int buttonX, buttonY; // Coordinates for the start button
@@ -6,12 +8,14 @@ int startGameButtonX, startGameButtonY; // Coordinates for the start game button
 int restartButtonX, restartButtonY;
 int easyButtonX, easyButtonY; // Coordinates for the easy button
 int hardButtonX, hardButtonY; // Coordinates for the hard button
+int leaderboardButtonX, leaderboardButtonY; // Coordinates for the leaderboard button
+ArrayList<LeaderboardEntry> leaderboard = new ArrayList<LeaderboardEntry>(); // Leaderboard list
+boolean drawed = false; //<>//
 void drawIntroWindow() {
   int introWindowWidth = 300;
   int introWindowHeight = 200;
   int introWindowX = width/2 - introWindowWidth/2;
   int introWindowY = height/2 - introWindowHeight/2;
-  
   fill(200);
   rect(introWindowX, introWindowY, introWindowWidth, introWindowHeight);
   
@@ -40,6 +44,7 @@ void drawPage(){
     easyButtonY = height/2 + buttonHeight + 100;
     hardButtonX = width/2 + 50;
     hardButtonY = height/2 + buttonHeight + 100;
+
     // Draw the start button
     fill(28, 82, 97);
     rect(buttonX, buttonY, buttonWidth, buttonHeight);
@@ -47,11 +52,14 @@ void drawPage(){
     textSize(20);
     textAlign(CENTER, CENTER);
     image(loadImage("./data/play.png"), buttonX+75, buttonY+25, buttonWidth-50, buttonHeight-10);
+
     // Draw the intro button
     fill(28, 82, 97);
     rect(introButtonX, introButtonY, buttonWidth, buttonHeight);
     fill(255);
     drawButton("Game Intro", introButtonX, introButtonY);
+    drawInputBox();
+
     // Show the intro window if introVisible is true
     if(introVisible) {
       drawIntroWindow();
@@ -102,13 +110,34 @@ void mouseClicked() {
     if(mouseX >= hardButtonX && mouseX <= hardButtonX + buttonWidth && mouseY >= hardButtonY && mouseY <= hardButtonY + buttonHeight) {
       difficulty = "Hard";
     }
-  } else if (gameOver) {
+  } else if (gameOver && !showLeaderboard) {
+
     // Check if the restart button is clicked
     if(mouseX >= restartButtonX-75 && mouseX <= restartButtonX + buttonWidth -75 && mouseY >= restartButtonY-25 && mouseY <= restartButtonY + buttonHeight-25) {
-
       restartGame();
+      drawed = false;
+    }
+    if(mouseX >= leaderboardButtonX-75 && mouseX <= restartButtonX + buttonWidth-75 && mouseY >= restartButtonY-25+200 && mouseY <= restartButtonY + buttonHeight+200-25) {
+      showLeaderboard = true;
     }
   }
+  else if (showLeaderboard) {
+    // Check if the restart button is clicked
+    if(mouseX >= restartButtonX-75 && mouseX <= restartButtonX + buttonWidth -75 && mouseY >= restartButtonY-25+240 && mouseY <= restartButtonY + buttonHeight-25+240) {
+      restartGame();
+      drawed = false;
+      showLeaderboard = false;
+    }
+  if (mouseX >= restartButtonX-75+100 && mouseX <= restartButtonX + buttonWidth -75+100 && mouseY >= restartButtonY-25+170 && mouseY <= restartButtonY + buttonHeight-25+170 && (currentpage + 1) * pageSize < leaderboard.size()) {
+      currentpage++;
+      println("+");
+   }
+  if (mouseX >= restartButtonX-75-100 && mouseX <= restartButtonX + buttonWidth -75-100 && mouseY >= restartButtonY-25+170 && mouseY <= restartButtonY + buttonHeight-25+170 && currentpage > 0) {
+      currentpage--;
+    }
+  }
+
+  
 }
 
 void restartGame() {
@@ -128,7 +157,15 @@ void drawRestart(){
     text("Game Over", width/2, height/2 - 50);
     text("Score: " + score, width/2, height/2);
     drawButton("Restart", restartButtonX, restartButtonY);
+    drawButton("Leaderboard", restartButtonX, restartButtonY+200);
     gw.restart();
+    if (!playerName.isEmpty() && !drawed) {
+    leaderboard.add(new LeaderboardEntry(playerName, score, difficulty));
+    Collections.sort(leaderboard, (e1, e2) -> Integer.compare(e2.score, e1.score));
+    drawed = true; 
+  }
+    saveLeaderboard();
+    
 }
 
 void draw_diff(){
@@ -153,4 +190,61 @@ void draw_diff(){
     textSize(20);
     textAlign(CENTER, CENTER);
     text("Hard", hardButtonX, hardButtonY, buttonWidth, buttonHeight);
+}
+
+void LeaderBoard(){
+  background(sky);
+    int startIndex = currentpage * pageSize;
+    int endIndex = min(startIndex + pageSize, leaderboard.size());
+    fill(255,255,255);
+    textSize(30);
+    textAlign(CENTER, CENTER);
+    text("Leaderboard", width/2, height/2 - 200);
+    for (int i = startIndex; i < endIndex; i++) {
+      LeaderboardEntry entry = leaderboard.get(i);
+      text("Name: " + entry.playerName + " score: " + entry.score + " difficulty: " + entry.difficulty, width/2, height/2 - 150 + (i - startIndex) * 30);
+    }
+    // Draw the restart button
+    drawButton("Restart", restartButtonX, restartButtonY+240);
+    drawButton("Prev", restartButtonX-100, restartButtonY+170);
+    
+    // Draw next page button
+    drawButton("Next", restartButtonX+100, restartButtonY+170);
+}
+  
+ void drawInputBox() {
+  fill(200);
+  rect(introButtonX-25, introButtonY + 200, 200, 30);
+  fill(0);
+  textSize(16);
+  textAlign(CENTER, CENTER);
+  text(playerName, introButtonX+45, introButtonY + 210);
+  fill(255, 0, 0);
+  text("Enter Your Name:", introButtonX+35, introButtonY + 180);
+  
+}
+
+void saveLeaderboard() {
+  String[] lines = new String[leaderboard.size()];
+  for (int i = 0; i < leaderboard.size(); i++) {
+    LeaderboardEntry entry = leaderboard.get(i);
+    lines[i] = entry.playerName + "," + entry.score + "," + entry.difficulty;
+  }
+  saveStrings("./data/leaderboard.txt", lines);
+}
+void loadLeaderboard() {
+ // Check if the file exists
+    String[] lines = loadStrings("./data/leaderboard.txt");
+    if (lines != null) {
+      for (String line : lines) {
+        String[] parts = line.split(",");
+        if (parts.length == 3) {
+          String playerName = parts[0];
+          int score = Integer.parseInt(parts[1]);
+          String difficulty = parts[2];
+          leaderboard.add(new LeaderboardEntry(playerName, score, difficulty));
+        }
+      }
+    }
+
 }

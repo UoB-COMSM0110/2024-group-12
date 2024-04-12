@@ -9,10 +9,11 @@ boolean jump = false;
 boolean created = false;
 String difficulty = "Easy";
 boolean timeOutHasStarted;
+boolean showLeaderboard = false;
 Player player;
 gameworld gw;
 
-
+String playerName = ""; // Player's name
 PImage sky;
 PImage heart, emptyheart;
 void setup() {
@@ -24,6 +25,7 @@ void setup() {
   heart = loadImage("./data/Player/heart.png");
   emptyheart = loadImage("./data/Player/empytHeart.png");
   sky.resize(width,height);
+  loadLeaderboard();
 }
 
 void draw() {
@@ -40,8 +42,11 @@ void draw() {
     updateAll();
     collideAll();
   }
-  else{
+  else {
     drawRestart();
+    if( showLeaderboard){
+     LeaderBoard();
+   }
   }
-
+  
 }
