@@ -16,7 +16,7 @@ public class Witch extends Enemy {
   @Override
     public void selectImg(){
        ms = millis(); 
-       ChackAttack(player);
+       CheckAttack(player);
        if(Chase(player)){
          currentImg = walk;
        }
