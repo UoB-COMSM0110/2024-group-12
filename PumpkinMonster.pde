@@ -23,8 +23,9 @@ public class PumpkinMonster extends Boss{
   public void selectImg(){
        ms = millis(); 
        if (!findPlayer){FindPlayer(player);}
-       ChackAttack(player);
-       if (findPlayer){ 
+       CheckAttack(player);
+       if (findPlayer){
+       // found the player and triggers transformation
          if(!transformed){
            changetime = millis();
            currentImg = transform;
@@ -70,7 +71,7 @@ public class PumpkinMonster extends Boss{
       }
     }
     
-    boolean ChackAttack(Player player){
+    boolean CheckAttack(Player player){
       if (collisionTest(player, this)){
         if ((ms - attms)/1000>=2 ){
         player.lives-=dam;

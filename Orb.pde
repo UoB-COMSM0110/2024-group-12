@@ -24,11 +24,13 @@ void displayOrb(){
   }
 }
 
+// checks for collisions between the player and orbs
 void OrbCollisions(Sprite player, ArrayList<Sprite> Orbs) {
   ArrayList<Sprite> orbList = checkCollisionList(player, Orbs);
   if (orbList.size() > 0) {
     for (Sprite o: orbList) {
       player.fly = true;
+      //record start time of flying
       flyStartTime = millis();
       timeOutHasStarted = true;
       Orbs.remove(o);
@@ -38,6 +40,7 @@ void OrbCollisions(Sprite player, ArrayList<Sprite> Orbs) {
     timeOut(player);
   }
 }
+//manages the timeout for the flying ability
 void timeOut(Sprite player) {
   long elapsedTime = millis() - flyStartTime;
   if (elapsedTime < FLY_DURATION) {
@@ -54,7 +57,7 @@ void timeOut(Sprite player) {
     arc(0, 0, 50, 50, 0, endAngle, OPEN);
     popMatrix();
   }
- 
+ //elapsed  FLY_DURATION, it resets the player.fly flag
   else {
     player.fly = false;
     timeOutHasStarted = false;
