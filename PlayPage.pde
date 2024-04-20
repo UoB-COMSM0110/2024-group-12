@@ -44,7 +44,6 @@ void drawPage(){
     easyButtonY = height/2 + buttonHeight + 100;
     hardButtonX = width/2 + 50;
     hardButtonY = height/2 + buttonHeight + 100;
-
     // Draw the start button
     fill(28, 82, 97);
     rect(buttonX, buttonY, buttonWidth, buttonHeight);
@@ -52,14 +51,12 @@ void drawPage(){
     textSize(20);
     textAlign(CENTER, CENTER);
     image(loadImage("./data/play.png"), buttonX+75, buttonY+25, buttonWidth-50, buttonHeight-10);
-
     // Draw the intro button
     fill(28, 82, 97);
     rect(introButtonX, introButtonY, buttonWidth, buttonHeight);
     fill(255);
     drawButton("Game Intro", introButtonX, introButtonY);
     drawInputBox();
-
     // Show the intro window if introVisible is true
     if(introVisible) {
       drawIntroWindow();
@@ -111,7 +108,6 @@ void mouseClicked() {
       difficulty = "Hard";
     }
   } else if (gameOver && !showLeaderboard) {
-
     // Check if the restart button is clicked
     if(mouseX >= restartButtonX-75 && mouseX <= restartButtonX + buttonWidth -75 && mouseY >= restartButtonY-25 && mouseY <= restartButtonY + buttonHeight-25) {
       restartGame();

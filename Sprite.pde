@@ -94,7 +94,7 @@ public class Sprite{
   }
   
   float getRight(){
-    return center_x + w/2;
+    return center_x + w/2 ;
   }
   
   void setTop(float top) {

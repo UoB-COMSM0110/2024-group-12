@@ -2,8 +2,26 @@ boolean collisionTest(Sprite c1, Sprite c2){
   boolean checkX1 = c1.getLeft()+5 >= c2.getRight();
   boolean checkX2 = c1.getRight()-5 <= c2.getLeft();
   boolean checkY1 = c1.getBottom() <= c2.getTop();
-  boolean checkY2 = c1.getTop() >= c2.getBottom();
+  boolean checkY2 = c1.getTop()+5 >= c2.getBottom();
   if (checkX1 || checkX2 || checkY1 || checkY2) {
+    return false;
+  } else {
+    return true;
+  }
+}
+boolean collisionTest_X(Sprite c1, Sprite c2){
+  boolean checkX1 = c1.getLeft()+5 >= c2.getRight();
+  boolean checkX2 = c1.getRight()-5 <= c2.getLeft();
+  if (checkX1 || checkX2) {
+    return false;
+  } else {
+    return true;
+  }
+}
+boolean collisionTest_Y(Sprite c1, Sprite c2){
+  boolean checkY1 = c1.getBottom() <= c2.getTop();
+  boolean checkY2 = c1.getTop()+5 >= c2.getBottom();
+  if (checkY1 || checkY2) {
     return false;
   } else {
     return true;
@@ -14,6 +32,24 @@ public ArrayList<Sprite> checkCollisionList(Sprite c, ArrayList<Sprite> list) {
   ArrayList<Sprite> listCollision = new ArrayList<Sprite>();
   for (Sprite element: list) {
     if (collisionTest(c, element)) {
+      listCollision.add(element);
+    }
+  }
+  return listCollision;
+}
+public ArrayList<Sprite> checkCollisionList_X(Sprite c, ArrayList<Sprite> list) {
+  ArrayList<Sprite> listCollision = new ArrayList<Sprite>();
+  for (Sprite element: list) {
+    if (collisionTest_X(c, element)) {
+      listCollision.add(element);
+    }
+  }
+  return listCollision;
+}
+public ArrayList<Sprite> checkCollisionList_Y(Sprite c, ArrayList<Sprite> list) {
+  ArrayList<Sprite> listCollision = new ArrayList<Sprite>();
+  for (Sprite element: list) {
+    if (collisionTest_Y(c, element)) {
       listCollision.add(element);
     }
   }
@@ -74,8 +110,9 @@ public void solveCollisions(Sprite player, ArrayList<Sprite> grounds) {
     player.center_y += player.change_y;
   }
   ArrayList<Sprite> list = checkCollisionList(player, grounds);
-  if (list.size() > 0 ) {
-    Sprite collided = list.get(0);
+  ArrayList<Sprite> y_list = checkCollisionList_Y(player,list);
+  if (y_list.size() > 0 ) {
+    Sprite collided = y_list.get(0);
     if (player.change_y > 0) {
       player.setBottom(collided.getTop());
     }
@@ -87,8 +124,9 @@ public void solveCollisions(Sprite player, ArrayList<Sprite> grounds) {
   
   player.center_x += player.change_x;
   list = checkCollisionList(player, grounds);
-  if (list.size() > 0) {
-    Sprite collided = list.get(0);
+  ArrayList<Sprite> x_list = checkCollisionList_Y(player,list);
+  if (x_list.size() > 0) {
+    Sprite collided = x_list.get(0);
     if (player.change_x > 0) {
       player.setRight(collided.getLeft());
     }
@@ -135,6 +173,7 @@ void displayAll(){
     displayheart();
     displayOrb();
     displayEnemy();
+    End.display();
 }
 
 void updateAll(){
@@ -159,6 +198,9 @@ void collideAll(){
     ReinforceJump(jump_ms_start);
   }
   OrbCollisions(player, Orbs);
+  if(collisionTest(player, End)){
+    gameOver = true;
+  }
 }
 
 int jump_ms_start = millis();

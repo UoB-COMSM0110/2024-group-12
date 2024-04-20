@@ -2,6 +2,7 @@ ArrayList<Sprite> Pumpkins = new ArrayList<Sprite>();
 ArrayList<Sprite> bosses = new ArrayList<Sprite>();
 ArrayList<Sprite> Orbs = new ArrayList<Sprite>();
 ArrayList<Sprite> Enemies = new ArrayList<Sprite>();
+Sprite End;
 class gameworld{
   ArrayList<Sprite> platforms = new ArrayList<Sprite>();
   ArrayList<Sprite> bricks = new ArrayList<Sprite>();
@@ -11,7 +12,7 @@ class gameworld{
   tree13,tree14,leaf1,leaf2,leaf3,leaf4,leaf5,leaf6,leaf7,leaf8,leaf9,flower1, flower2, flower3,flower4,ladder12,
   ladder13,ladder14,ladder15,ladder16, ground10, ground11,ground12,ground13,ground14, ground15,candytr1,candytr2,
   candytr3,candytr4,candytr5,candytr6,candytr7,candytr8,candytr9,candytr10,candytr11,candytr12,candytr13,candy1,
-  candy2,candy3,candy4,candy5,candy6,candytr14,candytr15,candytr16,candytr17,candytr18,candytr19,candytr20,candytr21,candytr22;
+  candy2,candy3,candy4,candy5,candy6,candytr14,candytr15,candytr16,candytr17,candytr18,candytr19,candytr20,candytr21,candytr22,flag;
   PImage[] Doughnut = new PImage[9];
   PImage brick,ladder;
   String path;
@@ -84,7 +85,7 @@ class gameworld{
     candytr20 = loadImage("./data/map/candy/image130.png");
     candytr21 = loadImage("./data/map/candy/image131.png");
     candytr22 = loadImage("./data/map/candy/image132.png");
-    
+    flag = loadImage("./data/map/flag.png");
     for(int i = 0; i<Doughnut.length; i++){
       Doughnut[i] = loadImage("./data/map/candy/Doughnut/image"+i+".png");
     }
@@ -396,6 +397,10 @@ class gameworld{
               createground(candytr22,col, row, false);
               break;
           }
+          case "flag": {
+              createground(flag,col, row, false);
+              break;
+          }
           case "o": {
               createOrb(col, row);
               break;
@@ -407,6 +412,10 @@ class gameworld{
           case "player":{
             player = new Player(loadImage("./data/Player/stand1.png"), SPRITE_SIZE_X,SPRITE_SIZE_Y,WALL_SIZE_X / 2 + col * WALL_SIZE_X, WALL_SIZE_Y / 2 + row * WALL_SIZE_Y);
             break;
+          }
+          case "f": {
+              CreateEnd(col, row);
+              break;
           }
           default:{
             break;
@@ -488,6 +497,11 @@ class gameworld{
     w.center_x = ((float) (SPRITE_SIZE_X / 2 + col * SPRITE_SIZE_X));
     w.center_y = ((float) (SPRITE_SIZE_Y / 2 + row * SPRITE_SIZE_Y));
     Enemies.add(w);
+  }
+  void CreateEnd(int col, int row){
+    End = new Sprite(loadImage("./data/map/peaceful night/image108.png"), WALL_SIZE_X, WALL_SIZE_Y);
+    End.center_x = ((float) (SPRITE_SIZE_X / 2 + col * SPRITE_SIZE_X));
+    End.center_y = ((float) (SPRITE_SIZE_Y / 2 + row * SPRITE_SIZE_Y));
   }
   
 }
