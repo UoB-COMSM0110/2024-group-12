@@ -1,127 +1,79 @@
 # 2024-group-12
 
+// TODO: 
+1. Table of Contents 
+2. Demo Video of Finished Game 
+3. Banner for the Game 
+4. Gifs of the Game working - Jumping, Flying Mechanic, Falling Mechanic, Chasing mechanic from the enemies 
+5. Implementation part of the Report 
+6. Contributions Group member roles - who did what, e.g. Hamza - User Stories, User Specifications, GunHo - Evaluation, Yiran - StakeHolder Identification
+7. Process - Write as Group  (Agile Working Method + Kanban board)
+8. Conclusion - Write as Group 
+9. Input and Situations
+10. Change orientation of Paper Prototype.
+11. Update Class Diagram
 
+
+// Group Photo 
 ![IMG_8164](https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/9738be08-5bbc-4ed8-9dd3-4c4d29ff4089)
 
-Game Idea 1: 
-
-Mario Brothers: 
-
-Overview:
-A 2D platform game with jumping and facing game oponents. 
-
-The Twist: 
-
-We decided the twist will be the princess saving mario, with her power being an umbrealla she can use to float between obstacles, giving the game similar game structure as floppy bird. However, the princess will still have the same powers as Mario i.e. 
-being able to jump, and having power ups that can increase her size 
-
-The challanages: 
-
-The map will have to be larger than the screen
-Physics dynamics associated with jumping to exact location the princess will jump to as well as making sure she stays within the boundries of the map visible to the player
-AI mosters / opponents 
-Character animations
+**Introduction**
+Our game is a 2D platform game which like other similar 2D platforms allows for a character to jump through obstacles, avoiding enemies and collecting points. The added twist within our game is the addition of a timed flying mechanic, this ‘power up’ allows the player to fly for a short period of time, making traversal through the game world easier. Early on the inspiration for our game was the fondness all team members had towards games like Super Mario, we chose this because it also gave a simple vision to consitantly aim for in the game development process. This was reflected in our initial idea for the game where the twist would be that princess peach would be rescuing Mario. Over time however this evolved, as we sought after our own story line and unique game aesthetic.
 
 
+**Requirements**
 
+# ideation, Use-cases and User Stories
 
+Our group first came up with six game ideas, these were narrowed down to two potential games that looked the most promising. The games that we selected were : 
+
+- 2D Platform. Inspired by Mario, with a twist that would allow the user to control the player in the same manner as seen in flappy bird (each press of a key will elevate the player in space, keeping the player afloat)
+- Temple Run: Similar to the 2D platform game idea, however the the camera would follow the player as you traversed through the map. The twist for this game would be that the screen would shrink as the game progressed, closing centrally onto the character, meaning that there was a inherit time limit within which the user had to complete the map.
+
+For both these games, we identified the stakeholders, user stories and the potential challenges, we then prepared our paper mock ups, divieing up the task within the group. We used the paper prototypes to visualise how the main game screen would look and to work out the aesthetics of the game.
+
+// Paper prototype 
 ![IMG_8136](https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/5e728a3a-4046-4157-afb2-9b57238f4895)
 
 
 
 
 
+### Identifying the stakeholders
 
+We identified the *primary stakeholders* for the game are the individuals who will be directly playing the game and reviewing it, these are: 
 
-Game Idea 2: 
+- Friend and Family / Other teams within our cohort : As the ones testing and playing, students within our cohort as well as friends and family members have a direct stake in the games success making them the operational support within the onion diagram shown below
+- Lecturers / Markers / TAs : As the game is part of an educational goal, the game will be reviewed and tested thus making the educational support staff / Lecturers functional beneficiaries and sponsors of the game.
 
-Temple Run: 
-
-Overview: 
-Similar to 2D platform mario brothers, the screen will follow the player from behind this time as he jumps and ducks
-
-The twist: 
-
-Special power move given to the character, e.g. double jumps (something similar) with the caviat that it is a limited time use, where every time it is used the screen goes darker / smaller making it more difficult to complete the game 
-
-
-The challanges:
-
-The map will have to be larger than the screen
-Physics dynamics associated with jumping to exact location the princess will jump to as well as making sure she stays within the boundries of the map visible to the player
-AI mosters / opponents 
-Character animations
-Perspective movement that allows the camera to follow the player 
-
-
-Stake Holders:
-
-End Users/Players: 
-
-The primary stakeholders are the individuals who will be playing the game other team, the teachers, or other friends. The users are the Normal Operators and Purchasers of the game.  
-
-Educational Institutions (teacher): 
-
-As the game is part of an educational goal, the game will be reviewed and tested thus making the educational support staff / Lecturers functional beneficiaries and sponsors of the game. 
-
-Game Developers / Students: 
-
-As the ones developing the game and being tested the students / developers have a direct stake in the game’s success making us the Maintenance Operators and Operational support. 
-
+// Stakeholder diagram 
  ![image](https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/c9d2c6e1-9805-42d4-b642-737598cf019c)
 
+The interaction of the stake holders with this game is designed to be identical so the user specification and user stories can be condensed for all stake holders identified above.
 
-The interaction of the stake holders with this simple game is designed to be identical so the user specification and user stores can be condensed for all three stake holders identified above. 
+### User Case Story
 
-User stories
+- Control the player / character via intuitive controls
+- Have clear objectives and goals that the user must achieve when playing the game, i.e. a clear incentive
+- Have special power ups and milestones
 
-As a gamer, I want to control the characters movements using simple controls that are immediately responsive. These controls should be intuitive controls so that I can navigate through the game easily and enjoy a responsive gaming experience.
+### User Story
 
-As a player of the game, I want a clear objective that provides a rewarding experience, e.g. a method to earn points. 
+> “As a gamer, I want to control the characters movements using simple controls that are immediately responsive. These controls should be intuitive controls so that I can navigate through the game easily and enjoy a immersive gaming experience.”
+> 
 
-As a user, I want to unlock special levels or achievements by collecting specific power-ups or achieving certain in-game milestones so that I can explore additional content and challenges.
+> “As a player of the game, I want a clear objective that provides a rewarding experience, e.g. a method to earn points.”
+> 
 
-As a speed runner, I want to have a timer feature to track my completion time for each level so that I can optimize my gameplay and strive for faster completion times.
-
-
-
-<img width="681" alt="Screenshot 2024-02-15 at 17 18 36" src="https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/49c25ec7-aef1-4667-885b-b99bf3b7bb87">
-
+> “As a user, I want to unlock special levels or achievements by collecting specific power-ups or achieving certain in-game milestones so that I can explore additional content and challenges.”
+>
 
 
+// Use Case Table Insert here 
 
 
 **CLASS DIAGRAM**
 
-
-
 ![Game Class Diagram](https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/fb6f8e37-a65f-4c2a-bbaf-8083a01caa8a)
 
 
-
-**Evaluation**
-
-
-**Think Aloud Evaluation:**
-
-**Tasks**
-1. Try and collect as many pumpkins as you can
-2. Traverse the game until you reach the finish point
-   
-Participant1: Feedback
-
-+ The controls were intuative and simple
-+ Good Asthetic
-+ Jump Speed was set at the right pace - not too large of a jump or small
-- Make the background less generic and
-- Be able to add player name fully
-- No implementation of the "Flappy Bird" component of the game i.e. the donuts were not resolved
-- Have a tutorial of the the games functionality and use, what do the pumpkins do? what do the donuts do?
-
-Participant2: Feedback:
-
-+ Good asthetic to the game
-- Would like the functionality of respawing where I died rather then the start of the game
-- Would like enimes to be chasing the character rather then static obstacles
-- Increase the speed to land faster
-  
