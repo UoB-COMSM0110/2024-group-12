@@ -1,3 +1,7 @@
+boolean cursorVisible = true; // Flag to indicate whether the cursor is visible
+boolean back = false;
+int lastTime = 0; // Variable to track the last time the cursor was toggled
+
 int pageSize = 10; // Number of entries per page
 int currentpage = 0; // Current page of the leaderboard
 int buttonWidth = 150;
@@ -12,6 +16,7 @@ int leaderboardButtonX, leaderboardButtonY; // Coordinates for the leaderboard b
 ArrayList<LeaderboardEntry> leaderboard = new ArrayList<LeaderboardEntry>(); // Leaderboard list
 boolean drawed = false; //<>//
 void drawIntroWindow() {
+  pushMatrix();
   int introWindowWidth = 300;
   int introWindowHeight = 200;
   int introWindowX = width/2 - introWindowWidth/2;
@@ -30,6 +35,7 @@ void drawIntroWindow() {
   fill(255);
   text("Start Game", startGameButtonX, startGameButtonY, buttonWidth, buttonHeight);
   drawButton("back" , startGameButtonX, startGameButtonY+100);
+  popMatrix();
 }
 
 void drawPage(){
@@ -44,7 +50,6 @@ void drawPage(){
     easyButtonY = height/2 + buttonHeight + 100;
     hardButtonX = width/2 + 50;
     hardButtonY = height/2 + buttonHeight + 100;
-
     // Draw the start button
     fill(28, 82, 97);
     rect(buttonX, buttonY, buttonWidth, buttonHeight);
@@ -52,41 +57,56 @@ void drawPage(){
     textSize(20);
     textAlign(CENTER, CENTER);
     image(loadImage("./data/play.png"), buttonX+75, buttonY+25, buttonWidth-50, buttonHeight-10);
-
     // Draw the intro button
     fill(28, 82, 97);
     rect(introButtonX, introButtonY, buttonWidth, buttonHeight);
     fill(255);
     drawButton("Game Intro", introButtonX, introButtonY);
-    drawInputBox();
-
+    
     // Show the intro window if introVisible is true
     if(introVisible) {
       drawIntroWindow();
     }
     else{
       draw_diff();
+      drawInputBox();
+    }
+    if (millis() - lastTime > 500) {
+      cursorVisible = !cursorVisible;
+      lastTime = millis();
     }
 }
 
 
 void drawButton(String label, int x, int y) {
+  pushMatrix();
   fill(200);
   rect(x, y, buttonWidth, buttonHeight);
   fill(0);
   textSize(20);
   textAlign(CENTER, CENTER);
   text(label, x, y, buttonWidth, buttonHeight);
+  popMatrix();
 }
 
 
 
 void mouseClicked() {
+   if (mouseX >= width - 100 && mouseX <= width - 10 && mouseY >= 10 && mouseY <= 40) {
+      gameStarted = false;
+      back = true;
+      gameOver = false;
+      gw.restart();
+      drawed = false;
+      score = 0;
+    }
   if (!gameStarted) {
+    
     // Check if the start button is clicked
     if(mouseX >= buttonX && mouseX <= buttonX + buttonWidth && mouseY >= buttonY && mouseY <= buttonY + buttonHeight) {
       gameStarted = true;
     }
+
     
     // Check if the intro button is clicked
     if(mouseX >= introButtonX && mouseX <= introButtonX + buttonWidth && mouseY >= introButtonY && mouseY <= introButtonY + buttonHeight) {
@@ -104,14 +124,19 @@ void mouseClicked() {
     }
     if(mouseX >= easyButtonX && mouseX <= easyButtonX + buttonWidth && mouseY >= easyButtonY && mouseY <= easyButtonY + buttonHeight) {
       difficulty = "Easy";
+      if (back){
+        gw.restart();
+      }
     }
     
     // Check if the hard button is clicked
     if(mouseX >= hardButtonX && mouseX <= hardButtonX + buttonWidth && mouseY >= hardButtonY && mouseY <= hardButtonY + buttonHeight) {
       difficulty = "Hard";
+      if (back){
+        gw.restart();
+      }
     }
   } else if (gameOver && !showLeaderboard) {
-
     // Check if the restart button is clicked
     if(mouseX >= restartButtonX-75 && mouseX <= restartButtonX + buttonWidth -75 && mouseY >= restartButtonY-25 && mouseY <= restartButtonY + buttonHeight-25) {
       restartGame();
@@ -128,11 +153,10 @@ void mouseClicked() {
       drawed = false;
       showLeaderboard = false;
     }
-  if (mouseX >= restartButtonX-75+100 && mouseX <= restartButtonX + buttonWidth -75+100 && mouseY >= restartButtonY-25+170 && mouseY <= restartButtonY + buttonHeight-25+170 && (currentpage + 1) * pageSize < leaderboard.size()) {
+  if (mouseX >= restartButtonX+100 && mouseX <= restartButtonX + buttonWidth +100 && mouseY >= restartButtonY-25+170 && mouseY <= restartButtonY + buttonHeight-25+170 && (currentpage + 1) * pageSize < leaderboard.size()) {
       currentpage++;
-      println("+");
    }
-  if (mouseX >= restartButtonX-75-100 && mouseX <= restartButtonX + buttonWidth -75-100 && mouseY >= restartButtonY-25+170 && mouseY <= restartButtonY + buttonHeight-25+170 && currentpage > 0) {
+  if (mouseX >= restartButtonX-100-75 && mouseX <= restartButtonX + buttonWidth -100-75 && mouseY >= restartButtonY-25+170 && mouseY <= restartButtonY + buttonHeight-25+170 && currentpage > 0) {
       currentpage--;
     }
   }
@@ -156,8 +180,8 @@ void drawRestart(){
     textAlign(CENTER, CENTER);
     text("Game Over", width/2, height/2 - 50);
     text("Score: " + score, width/2, height/2);
-    drawButton("Restart", restartButtonX, restartButtonY);
-    drawButton("Leaderboard", restartButtonX, restartButtonY+200);
+    drawButton("Restart", restartButtonX-50, restartButtonY);
+    drawButton("Leaderboard", restartButtonX-50, restartButtonY+200);
     gw.restart();
     if (!playerName.isEmpty() && !drawed) {
     leaderboard.add(new LeaderboardEntry(playerName, score, difficulty));
@@ -205,11 +229,11 @@ void LeaderBoard(){
       text("Name: " + entry.playerName + " score: " + entry.score + " difficulty: " + entry.difficulty, width/2, height/2 - 150 + (i - startIndex) * 30);
     }
     // Draw the restart button
-    drawButton("Restart", restartButtonX, restartButtonY+240);
-    drawButton("Prev", restartButtonX-100, restartButtonY+170);
+    drawButton("Restart", restartButtonX-60, restartButtonY+200);
+    drawButton("Prev", restartButtonX-230, restartButtonY+120);
     
     // Draw next page button
-    drawButton("Next", restartButtonX+100, restartButtonY+170);
+    drawButton("Next", restartButtonX+120, restartButtonY+120);
 }
   
  void drawInputBox() {
@@ -217,11 +241,14 @@ void LeaderBoard(){
   rect(introButtonX-25, introButtonY + 200, 200, 30);
   fill(0);
   textSize(16);
-  textAlign(CENTER, CENTER);
-  text(playerName, introButtonX+45, introButtonY + 210);
+  textAlign(LEFT, CENTER);
+  text(playerName, introButtonX, introButtonY + 210);
   fill(255, 0, 0);
-  text("Enter Your Name:", introButtonX+35, introButtonY + 180);
-  
+  text("Enter Your Name:", introButtonX, introButtonY + 180);
+  if (cursorVisible && playerName.length()!=0) {
+    float cursorX = textWidth(playerName) + width/2 - 75; // Calculate cursor position
+    line(cursorX,  introButtonY + 200, cursorX,  introButtonY + 225); // Draw cursor line
+  }
 }
 
 void saveLeaderboard() {
@@ -246,5 +273,13 @@ void loadLeaderboard() {
         }
       }
     }
-
+}
+void drawBackButton() {
+  // Draw back button at top left corner
+  fill(200);
+  rect(width - 70 +view_x, 20+view_y, 60, 30);
+  fill(0);
+  textSize(16);
+  textAlign(CENTER, CENTER);
+  text("Back", width - 70 +view_x, 20+view_y, 60, 30);
 }
