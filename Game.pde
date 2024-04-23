@@ -38,15 +38,15 @@ void draw() {
   else  if (!gameOver){
     background(sky);
     scroll();
+    drawBackButton();
     displayAll();
     updateAll();
     collideAll();
   }
-  else {
+  else if (gameOver){
     drawRestart();
     if( showLeaderboard){
      LeaderBoard();
    }
   }
-  
 }

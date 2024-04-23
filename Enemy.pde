@@ -28,9 +28,6 @@ public class Enemy extends AnimatedSprite{
            currentImg = stand;
        }
     }
-
-    /// if the enemy should chase the player based on their
-    //relative positions and the chase distance
     boolean Chase(Player player){
       float dis = 10000;
       if (collisionTest(player, this)){

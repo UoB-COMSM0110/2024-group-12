@@ -138,19 +138,23 @@ public void solveCollisions(Sprite player, ArrayList<Sprite> grounds) {
 
 void displayheart() {
   // Container
+  pushMatrix();
   stroke(#D4AF37);
   strokeWeight(4);
   fill(#D4AF37, 25);
-  rectMode(CENTER);
-  rect(250/6*PlayerSprite_LIVES + view_x, 80 + view_y, 250/3*PlayerSprite_LIVES, 120, 20);
-
+  rect(250/6*PlayerSprite_LIVES + view_x-100, 20+view_y, 250/3*PlayerSprite_LIVES, 120, 20);
+  popMatrix();
+  
   // Score
+  pushMatrix();
+  translate(view_x, view_y); // Apply view offset
   textAlign(LEFT);
   fill(#FFFFFF);
   textSize(40);
-  text("Score: " + String.valueOf(score), 30 + view_x, 70 + view_y);
+  text("Score: " + String.valueOf(score), 30, 70);
   textAlign(CENTER);
-
+  popMatrix();
+  
   // Life
   int heartX = 70;
   for (int i = 0; i < player.lives; i++) {
@@ -160,7 +164,7 @@ void displayheart() {
   for (int j = PlayerSprite_LIVES; j > player.lives; j--) {
     image(emptyheart, heartX + view_x, 108 + view_y, 60, 60);
     heartX += 70;
-  }
+  }  
 }
 
 

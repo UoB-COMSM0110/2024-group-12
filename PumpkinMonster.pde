@@ -24,8 +24,7 @@ public class PumpkinMonster extends Boss{
        ms = millis(); 
        if (!findPlayer){FindPlayer(player);}
        CheckAttack(player);
-       if (findPlayer){
-       // found the player and triggers transformation
+       if (findPlayer){ 
          if(!transformed){
            changetime = millis();
            currentImg = transform;

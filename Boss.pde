@@ -2,14 +2,13 @@ public class Boss extends AnimatedSprite{
     PImage[] stand; 
     PImage[] attack;
     PImage[] walk;
-    int dam; //the damage dealt by the boss
+    int dam;
     float chase_speed;
     float ChaseDis;
-    // store timestamps
     int attms = 0;
     int ms = 0;
     int chasems;
-    int change; //change the direction of movement
+    int change;
   public Boss(PImage img, int size_x, int size_y, float x, float y, int dam, float ChaseDis, float chase_speed){
     super(img, size_x,size_y,x,y);
     this.dam = dam;
@@ -35,8 +34,6 @@ public class Boss extends AnimatedSprite{
        }
     }
     boolean Chase(Player player){
-    //calculates the distance to the player and adjusts movement accordingly
-    //if this is hard level,or it simulates movement changes over time
       if(difficulty == "Hard"){
         float dis = 10000;
         if (collisionTest(player, this)){
@@ -69,7 +66,7 @@ public class Boss extends AnimatedSprite{
         return true;
       }
     }
-    //Checks if the boss is colliding with the player
+    
     boolean CheckAttack(Player player){
       if (collisionTest(player, this)){
         if ((ms - attms)/1000>=2 ){
@@ -84,7 +81,6 @@ public class Boss extends AnimatedSprite{
     }
 }
 
-//display, update animation, update position, and handle collisions for each boss
 void displayBoss(){
   for(Sprite boss : bosses){
      AnimatedSprite bosss = (AnimatedSprite)boss;
