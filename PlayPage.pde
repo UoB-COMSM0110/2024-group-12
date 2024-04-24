@@ -14,7 +14,7 @@ int easyButtonX, easyButtonY; // Coordinates for the easy button
 int hardButtonX, hardButtonY; // Coordinates for the hard button
 int leaderboardButtonX, leaderboardButtonY; // Coordinates for the leaderboard button
 ArrayList<LeaderboardEntry> leaderboard = new ArrayList<LeaderboardEntry>(); // Leaderboard list
-boolean drawed = false; //<>// //<>//
+boolean drawed = false; //<>//
 void drawIntroWindow() {
   pushMatrix();
   int introWindowWidth = 300;
@@ -23,12 +23,12 @@ void drawIntroWindow() {
   int introWindowY = height/2 - introWindowHeight/2;
   fill(200);
   rect(introWindowX, introWindowY, introWindowWidth, introWindowHeight);
-  
+
   fill(0);
   textSize(16);
   textAlign(CENTER, CENTER);
   text("Game Introduction:\n\nThis is a simple game. Play and have fun!", introWindowX, introWindowY, introWindowWidth, introWindowHeight);
-  
+
   // Draw the start game button
   fill(200, 0, 0);
   rect(startGameButtonX, startGameButtonY, buttonWidth, buttonHeight);
@@ -62,7 +62,7 @@ void drawPage(){
     rect(introButtonX, introButtonY, buttonWidth, buttonHeight);
     fill(255);
     drawButton("Game Intro", introButtonX, introButtonY);
-    
+
     // Show the intro window if introVisible is true
     if(introVisible) {
       drawIntroWindow();
@@ -101,24 +101,24 @@ void mouseClicked() {
       score = 0;
     }
   if (!gameStarted) {
-    
+
     // Check if the start button is clicked
     if(mouseX >= buttonX && mouseX <= buttonX + buttonWidth && mouseY >= buttonY && mouseY <= buttonY + buttonHeight) {
       gameStarted = true;
     }
 
-    
+
     // Check if the intro button is clicked
     if(mouseX >= introButtonX && mouseX <= introButtonX + buttonWidth && mouseY >= introButtonY && mouseY <= introButtonY + buttonHeight) {
       // Toggle the visibility of the intro window
       introVisible = !introVisible;
     }
-    
+
     // Check if the start game button is clicked
     if(mouseX >= startGameButtonX && mouseX <= startGameButtonX + buttonWidth && mouseY >= startGameButtonY && mouseY <= startGameButtonY + buttonHeight && introVisible) {
       gameStarted = true;
     }
-    
+
     if(mouseX >= startGameButtonX && mouseX <= startGameButtonX + buttonWidth && mouseY >= startGameButtonY+100 && mouseY <= startGameButtonY+100 + buttonHeight && introVisible) {
       introVisible = !introVisible;
     }
@@ -128,7 +128,7 @@ void mouseClicked() {
         gw.restart();
       }
     }
-    
+
     // Check if the hard button is clicked
     if(mouseX >= hardButtonX && mouseX <= hardButtonX + buttonWidth && mouseY >= hardButtonY && mouseY <= hardButtonY + buttonHeight) {
       difficulty = "Hard";
@@ -148,13 +148,7 @@ void mouseClicked() {
   }
   else if (showLeaderboard) {
     // Check if the restart button is clicked
-    if(mouseX >= restartButtonX-75 && mouseX <= restartButtonX + buttonWidth -75 && mouseY >= restartButtonY-25+240 && mouseY <= restartButtonY + buttonHeight-25+240) {
-      restartGame();
-      drawed = false;
-      showLeaderboard = false;
-    }
-  
-  if(mouseX >= restartButtonX-70+200 && mouseX <= restartButtonX + buttonWidth -70+200 && mouseY >= restartButtonY-25+240-15 && mouseY <= restartButtonY + buttonHeight-25+240-15) {
+    if(mouseX >= restartButtonX-70+200 && mouseX <= restartButtonX + buttonWidth -70+200 && mouseY >= restartButtonY-25+240-15 && mouseY <= restartButtonY + buttonHeight-25+240-15) {
       restartGame();
       drawed = false;
       showLeaderboard = false;
@@ -167,7 +161,7 @@ void mouseClicked() {
     }
   }
 
-  
+
 }
 
 void restartGame() {
@@ -192,10 +186,10 @@ void drawRestart(){
     if (!playerName.isEmpty() && !drawed) {
     leaderboard.add(new LeaderboardEntry(playerName, score, difficulty));
     Collections.sort(leaderboard, (e1, e2) -> Integer.compare(e2.score, e1.score));
-    drawed = true; 
+    drawed = true;
   }
     saveLeaderboard();
-    
+
 }
 
 void draw_diff(){
@@ -209,7 +203,7 @@ void draw_diff(){
     textSize(20);
     textAlign(CENTER, CENTER);
     text("Easy", easyButtonX, easyButtonY, buttonWidth, buttonHeight);
-    
+
     if (difficulty.equals("Hard")) {
       fill(255, 0, 0); // Red color for hard button
     } else {
@@ -235,13 +229,13 @@ void LeaderBoard(){
       text("Name: " + entry.playerName + " score: " + entry.score + " difficulty: " + entry.difficulty, width/2, height/2 - 150 + (i - startIndex) * 30);
     }
     // Draw the restart button
-    drawButton("Restart", restartButtonX-60, restartButtonY+200);
-    drawButton("Prev", restartButtonX-230, restartButtonY+120);
-    
+    drawButton("Restart", restartButtonX+140, restartButtonY+185);
+    drawButton("Prev", restartButtonX-200, restartButtonY+120);
+
     // Draw next page button
-    drawButton("Next", restartButtonX+120, restartButtonY+120);
+    drawButton("Next", restartButtonX+140, restartButtonY+120);
 }
-  
+
  void drawInputBox() {
   fill(200);
   rect(introButtonX-25, introButtonY + 200, 200, 30);
