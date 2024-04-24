@@ -20,7 +20,7 @@ public class AnimatedSprite extends Sprite {
         }
     }
     public void selectImg() {
-        if (change_x > 0) {
+        if (change_x != 0) {
             currentImg = move;
         }
         else {

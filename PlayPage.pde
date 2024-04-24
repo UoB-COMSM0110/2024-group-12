@@ -103,7 +103,6 @@ void mouseClicked() {
   if (!gameStarted) {
     
     // Check if the start button is clicked
-    System.out.println("CLICK START " + gw.isReady);
     if(mouseX >= buttonX && mouseX <= buttonX + buttonWidth && mouseY >= buttonY && mouseY <= buttonY + buttonHeight) {
       gameStarted = true;
     }
