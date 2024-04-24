@@ -35,7 +35,7 @@ void draw() {
     gw.createMap();
     created = true;
   }
-  else  if (!gameOver){
+  else  if (gw.isReady && !gameOver){
     background(sky);
     scroll();
     drawBackButton();

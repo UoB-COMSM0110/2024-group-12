@@ -15,6 +15,7 @@ public class AnimatedSprite extends Sprite {
     public void updateAnimation() {
         frame++;
         if (frame % 9 == 0) {
+            System.out.println("GAME STATUS :" + gw.isReady);
             selectImg();
             moveToNextImg();
         }

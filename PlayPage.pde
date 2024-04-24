@@ -103,6 +103,7 @@ void mouseClicked() {
   if (!gameStarted) {
     
     // Check if the start button is clicked
+    System.out.println("CLICK START " + gw.isReady);
     if(mouseX >= buttonX && mouseX <= buttonX + buttonWidth && mouseY >= buttonY && mouseY <= buttonY + buttonHeight) {
       gameStarted = true;
     }
@@ -115,7 +116,7 @@ void mouseClicked() {
     }
     
     // Check if the start game button is clicked
-    if(gw.isReady && mouseX >= startGameButtonX && mouseX <= startGameButtonX + buttonWidth && mouseY >= startGameButtonY && mouseY <= startGameButtonY + buttonHeight && introVisible) {
+    if(mouseX >= startGameButtonX && mouseX <= startGameButtonX + buttonWidth && mouseY >= startGameButtonY && mouseY <= startGameButtonY + buttonHeight && introVisible) {
       gameStarted = true;
     }
     
