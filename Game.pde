@@ -32,9 +32,7 @@ void draw() {
   if (!gameStarted) {
     drawPage();
   }else if (created == false){
-    System.out.println("DO YOU RUN");
     gw.createMap();
-    System.out.println("GAME DRAW: " + (gw.isReady));
     created = true;
   }
   else  if (!gameOver){
