@@ -18,7 +18,7 @@ void keyPressed() {
     }
    
   //}
-    if (!gameStarted && !showLeaderboard) {
+    if (!gameStarted && !showLeaderboard && !back) {
     if (keyCode >= 65 && keyCode <= 90 || keyCode >= 97 && keyCode <= 122 || keyCode == 32) {
       playerName += key;
     } else if (keyCode == BACKSPACE && playerName.length() > 0) {

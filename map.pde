@@ -17,6 +17,7 @@ class gameworld{
   PImage brick,ladder;
   String path;
   String file_name;
+  boolean isReady = false;
   gameworld(){
     randomSeed(SEED);
     ground1 = loadImage("./data/map/peaceful night/image48.png");
@@ -99,6 +100,7 @@ class gameworld{
     Doughnuts = new  ArrayList<Sprite>();
     Orbs = new ArrayList<Sprite>();
     Enemies = new ArrayList<Sprite>();
+    isReady = false;
     this.createMap();
   }
   void createMap() {
@@ -423,6 +425,8 @@ class gameworld{
         }
       }
     }
+
+    isReady = true;
   }
   
   void display(){

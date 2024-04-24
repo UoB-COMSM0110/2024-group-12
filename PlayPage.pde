@@ -14,7 +14,7 @@ int easyButtonX, easyButtonY; // Coordinates for the easy button
 int hardButtonX, hardButtonY; // Coordinates for the hard button
 int leaderboardButtonX, leaderboardButtonY; // Coordinates for the leaderboard button
 ArrayList<LeaderboardEntry> leaderboard = new ArrayList<LeaderboardEntry>(); // Leaderboard list
-boolean drawed = false; //<>//
+boolean drawed = false; //<>// //<>//
 void drawIntroWindow() {
   pushMatrix();
   int introWindowWidth = 300;
@@ -115,7 +115,7 @@ void mouseClicked() {
     }
     
     // Check if the start game button is clicked
-    if(mouseX >= startGameButtonX && mouseX <= startGameButtonX + buttonWidth && mouseY >= startGameButtonY && mouseY <= startGameButtonY + buttonHeight && introVisible) {
+    if(gw.isReady && mouseX >= startGameButtonX && mouseX <= startGameButtonX + buttonWidth && mouseY >= startGameButtonY && mouseY <= startGameButtonY + buttonHeight && introVisible) {
       gameStarted = true;
     }
     

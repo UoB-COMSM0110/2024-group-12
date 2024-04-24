@@ -2,6 +2,7 @@ Freya,35,Easy
 Freya,33,Easy
 Finn,20,Easy
 Freya,13,Easy
+DDDDD,11,Hard
 ahmed,9,Hard
 Finn,9,Hard
 Freya,7,Easy
@@ -16,3 +17,4 @@ Finn,3,Hard
 Finn,3,Hard
 Freya,3,Easy
 Freya,3,Easy
+a,2,Hard
