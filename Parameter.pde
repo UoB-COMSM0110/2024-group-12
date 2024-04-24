@@ -32,7 +32,7 @@ final static int SEED = 123;
 final static int BOSS1_SPEED = 2;
 final static int BOSS2_SPEED = 2;
 
-final static int PlayerSprite_LIVES = 1;
+final static int PlayerSprite_LIVES = 3;
 
 float JUMP_SPEED = 9;
 final static float JUMP_REINFIORCE = 12;

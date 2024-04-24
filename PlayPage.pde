@@ -153,10 +153,16 @@ void mouseClicked() {
       drawed = false;
       showLeaderboard = false;
     }
-  if (mouseX >= restartButtonX+100 && mouseX <= restartButtonX + buttonWidth +100 && mouseY >= restartButtonY-25+170 && mouseY <= restartButtonY + buttonHeight-25+170 && (currentpage + 1) * pageSize < leaderboard.size()) {
+  
+  if(mouseX >= restartButtonX-70+200 && mouseX <= restartButtonX + buttonWidth -70+200 && mouseY >= restartButtonY-25+240-15 && mouseY <= restartButtonY + buttonHeight-25+240-15) {
+      restartGame();
+      drawed = false;
+      showLeaderboard = false;
+    }
+  if (mouseX >= restartButtonX+100+200 && mouseX <= restartButtonX + buttonWidth +100+200 && mouseY >= restartButtonY-25+170-15 && mouseY <= restartButtonY + buttonHeight-25+170-15 && (currentpage + 1) * pageSize < leaderboard.size()) {
       currentpage++;
    }
-  if (mouseX >= restartButtonX-100-75 && mouseX <= restartButtonX + buttonWidth -100-75 && mouseY >= restartButtonY-25+170 && mouseY <= restartButtonY + buttonHeight-25+170 && currentpage > 0) {
+  if (mouseX >= restartButtonX-100-75+200 && mouseX <= restartButtonX + buttonWidth -100-75+200 && mouseY >= restartButtonY-25+170-15 && mouseY <= restartButtonY + buttonHeight-25+170-15 && currentpage > 0) {
       currentpage--;
     }
   }
