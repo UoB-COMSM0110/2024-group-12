@@ -244,7 +244,8 @@ void LeaderBoard(){
   textAlign(LEFT, CENTER);
   text(playerName, introButtonX, introButtonY + 210);
   fill(255, 0, 0);
-  text("Enter Your Name:", introButtonX, introButtonY + 180);
+  String text = (!back) ? "Enter Your Name" : "Cannot Change Your Name:";
+  text(text, introButtonX, introButtonY + 180);
   if (cursorVisible && playerName.length()!=0) {
     float cursorX = textWidth(playerName) + width/2 - 75; // Calculate cursor position
     line(cursorX,  introButtonY + 200, cursorX,  introButtonY + 225); // Draw cursor line
