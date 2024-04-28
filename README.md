@@ -31,6 +31,7 @@ Early on the inspiration for our game was the fondness all team members had towa
 
 ![fly](https://github.com/UoB-COMSM0110/2024-group-12/assets/104866923/afd58ebd-9b54-4a59-b05b-f71efe75bb6a)
 
+(videos have been editted by VEED.io)
 
 # Requirements
 
