@@ -18,6 +18,37 @@
   <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/9738be08-5bbc-4ed8-9dd3-4c4d29ff4089" alt="Team_photo" style="width:100%">
 </figure>
 
+<table align="center">
+  <thead>
+    <tr>
+      <th style="text-align:center">Name</th>
+      <th style="text-align:center">Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:center">Hamza Ahmed</td>
+      <td style="text-align:center"><a href="mailto:io23632@bristol.ac.uk">io23632@bristol.ac.uk</a></td>
+    </tr>
+    <tr>
+      <td style="text-align:center">Yiran Liu</td>
+      <td style="text-align:center"><a href="mailto:fm19201@bristol.ac.uk">fm19201@bristol.ac.uk</a></td>
+    </tr>
+    <tr>
+      <td style="text-align:center">Gunho Ryu</td>
+      <td style="text-align:center"><a href="mailto:jm23986@bristol.ac.uk">jm23986@bristol.ac.uk</a></td>
+    </tr>
+    <tr>
+      <td style="text-align:center">Xiaoqian Lu</td>
+      <td style="text-align:center"><a href="mailto:fd23007@bristol.ac.uk">fd23007@bristol.ac.uk</a></td>
+    </tr>
+    <tr>
+      <td style="text-align:center">Feng Xue</td>
+      <td style="text-align:center"><a href="mailto:zp23769@bristol.ac.uk">zp23769@bristol.ac.uk</a></td>
+    </tr>
+  </tbody>
+</table>
+
 # Introduction
 
 Our game is a 2D platform game which, like other similar 2D platforms, allows for a character to jump through obstacles, avoiding enemies and collecting points. 
