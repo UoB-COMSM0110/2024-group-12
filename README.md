@@ -164,7 +164,7 @@ The interaction of the stake holders with this game is designed to be identical 
 
 ![Game Class Diagram](https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/fb6f8e37-a65f-4c2a-bbaf-8083a01caa8a)
 
-# Implementation (Yiran)
+# Implementation
 
 -	Introduction
   
