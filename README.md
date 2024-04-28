@@ -140,7 +140,7 @@ The interaction of the stake holders with this game is designed to be identical 
 
 ![Game Class Diagram](https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/fb6f8e37-a65f-4c2a-bbaf-8083a01caa8a)
 
-# Evaluation (GunHo)
+# Evaluation
 
  Evaluation is fundamental in software development as it enables developers to analyse and refine the software to meet users’ requirements effectively. To ensure that our project meets users’ requirements, our group implemented two evaluation measures: qualitative and quantitative evaluations. Any issues identified from these evaluations, if applicable, were addressed and some evaluations were run multiple times to better evaluate the project.
 
@@ -212,7 +212,7 @@ The interaction of the stake holders with this game is designed to be identical 
 <br>
 <br>
 
-# Process (Hamza) 
+# Process
 
 ## Introduction
 
