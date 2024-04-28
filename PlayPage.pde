@@ -15,19 +15,51 @@ int hardButtonX, hardButtonY; // Coordinates for the hard button
 int leaderboardButtonX, leaderboardButtonY; // Coordinates for the leaderboard button
 ArrayList<LeaderboardEntry> leaderboard = new ArrayList<LeaderboardEntry>(); // Leaderboard list
 boolean drawed = false; //<>//
+
+
+
 void drawIntroWindow() {
+  
   pushMatrix();
-  int introWindowWidth = 300;
-  int introWindowHeight = 200;
+  int introWindowWidth = 700;
+  int introWindowHeight = 300;
   int introWindowX = width/2 - introWindowWidth/2;
-  int introWindowY = height/2 - introWindowHeight/2;
+  int introWindowY = height/2 - introWindowHeight/2 - 50;
+  
   fill(200);
   rect(introWindowX, introWindowY, introWindowWidth, introWindowHeight);
 
   fill(0);
   textSize(16);
-  textAlign(CENTER, CENTER);
-  text("Game Introduction:\n\nThis is a simple game. Play and have fun!", introWindowX, introWindowY, introWindowWidth, introWindowHeight);
+  
+   // Load the Right arrow for image for the intro window
+  PImage Rightarrow = loadImage("./data/IntroPage/RightArrow.png");
+  PImage Jumparrow = loadImage("./data/IntroPage/HoldUp.png");
+  
+  
+  // Calculate image dimensions and position to fit inside the intro window
+  float imageScale = ( min(introWindowWidth / (float)Rightarrow.width, introWindowHeight / (float)Rightarrow.height) ) / 8;
+  int imageWidth = (int)(Rightarrow.width * imageScale);
+  int imageHeight = (int)(Rightarrow.height * imageScale);
+  int imageX = introWindowX + (introWindowWidth - imageWidth) / 15; // center the image horizontally within the window
+  int imageY = introWindowY + (introWindowHeight - imageHeight) / 8; // center the image vertically within the window
+  int moveInstructionX = introWindowX + 300;
+  int moveInstructionY = introWindowY + 20;
+
+  // Display the arrow images + text: 
+  image(Rightarrow, imageX, imageY, imageWidth, imageHeight);
+  text("Use the arrows keys to move right, left, up and down", moveInstructionX, moveInstructionY);
+  image(loadImage("./data/PowerUpOrb/powerOrb3.png"), imageX, imageY + 50, imageWidth, imageHeight);
+  text("Collect the orb to fly, but be careful the Orb only lets you fly for 5 seconds !", moveInstructionX + 30, moveInstructionY + 50);
+  image(Jumparrow, imageX, imageY + 100, imageWidth, imageHeight);
+  text("Press and hold the UP key to fly, when you get an Orb", moveInstructionX, moveInstructionY + 100);
+  image(loadImage("./data/pk/pumpkin1.png"), imageX, imageY + 160);
+  text("Collect the pumkins to gain points !", moveInstructionX, moveInstructionY + 160);
+  image(loadImage("./data/redsmile/attack2.png"), moveInstructionX - 250, moveInstructionY + 235, imageWidth, imageHeight);
+  text("Avoid enemies or lose a life !", moveInstructionX, moveInstructionY + 235);
+    
+  //textAlign(CENTER, CENTER);
+  //text("Game Introduction:\n\nThis is a simple game. Play and have fun!", introWindowX, introWindowY, introWindowWidth, introWindowHeight);
 
   // Draw the start game button
   fill(200, 0, 0);
@@ -36,9 +68,11 @@ void drawIntroWindow() {
   text("Start Game", startGameButtonX, startGameButtonY, buttonWidth, buttonHeight);
   drawButton("back" , startGameButtonX, startGameButtonY+100);
   popMatrix();
+  
 }
 
 void drawPage(){
+  
     background(sky);
     buttonX = width/2 - buttonWidth/2;
     buttonY = height/2 - buttonHeight/2;
@@ -79,6 +113,7 @@ void drawPage(){
 
 
 void drawButton(String label, int x, int y) {
+  
   pushMatrix();
   fill(200);
   rect(x, y, buttonWidth, buttonHeight);
@@ -92,6 +127,7 @@ void drawButton(String label, int x, int y) {
 
 
 void mouseClicked() {
+  
    if (mouseX >= width - 100 && mouseX <= width - 10 && mouseY >= 10 && mouseY <= 40) {
       gameStarted = false;
       back = true;
