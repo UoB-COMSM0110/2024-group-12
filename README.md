@@ -4,6 +4,7 @@
 
 ## Table of Contents
 - [Team](#team)
+- [How to Donwload and Play](#How-to-download-and-Play-Halloween-Adventure)
 - [Introduction](#introduction)
 - [Requirements](#requirements)
 - [Implementation](#implementation)
@@ -48,6 +49,34 @@
     </tr>
   </tbody>
 </table>
+
+# How to download and Play Halloween Adventure 
+
+**requirements:**
+MAC OS / WINDOWS, **Halloween adventure will not work on linux machines**
+Processing, which can be downlaoded here: 
+https://processing.org/download
+
+1. **Donwload the zipped folder of this repo**
+
+<img width="1028" alt="DownloadGame-ZipFolder" src="https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/f7110e88-cb41-416c-82ca-c3becda346b6">
+
+2. **Open Processing from your Mac OS or windows computer**
+
+3. **Click on File - > Open**
+   
+<img width="1439" alt="DownloadGame-FileOpenProcessing" src="https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/45a4836d-6e4a-4eb6-a4a8-9e9ab25420dd">
+
+4. **Select the "Game.pde" File**
+
+<img width="1440" alt="DownloadGame-OpenGamepde" src="https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/ea32b19f-c8a1-4c71-8b1f-ca5bd76148ff">
+
+5.**Once the file is open, click on the Play Button on the bottom Left corner of Processing**
+
+<img width="383" alt="DownloadGame-PressPlay" src="https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/d018b586-8b28-42f0-b75e-60b98b41f4b6">
+
+
+6. **HAVE FUN**
 
 # Introduction
 
