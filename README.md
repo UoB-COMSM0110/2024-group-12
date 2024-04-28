@@ -3,26 +3,13 @@
 </p>
 
 ## Table of Contents
-- [Team](Team)
-- [Introduction](https://github.com/UoB-COMSM0110/2024-group-12/edit/main/README.md#introduction)
-- [Requirements](https://github.com/UoB-COMSM0110/2024-group-12/edit/main/README.md#requirements)
-  - [Ideation Process](#ideation-process)
-  - [Early Stages Design](#early-stages-design)
-- [Design](#design)
-  - [System Architecture](#system-architecture)
-  - [Class Diagram](#class-diagram)
-  - [Sequence Diagram](#sequence-diagram)
+- [Team](#team)
+- [Introduction](#introduction)
+- [Requirements](#requirements)
 - [Implementation](#implementation)
-  - [Challenge 1: Platforming Framework](#challenge-1-platforming-framework)
-  - [Challenge 2: GamePlay Twists](#challenge-2-gameplay-twists)
-  - [Challenge 3: Integration and UI](#challenge-3-integration-and-ui)
 - [Evaluation](#evaluation)
-    - [Qualitative Evaluations](#qualitative-evaluations)
-    - [Quantitative Evaluations](#quantitative-evaluations)
-    - [How code was tested](#how-code-was-tested)
 - [Process](#process)
 - [Conclusion](#conclusion)
-- [Documentation of code](#documentation-of-code)
 - [Individual Contribution Table](#individual-contribution-table)
 
 # Team
