@@ -18,7 +18,18 @@
 ![IMG_8164](https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/9738be08-5bbc-4ed8-9dd3-4c4d29ff4089)
 
 # Introduction
-Our game is a 2D platform game which like other similar 2D platforms allows for a character to jump through obstacles, avoiding enemies and collecting points. The added twist within our game is the addition of a timed flying mechanic, this ‘power up’ allows the player to fly for a short period of time, making traversal through the game world easier. Early on the inspiration for our game was the fondness all team members had towards games like Super Mario, we chose this because it also gave a simple vision to consitantly aim for in the game development process. This was reflected in our initial idea for the game where the twist would be that princess peach would be rescuing Mario. Over time however this evolved, as we sought after our own story line and unique game aesthetic.
+Our game is a 2D platform game which like other similar 2D platforms allows for a character to jump through obstacles, avoiding enemies and collecting points. 
+
+![chase](https://github.com/UoB-COMSM0110/2024-group-12/assets/104866923/aef13f50-98de-417a-aa9f-402e4b209f9c)
+
+
+The added twist within our game is the addition of a timed flying mechanic, this ‘power up’ allows the player to fly for a short period of time, making traversal through the game world easier. 
+
+![clear](https://github.com/UoB-COMSM0110/2024-group-12/assets/104866923/bad4b69e-b302-44f0-8c62-0d49154a1dfe)
+
+Early on the inspiration for our game was the fondness all team members had towards games like Super Mario, we chose this because it also gave a simple vision to consitantly aim for in the game development process. This was reflected in our initial idea for the game where the twist would be that princess peach would be rescuing Mario. Over time however this evolved, as we sought after our own story line and unique game aesthetic.
+
+![fly](https://github.com/UoB-COMSM0110/2024-group-12/assets/104866923/afd58ebd-9b54-4a59-b05b-f71efe75bb6a)
 
 
 # Requirements
