@@ -207,14 +207,18 @@ The interaction of the stake holders with this game is designed to be identical 
 
 ### Challenge 1
 
-   <img width="416" alt="image" src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/3e9419ed-ddfd-4bda-b8e3-0edfd9584fbc">
-
+<p align="center">
+  <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/3e9419ed-ddfd-4bda-b8e3-0edfd9584fbc" alt="image" style="width:50%; height:350px;"
+</p>
+ 
    <br>
    During our development process, we encountered a challenge related to preserving the correct game state after a character's death and game restart. Specifically, utilizing the gw.create() method post-character death and subsequent game restart failed to maintain the intended game state. Despite collecting crucial elements like a pumpkin before the character's demise, certain elements were not retained upon game restart. This issue led to an accumulation of items and an abrupt termination of the game due to inadvertent duplication of item quantities.
 
 ### Solution 1
 
-<img width="416" alt="image" src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/ddd64f74-2bbf-4304-aae7-6a042c41678e">
+<p align="center">
+  <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/ddd64f74-2bbf-4304-aae7-6a042c41678e" alt="image" style="width:50%; height:350px;"
+</p>
 
   <br>
   To tackle this dilemma effectively, we implemented a solution that involved resetting all monster lists and character information within the gameworld object. By doing so, we ensured that the game starts afresh with the accurate state upon each restart, thereby mitigating the risk of unintended item duplication and ensuring a smoother gameplay experience.
@@ -425,8 +429,8 @@ Our adherence to Agile practices such as pair programming and iterative testing 
 
 | Name            | Role                                        | Individual Weight |
 |------------     |---------------------------------------------|-------------------|
-| Yiran           | Lead Developer and Coder                    |       1.6         |
-| Hamza           | Project Manager and Coder                   |       1.6         |
-| GunHo           | Secondary Developer and Designer            |       1.6         |
-| Lu              | null                                        |       0.15        |
-| Feng            | null                                        |       0.05        |
+| Yiran           | Lead Developer and Coder                    |       1.64        |
+| Hamza           | Project Manager and Coder                   |       1.64        |
+| GunHo           | Secondary Developer and Designer            |       1.64        |
+| Lu              | null                                        |       0.05        |
+| Feng            | null                                        |       0.03        |
