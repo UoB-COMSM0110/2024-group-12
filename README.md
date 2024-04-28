@@ -1,4 +1,9 @@
+<p align="center">
+ <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/104866923/8bb8b7e9-b76a-4005-a784-5067c5234a8d" alt="Halloween" style="width:100%;">
+</p>
+
 # 2024-group-12
+
 
 // TODO: 
 1. Table of Contents 
