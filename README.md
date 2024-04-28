@@ -2,8 +2,10 @@
  <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/104866923/8bb8b7e9-b76a-4005-a784-5067c5234a8d" alt="Halloween" style="width:100%;">
 </p>
 
-# 2024-group-12
+## Table of Contents
 
+
+# 2024-group-12
 
 // TODO: 
 1. Table of Contents 
@@ -19,22 +21,39 @@
 11. Update Class Diagram
 
 
-
-![IMG_8164](https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/9738be08-5bbc-4ed8-9dd3-4c4d29ff4089)
+<figure>
+  <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/9738be08-5bbc-4ed8-9dd3-4c4d29ff4089" alt="Team_photo" style="width:100%">
+</figure>
 
 # Introduction
-Our game is a 2D platform game which like other similar 2D platforms allows for a character to jump through obstacles, avoiding enemies and collecting points. 
 
-![chase](https://github.com/UoB-COMSM0110/2024-group-12/assets/104866923/aef13f50-98de-417a-aa9f-402e4b209f9c)
+Our game is a 2D platform game which, like other similar 2D platforms, allows for a character to jump through obstacles, avoiding enemies and collecting points. 
 
+<br>
+<p align="center">
+ <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/104866923/aef13f50-98de-417a-aa9f-402e4b209f9c" alt="Enemies Chase Mechanics" style="width:100%; height:350px;">
+ <p align="center">Enemies Chase Mechanics </p>
+</p>
 
-The added twist within our game is the addition of a timed flying mechanic, this ‘power up’ allows the player to fly for a short period of time, making traversal through the game world easier. 
+<br>
 
-![clear](https://github.com/UoB-COMSM0110/2024-group-12/assets/104866923/bad4b69e-b302-44f0-8c62-0d49154a1dfe)
+The added twist within our game is the addition of a timed flying mechanic. This ‘power-up’ allows the player to fly for a short period of time, making traversal through the game world easier. 
+
+<br>
+<p align="center">
+  <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/104866923/bad4b69e-b302-44f0-8c62-0d49154a1dfe" alt="Flying Mechanics" style="width:100%; height:350px;">
+  <p align="center">Flying Mechanics</p>
+</p>
+
+<br>
+<br>
 
 Early on the inspiration for our game was the fondness all team members had towards games like Super Mario, we chose this because it also gave a simple vision to consitantly aim for in the game development process. This was reflected in our initial idea for the game where the twist would be that princess peach would be rescuing Mario. Over time however this evolved, as we sought after our own story line and unique game aesthetic.
 
-![fly](https://github.com/UoB-COMSM0110/2024-group-12/assets/104866923/afd58ebd-9b54-4a59-b05b-f71efe75bb6a)
+<p align="center">
+  <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/104866923/bad4b69e-b302-44f0-8c62-0d49154a1dfe" alt="Game Clear" style="width:100%; height:350px;">
+  <p align="center">Game Playing</p>
+</p>
 
 (videos have been editted by VEED.io)
 
@@ -49,18 +68,26 @@ Our group first came up with six game ideas, these were narrowed down to two pot
 
 For both these games, we identified the stakeholders, user stories and the potential challenges, we then prepared our paper mock ups, divieing up the task within the group. We used the paper prototypes to visualise how the main game screen would look and to work out the aesthetics of the game.
 
+<p align="center">
+  <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/104866923/4d2145e1-922c-4c5d-ac44-03e8053819c4" alt="Game Preview" style="width:100%; height:350px;">
+</p>
 
-![IMG_8136](https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/5e728a3a-4046-4157-afb2-9b57238f4895)
+<br>
+<br>
 
-
- **Identifying the stakeholders**
+**Identifying the stakeholders**
 
 We identified the *primary stakeholders* for the game are the individuals who will be directly playing the game and reviewing it, these are: 
 
 - Friend and Family / Other teams within our cohort : As the ones testing and playing, students within our cohort as well as friends and family members have a direct stake in the games success making them the operational support within the onion diagram shown below
 - Lecturers / Markers / TAs : As the game is part of an educational goal, the game will be reviewed and tested thus making the educational support staff / Lecturers functional beneficiaries and sponsors of the game.
 
- ![image](https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/c9d2c6e1-9805-42d4-b642-737598cf019c)
+<br>
+<br>
+
+<p align="center">
+  <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/c9d2c6e1-9805-42d4-b642-737598cf019c" alt="Game Preview" style="width:70%; height:70%;">
+</p>
 
 The interaction of the stake holders with this game is designed to be identical so the user specification and user stories can be condensed for all stake holders identified above.
 
@@ -81,6 +108,9 @@ The interaction of the stake holders with this game is designed to be identical 
 > “As a user, I want to unlock special levels or achievements by collecting specific power-ups or achieving certain in-game milestones so that I can explore additional content and challenges.”
 >
 
+<br>
+<br>
+
 | Use Case Section | Easy Mode | Hard Mode | 
 | ------------- | ------------- | ------------- |
 | Description  | A run through the game with fewer enemies and more power up placements | A run through of the game with more enemies and fewer special power upgrades |
@@ -96,6 +126,8 @@ The interaction of the stake holders with this game is designed to be identical 
 | 3  |The player player falls of an edge and is returned to the start of the game screen   | The player player falls of an edge and is returned to the start of the game screen   |
 | 4  | When all three lives are list the game ends there with the option to restart the game  | When all three lives are list the game ends there with the option to restart the game  |
 
+<br>
+<br>
 
 **CLASS DIAGRAM**
 
