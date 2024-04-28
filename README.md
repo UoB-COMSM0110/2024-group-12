@@ -279,8 +279,12 @@ During Easter, we held sprint days, refining features and incorporating feedback
 **Solution:**
 We decided against a detailed narrative, opting instead to enhance the gameplay and visual elements. Unimplemented ideas included gameplay mechanics like collecting donuts for extra lives and transforming the ghost into a human.
 
-## **Conclusion**
+# Conclusion
 
 Our adherence to Agile practices such as pair programming and iterative testing was instrumental in creating a game that was both enjoyable and aesthetically pleasing. This project underscored the importance of user feedback and continuous iteration, and taught us effective use of tools like Kanban boards and GitHub. These experiences will undoubtedly benefit our future projects.
 
+<br>
+<br>
+
+# Individual Contribution Table
 
