@@ -285,3 +285,10 @@ Our adherence to Agile practices such as pair programming and iterative testing 
 
 # Individual Contribution Table
 
+| Name            | Role                                        | Individual Weight |
+|------------     |---------------------------------------------|-------------------|
+| Yiran           | Lead Developer and Coder                    |       1.6         |
+| Hamza           | Project Manager and Coder                   |       1.6         |
+| GunHo           | Secondary Developer and Designer            |       1.6         |
+| Lu              | null                                        |       0.15        |
+| Feng            | null                                        |       0.05        |
