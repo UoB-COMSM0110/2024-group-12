@@ -84,7 +84,7 @@ The interaction of the stake holders with this game is designed to be identical 
 
 ![Game Class Diagram](https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/fb6f8e37-a65f-4c2a-bbaf-8083a01caa8a)
 
-# Evaluation
+# Evaluation (GunHo)
 
  Evaluation is fundamental in software development as it enables developers to analyse and refine the software to meet users’ requirements effectively. To ensure that our project meets users’ requirements, our group implemented two evaluation measures: qualitative and quantitative evaluations. Any issues identified from these evaluations, if applicable, were addressed and some evaluations were run multiple times to better evaluate the project.
 
@@ -133,6 +133,82 @@ The interaction of the stake holders with this game is designed to be identical 
  <p><img width="448" alt="image" src="https://github.com/UoB-COMSM0110/2024-group-12/assets/104866923/3917c4b2-0f1b-46a3-b6bb-c92edee72336"></p>
  <p><img width="457" alt="image" src="https://github.com/UoB-COMSM0110/2024-group-12/assets/104866923/d1bb0b26-cc1d-4f46-8764-85faf85e4970"></p>
 
+# Process (Hamza) 
 
+## Introduction
+
+The goal for our project was to create a simple visually aesthetic game that gave players a fun yet challenging experience. We aimed to create in one level a replayability factor for the game which would:
+
+- Be a challenging yet engaging experience.
+- Have a unique look, prompting the user to explore the map and the game world.
+- Create an engaging story, that immerses the user in the game.
+
+To meet these objectives, we adopted the Agile methodology, emphasising:
+
+- Team collaboration with clearly defined roles.
+- An iterative testing process.
+- Regular feedback from key user groups, including students, teaching assistants, and lecturers.
+
+## Inception
+
+In our initial team meeting, attended by Hamza, GunHo, Yiran, Feng, and Lu, we brainstormed potential game concepts, prioritising personal passion over feasibility. We subsequently narrowed our focus to 2D platformers, dismissing more complex ideas like 3D and online multiplayer games due to time constraints.
+
+**Challenges** during this phase**:**
+
+- Varied coding skills and GitHub familiarity among team members.
+- Role assignment.
+
+**Solutions:**
+
+- Each member developed and presented a simple game in Processing, enhancing our understanding of individual coding skills and fostering team cohesion through **pair programming** and feedback.
+- We conducted a GitHub tutorial. For example, one of the team members (GunHo) had significantly more GitHub experience than the rest of the team. So we had all team members (Hamza, GunHo, and Yiran present) go through a tutorial on branching, merging, and rebasing. We did this by ‘practice’ codes that we pushed onto git, where each member practised creating their branch, merging code and resolving conflicts.
+
+ **Organisation and Communication**
+
+We decided on a 2D platformer with mechanics similar to those in Super Mario Bros and Flappy Bird, where players could fly by repeatedly pressing a button. Our organisational tools included the Kanban board on GitHub and personal notes on Notion. Unlike traditional Agile methods, we opted for continuous communication via WhatsApp instead of daily stand-ups.
+
+**Challenges:**
+
+- Tasks communicated on WhatsApp were often overlooked and not updated on the Kanban board.
+
+**Solution:**
+
+- As the project manager, I ensured that the Kanban board was regularly updated, facilitated access to meeting spaces, and centralised communication.
+
+Tasks were assigned using a method akin to planning poker, where each member assessed task difficulty before distribution, these sessions also helped us to clarify roles:
+
+- Yiran as the lead developer and coder.
+- GunHo as the secondary developer and designer.
+- Hamza handling project management and additional coding.
+
+## **Game Development**
+
+Development intensified during reading week and the Easter holiday. An initial minimal viable product was evaluated using Think Aloud and Heuristic evaluation methods, highlighting:
+
+- **Strengths:** Appealing design and intuitive gameplay.
+- **Areas for improvement:** Leaderboard integration, flying mechanics, map design, and respawn features.
+
+**Challenges:**
+
+- Uncertainty about game appearance and goals.
+- Lack of testers.
+
+**Solution:**
+Focusing on a core narrative, we redefined our game around a ghost character collecting pumpkins. We simplified the flying mechanics to better suit the game's aesthetic, transitioning from a flapping to a continuous flight model within a time frame.
+
+During Easter, we held sprint days, refining features and incorporating feedback from friends and family, crucially expanding our tester base to include novice gamers. This feedback led to the implementation of smoother controls and personalised start screens.
+
+![Screenshot 2024-04-27 at 08.15.23.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9be72222-befe-46cc-9af5-ff76348d03a9/1399c85c-12db-4d46-8ed0-c6cfbda51a86/Screenshot_2024-04-27_at_08.15.23.png)
+
+**Challenges:**
+
+- Bugs and a scattered focus delayed narrative development.
+
+**Solution:**
+We decided against a detailed narrative, opting instead to enhance the gameplay and visual elements. Unimplemented ideas included gameplay mechanics like collecting donuts for extra lives and transforming the ghost into a human.
+
+## **Conclusion**
+
+Our adherence to Agile practices such as pair programming and iterative testing was instrumental in creating a game that was both enjoyable and aesthetically pleasing. This project underscored the importance of user feedback and continuous iteration, and taught us effective use of tools like Kanban boards and GitHub. These experiences will undoubtedly benefit our future projects.
 
 
