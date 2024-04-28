@@ -283,8 +283,5 @@ We decided against a detailed narrative, opting instead to enhance the gameplay 
 
 Our adherence to Agile practices such as pair programming and iterative testing was instrumental in creating a game that was both enjoyable and aesthetically pleasing. This project underscored the importance of user feedback and continuous iteration, and taught us effective use of tools like Kanban boards and GitHub. These experiences will undoubtedly benefit our future projects.
 
-<br>
-<br>
-
 # Individual Contribution Table
 
