@@ -92,14 +92,21 @@ The interaction of the stake holders with this game is designed to be identical 
 
 **User Story**
 
-> “As a gamer, I want to control the characters movements using simple controls that are immediately responsive. These controls should be intuitive controls so that I can navigate through the game easily and enjoy a immersive gaming experience.”
-> 
-
-> “As a player of the game, I want a clear objective that provides a rewarding experience, e.g. a method to earn points.”
-> 
-
-> “As a user, I want to unlock special levels or achievements by collecting specific power-ups or achieving certain in-game milestones so that I can explore additional content and challenges.”
+> “Meet Hanna, a novice gamer: As a new gamer, I want to control the characters movements using simple controls that are immediately responsive. These controls should be intuitive so that I can navigate through the game easily and enjoy a immersive gaming experience.”
 >
+> ![UserStory-Hannah](https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/4ee9813e-1c6b-47ff-851b-b5093551951e)
+> 
+
+> “Meet John, a casual gamer: As a causal player of the game, I want a clear objective that provides a rewarding experience,  I want to unlock special levels or achievements by collecting specific power-ups or achieving certain in-game milestones so that I can explore additional content and challenges. e.g. a method to earn points."
+> 
+> ![Jon-CasualGamer](https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/9165a121-7700-49dd-b380-cc792c33df08)
+> 
+
+> “Meet Fenix, a experianced gamer: As an experianced user, I want a challanging game, I want to know I am the best player!!”
+>
+> ![Fenix-_ExperiancedGamer](https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/680a512a-2bf7-4e21-993b-408c7feabaa6)
+> 
+
 
 <br>
 <br>
