@@ -204,6 +204,7 @@ void collideAll(){
   OrbCollisions(player, Orbs);
   if(collisionTest(player, End)){
     gameOver = true;
+    score += (difficulty.equalsIgnoreCase("easy")) ? 5 : 7;
   }
 }
 
