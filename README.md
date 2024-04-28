@@ -212,6 +212,7 @@ The interaction of the stake holders with this game is designed to be identical 
 </p>
  
    <br>
+   
    During our development process, we encountered a challenge related to preserving the correct game state after a character's death and game restart. Specifically, utilizing the gw.create() method post-character death and subsequent game restart failed to maintain the intended game state. Despite collecting crucial elements like a pumpkin before the character's demise, certain elements were not retained upon game restart. This issue led to an accumulation of items and an abrupt termination of the game due to inadvertent duplication of item quantities.
 
 ### Solution 1
@@ -221,35 +222,39 @@ The interaction of the stake holders with this game is designed to be identical 
 </p>
 
   <br>
+  
   To tackle this dilemma effectively, we implemented a solution that involved resetting all monster lists and character information within the gameworld object. By doing so, we ensured that the game starts afresh with the accurate state upon each restart, thereby mitigating the risk of unintended item duplication and ensuring a smoother gameplay experience.
 
 
 ### Challenge 2
  
-
-https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/abd8852b-c5f1-4ab5-a410-7d6410769a34
-
-
+ <p align="center">
+   <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/104866923/34ba7f29-3a5a-4add-ae59-815fa1c15fe4" alt="image" style="width:100%; height:350px;"
+ </p>
  <br>
- In our game, when the difficulty level is set to "Hard," enemy behavior involves calculating the distance between enemies and the player. However, a critical flaw in our collision detection logic causes enemies to inaccurately perceive the player's position. As a result, they mistakenly believe they've collided with the player, particularly when the player is positioned above a brick (as depicted in the provided video). This erroneous perception leads enemies to cease their pursuit, disrupting the intended gameplay flow.
+  
+  In our game, when the difficulty level is set to "Hard," enemy behavior involves calculating the distance between enemies and the player. However, a critical flaw in our collision detection logic causes enemies to inaccurately perceive the player's position. As a result, they mistakenly believe they've collided with the player, particularly when the player is positioned above a brick (as depicted in the provided video). This erroneous perception leads enemies to cease their pursuit, disrupting the intended gameplay flow.
 
  ### Solution 2
-
- <img width="416" alt="image" src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/2e174034-ea3a-4e1b-991f-ef2bbfc914c2">
+   <p align="center">
+    <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/2e174034-ea3a-4e1b-991f-ef2bbfc914c2" alt="image" style="width:50%; height:350px;"
+   </p>
 
   <br>
+  
   To swiftly address this issue while prioritizing efficiency, we opted for a pragmatic solution rather than investing extensive resources into modifying the complex collision detection mechanism. Our chosen approach involves elevating the brick, thereby increasing the distance between the player and enemies. By implementing this adjustment, we effectively mitigate the impact of the collision detection error. Enemies are less likely to mistakenly converge on the brick, ensuring that their behavior aligns more closely with the intended gameplay dynamics.
 
 
  ### Challenge 3
 
- 
-https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/5a63dd63-a483-40c9-b062-e0e5ffc15c88
+ <p align="center">
+   <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/104866923/5f4bdd9f-ee65-4eba-b9c2-e5588a30c407" alt="image" style="width:100%; height:350px;"
+ </p>
 
-
- <img width="416" alt="image" src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/0ee6c46c-8637-464d-a253-9cddecd35d45">
-
-<img width="416" alt="image" src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/a863099f-5610-4ebe-b03b-78baca5646c1">
+ <p align="center">
+   <img width="416" alt="image" src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/0ee6c46c-8637-464d-a253-9cddecd35d45">
+   <img width="416" alt="image" src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/a863099f-5610-4ebe-b03b-78baca5646c1">
+ </p>
 
 <br>
   During gameplay, clicking on the leaderboard button consistently triggered a sudden switch to a new game, preventing players from accessing the leaderboard in time. This issue arose because the restart button shared the same location as the leaderboard button. Consequently, double-clicking on the leaderboard button often inadvertently activated the restart button, leading to unintended game restarts.
@@ -257,8 +262,10 @@ https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/5a63dd63-a483-40
 
  ### Solution 3
 
- <img width="416" alt="image" src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/ea0d3f47-3155-4c5c-adb2-b5beb88b158c">
-
+ <p align="center">
+   <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/ea0d3f47-3155-4c5c-adb2-b5beb88b158c" alt="image" style="width:50%; height:350px;"
+ </p>
+  
   To address this usability issue and improve player experience, we relocated the restart button to a different position. By separating the restart button from the leaderboard button, we reduced the likelihood of accidental activations during interactions with the leaderboard interface. This adjustment aimed to minimize player frustration and ensure that accessing the leaderboard remained a smooth and uninterrupted experience.
 
    ### Challenge 4
@@ -266,9 +273,10 @@ https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/5a63dd63-a483-40
    During the development phase, we encountered a significant challenge related to the character's collision box, which was oversized. This discrepancy caused the character to appear suspended above the ground rather than properly grounded. Additionally, when the character flipped, improper collision positioning resulted in a subtle yet noticeable displacement of the character's image. Upon investigation, we identified that transparent pixels within the character's image were causing issues in collision detection. These transparent pixels inadvertently triggered collisions prematurely, especially when the character approached a wall or obstacle.
 
   ### Solution 4
-  
-  <img width="248" alt="image" src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/3e8684fa-7c51-4553-9ebb-76d5cac27e30">
-  <img width="250" alt="image" src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/a1816845-5c2d-4249-8eb0-e55e2de63e70">
+  <p align="center">
+   <img width="248" alt="image" src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/3e8684fa-7c51-4553-9ebb-76d5cac27e30">
+   <img width="250" alt="image" src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/a1816845-5c2d-4249-8eb0-e55e2de63e70">
+  </p>
 
 <br>
 To address this issue effectively, we implemented a transparent pixel cropping technique on the character's image. This process involved trimming away the transparent pixels surrounding the character's visible portions, ensuring that the collision box accurately represented the character's silhouette. By restricting the collision box to encompass only the visible areas of the character, we significantly enhanced the accuracy of collision detection.
