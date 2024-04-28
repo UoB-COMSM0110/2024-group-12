@@ -198,7 +198,7 @@ Focusing on a core narrative, we redefined our game around a ghost character col
 
 During Easter, we held sprint days, refining features and incorporating feedback from friends and family, crucially expanding our tester base to include novice gamers. This feedback led to the implementation of smoother controls and personalised start screens.
 
-![Screenshot 2024-04-27 at 08.15.23.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/9be72222-befe-46cc-9af5-ff76348d03a9/1399c85c-12db-4d46-8ed0-c6cfbda51a86/Screenshot_2024-04-27_at_08.15.23.png)
+<img width="795" alt="FlowChartImage-Process" src="https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/4636efc2-ae31-4631-a7da-0fd5cdcd3ab7">
 
 **Challenges:**
 
