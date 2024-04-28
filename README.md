@@ -58,7 +58,7 @@ The added twist within our game is the addition of a timed flying mechanic. This
 Early on the inspiration for our game was the fondness all team members had towards games like Super Mario, we chose this because it also gave a simple vision to consitantly aim for in the game development process. This was reflected in our initial idea for the game where the twist would be that princess peach would be rescuing Mario. Over time however this evolved, as we sought after our own story line and unique game aesthetic.
 
 <p align="center">
-  <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/104866923/bad4b69e-b302-44f0-8c62-0d49154a1dfe" alt="Game Clear" style="width:100%; height:350px;">
+  <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/104866923/3b29196e-f7c5-4ec3-b1b1-5fcce879aa62" alt="Game Clear" style="width:100%; height:350px;">
   <p align="center">Game Playing</p>
 </p>
 
