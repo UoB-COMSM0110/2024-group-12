@@ -1,4 +1,7 @@
 import java.util.Collections;
+//sound
+import processing.sound.*;
+SoundFile bgm;
 float view_x = 0;
 float view_y = 0;
 int score = 0;
@@ -18,6 +21,9 @@ PImage sky;
 PImage heart, emptyheart;
 void setup() {
   gw= new gameworld();
+   //bgm
+  bgm = new SoundFile(this, "./data/background/background_music.mp3");
+  bgm.loop();
   size(800, 600);
   background(100,100,100);
   imageMode(CENTER);
@@ -34,6 +40,8 @@ void draw() {
   }else if (created == false){
     gw.createMap();
     created = true;
+     //bgm loop
+      bgm.loop();
   }
   else  if (gw.isReady && !gameOver){
     background(sky);
@@ -45,6 +53,8 @@ void draw() {
   }
   else if (gameOver){
     drawRestart();
+     //bgm stop
+     bgm.stop();
     if( showLeaderboard){
      LeaderBoard();
    }

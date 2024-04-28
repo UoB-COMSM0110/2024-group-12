@@ -170,6 +170,7 @@ void restartGame() {
   gameOver = false;
   player.setCenter_x(100);
   player.setCenter_y(100);
+  bgm.loop();
 }
 
 void drawRestart(){
