@@ -14,20 +14,6 @@
 
 # Team
 
-// TODO: 
-1. Table of Contents 
-2. Demo Video of Finished Game 
-3. Banner for the Game 
-4. Gifs of the Game working - Jumping, Flying Mechanic, Falling Mechanic, Chasing mechanic from the enemies 
-5. Implementation part of the Report 
-6. Contributions Group member roles - who did what, e.g. Hamza - User Stories, User Specifications, GunHo - Evaluation, Yiran - StakeHolder Identification
-7. Process - Write as Group  (Agile Working Method + Kanban board)
-8. Conclusion - Write as Group 
-9. Input and Situations
-10. Change orientation of Paper Prototype.
-11. Update Class Diagram
-
-
 <figure>
   <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/9738be08-5bbc-4ed8-9dd3-4c4d29ff4089" alt="Team_photo" style="width:100%">
 </figure>
