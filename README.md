@@ -494,5 +494,5 @@ In the end, our game stands as a testament to the power of teamwork, creativity,
 | Yiran           | Lead Developer and Coder                    |       1.64        |
 | Hamza           | Project Manager and Coder                   |       1.64        |
 | GunHo           | Secondary Developer and Designer            |       1.64        |
-| Lu              | null                                        |       0.05        |
-| Feng            | null                                        |       0.03        |
+| Feng            | null                                        |       0.05        |
+| Lu              | null                                        |       0.03        |
