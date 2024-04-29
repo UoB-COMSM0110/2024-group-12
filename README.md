@@ -4,7 +4,6 @@
 
 ## Table of Contents
 - [Team](#team)
-- [How  Play Halloween Adventure](#how--play-halloween-adventure)
 - [How to Donwload and Play](#how-to-download--halloween-adventure)
 - [Introduction](#introduction)
 - [Requirements](#requirements)
@@ -50,58 +49,6 @@
     </tr>
   </tbody>
 </table>
-
-# How  Play Halloween Adventure 
-
-1. **Controls**
-    <p >
-    <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/c821c6ec-92da-4050-ade8-0367724dcf7f" alt="image" style="width:90px; height:80px;"
-   </p>
-Use the arrow keys to move adventurer left and right.
-Press the up and down arrow key to make adventurer jump. Adventurer can also use this key to climb ladders.
-
-2. **Objective**
-   <p >
-   <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/f00bde97-8ad9-4136-9600-cc3ec68a5ea8" alt="image" style="width:20px; height:20px;"
-   </p>
- 
-Your goal is to safely guide adventurer through each level to reach the mystical flag at the end.
-
-3. **Avoid Enemies**
-   
-   <span>
-    <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/1874678e-9a90-473b-944e-fab58c0d646a" alt="redsprite" style="width:40px; height:40px;"
-   </span>
-     <span>
-     <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/d1966a87-bd81-45de-bfb0-5cb37c4d4dd4" alt="witch"style="width:40px; height:40px;"
-     </span>
-      
-    <span >
-      <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/b7ef13d3-beef-4896-b51d-73d5a5ccfb65" alt="redsmile" style="width:40px; height:40px;"
-     </span>
-    
-     <span>
-    <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/257a5d24-e355-409d-a888-f318bc312d14" alt="pumpkinmonster" style="width:40px; height:40px;"
-    </span>
-
-Beware of the lurking enemies ! Dodge the menacing pumpkin monsters, evade the spells of wicked witches, watch out for the mischievous red sprites, and beware of the eerie Redsmile. 
-Use your agility and quick reflexes to outmaneuver them.
-
-4. **Collectibles**
-<span>
-    <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/c3ce1d22-9818-496c-96df-3937e483bedf" alt="redsprite" style="width:80px; height:80px;"
-</span>
-
-Along the way, collect pumpkins scattered throughout the levels. Pumpkins are essential for scoring points.The more pumpkins you collect, the higher your score will be.
-
-5. **Power-ups**
-  <span>
-    <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/b32cec24-8519-471f-a7f3-7ee02d7635e0" alt="pumpkinmonster" style="width:40px; height:40px;"
-    </span>
-    
-Look out for special power-ups hidden throughout the levels. They might enhance advanturer jumping abilities, allowing him to overcome obstacles and enemies with ease.
-
-
 
 # How to download  Halloween Adventure 
 
@@ -163,6 +110,56 @@ Early on the inspiration for our game was the fondness all team members had towa
 </p>
 
 (videos have been editted by VEED.io)
+
+## How  Play Halloween Adventure 
+
+1. ***Controls***
+    <p >
+    <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/c821c6ec-92da-4050-ade8-0367724dcf7f" alt="image" style="width:90px; height:80px;"
+   </p>
+Use the arrow keys to move adventurer left and right.
+Press the up and down arrow key to make adventurer jump. Adventurer can also use this key to climb ladders.
+
+2. ***Objective***
+   <p >
+   <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/f00bde97-8ad9-4136-9600-cc3ec68a5ea8" alt="image" style="width:20px; height:20px;"
+   </p>
+ 
+Your goal is to safely guide adventurer through each level to reach the mystical flag at the end.
+
+3. ***Avoid Enemies***
+   
+   <span>
+    <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/1874678e-9a90-473b-944e-fab58c0d646a" alt="redsprite" style="width:40px; height:40px;"
+   </span>
+     <span>
+     <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/d1966a87-bd81-45de-bfb0-5cb37c4d4dd4" alt="witch"style="width:40px; height:40px;"
+     </span>
+      
+    <span >
+      <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/b7ef13d3-beef-4896-b51d-73d5a5ccfb65" alt="redsmile" style="width:40px; height:40px;"
+     </span>
+    
+     <span>
+    <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/257a5d24-e355-409d-a888-f318bc312d14" alt="pumpkinmonster" style="width:40px; height:40px;"
+    </span>
+
+Beware of the lurking enemies ! Dodge the menacing pumpkin monsters, evade the spells of wicked witches, watch out for the mischievous red sprites, and beware of the eerie Redsmile. 
+Use your agility and quick reflexes to outmaneuver them.
+
+4. ***Collectibles***
+<span>
+    <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/c3ce1d22-9818-496c-96df-3937e483bedf" alt="redsprite" style="width:80px; height:80px;"
+</span>
+
+Along the way, collect pumpkins scattered throughout the levels. Pumpkins are essential for scoring points.The more pumpkins you collect, the higher your score will be.
+
+5. ***Power-ups***
+  <span>
+    <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/126887318/b32cec24-8519-471f-a7f3-7ee02d7635e0" alt="pumpkinmonster" style="width:40px; height:40px;"
+    </span>
+    
+Look out for special power-ups hidden throughout the levels. They might enhance advanturer jumping abilities, allowing him to overcome obstacles and enemies with ease.
 
 # Requirements
 
