@@ -4,8 +4,8 @@
 
 ## Table of Contents
 - [Team](#team)
-- [How  Play Halloween Adventure](#How-Play-Halloween-Adventure)
-- [How to Donwload and Play](#How-to-download-and-Play-Halloween-Adventure)
+- [How  Play Halloween Adventure](#how--play-halloween-adventure)
+- [How to Donwload and Play](#how-to-download--halloween-adventure)
 - [Introduction](#introduction)
 - [Requirements](#requirements)
 - [Implementation](#implementation)
