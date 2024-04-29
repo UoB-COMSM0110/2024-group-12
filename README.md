@@ -479,8 +479,13 @@ During Easter, we held sprint days, refining features and incorporating feedback
 We decided against a detailed narrative, opting instead to enhance the gameplay and visual elements. Unimplemented ideas included gameplay mechanics like collecting donuts for extra lives and transforming the ghost into a human.
 
 # Conclusion
+In conclusion, our journey in developing this 2D platform game has been a testament to the power of collaboration, iteration, and user-centric design. Through the Agile methodology, we navigated various challenges, from refining our initial concept to addressing technical hurdles and user feedback. Our commitment to regular communication, role clarity, and task prioritization helped us stay on track despite the complexities of game development.
 
-Our adherence to Agile practices such as pair programming and iterative testing was instrumental in creating a game that was both enjoyable and aesthetically pleasing. This project underscored the importance of user feedback and continuous iteration, and taught us effective use of tools like Kanban boards and GitHub. These experiences will undoubtedly benefit our future projects.
+As we progressed, user feedback played a pivotal role in shaping our game's direction. Whether it was tweaking mechanics for smoother gameplay or refining visual elements for better immersion, every iteration brought us closer to our goal of creating a compelling gaming experience.
+
+While not without its challenges, our journey reinforced the importance of adaptability and resilience in the face of setbacks. By embracing feedback, iterating on our designs, and remaining focused on our objectives, we were able to overcome obstacles and deliver a game we're proud of.
+
+In the end, our game stands as a testament to the power of teamwork, creativity, and perseverance. Our adherence to Agile practices such as pair programming and iterative testing was instrumental in creating a game that was both enjoyable and aesthetically pleasing. This project underscored the importance of user feedback and continuous iteration, and taught us effective use of tools like Kanban boards and GitHub. These experiences will undoubtedly benefit our future projects, as we apply the lessons learned to new challenges and endeavors in the world of game development and beyond.
 
 # Individual Contribution Table
 
