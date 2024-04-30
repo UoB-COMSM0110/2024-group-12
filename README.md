@@ -7,6 +7,7 @@
 - [How to Donwload and Play](#how-to-download--halloween-adventure)
 - [Introduction](#introduction)
 - [Requirements](#requirements)
+- [Design](#design)
 - [Implementation](#implementation)
 - [Evaluation](#evaluation)
 - [Process](#process)
@@ -240,9 +241,31 @@ The interaction of the stake holders with this game is designed to be identical 
 <br>
 <br>
 
+# Design
+
+**System Architecture**
+
+The architecture of the game consists of largely three main components: Game Manager, UI and In-Game Components. It was of critical importance for all components to be fully integrated to develop a functioning game. 
+
+Game Manager corresponds to the default main.pde file of the newly created Processing Project, implying that the file manages the overall flow of the game and renders the UI and In-Game Components only under relevant situations. It overrides most built-in functions from Processing in which its keyboard and mouse actions are then controlled by this Game Manager. 
+
+To display the right UI and perhaps the In-Game components, main.pde has to identify current state of the game. For instance, if it is on start state, it may display the Game Start Page with a lot of helper features (Start, Intro, Levels, Name) while at game-play state, it may display what is relevant for the play state (the player, enemies, and maps).
+
+User Interfaces corresponds to all the user-friendly components including the start button, intro, leader board, difficulty levels, and a back button. They are designed to be well recognisable by users by their names without requiring understandings from the users on what to do and how to use these. 
+
+In-Game Components includes all the game related objects from a player, platforms, enemies, and score relevant collectables. Each of these game components are of a separate object with unique methods, and properties and if relevant may inherit from an identical parent class. It might be also important to find appealing visuals for each in-game components in which they may all look visually appealing. 
+
 **CLASS DIAGRAM**
 
 ![Game Class Diagram](https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/fb6f8e37-a65f-4c2a-bbaf-8083a01caa8a)
+
+To have a common static view of the game, our group devised a class diagram where it may roughly represent a good view of the classes that may be in used for the project. 
+
+- <b>Game Class</b>: Game Class corresponds to the above-mentioned Game Manager in which it oversees overall flow of the game. It has access to all the classes and variables relevant to the game then renders appropriate screen in accordance to the user actions. 
+- <b>Sprite Class</b>: Sprite Class has coordinate properties represented as in x and y value and PImage property that holds the image data. Such data if called by Game Class via Sprite display method then will be rendered into the game screen.
+- <b>Animated Sprite Class</b>: It is a class that extends from Sprite Class and may have arrays of PImages where there could be used in varying situations. The situation may be determined by its current Direction.
+- <b>Player, Pumpkin, Enemy, Donut Classes</b>: They are classes that extend from Animated Sprite Class and will present different animated images on varying circumstances. Their image displaying logics, however, may vary. 
+
 
 # Implementation
   
