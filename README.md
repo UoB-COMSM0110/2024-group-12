@@ -2,6 +2,11 @@
  <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/104866923/8bb8b7e9-b76a-4005-a784-5067c5234a8d" alt="Halloween" style="width:100%;">
 </p>
 
+<p align="center">
+  <a href="https://youtu.be/q2mqtx54D-A">Click Here to Watch Demo Video</a>
+</p>
+
+
 ## Table of Contents
 - [Team](#team)
 - [How to Donwload and Play](#how-to-download--halloween-adventure)
