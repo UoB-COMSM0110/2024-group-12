@@ -59,4 +59,9 @@ void draw() {
      LeaderBoard();
    }
   }
+  
+  if (drawLine) {
+    player.drawLineTo(mouseX, mouseY);
+    drawLine = false; // 绘制一次后重置标志
+  }
 }

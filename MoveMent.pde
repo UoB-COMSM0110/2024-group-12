@@ -16,6 +16,10 @@ void keyPressed() {
     if (keyCode == DOWN && (isOnLadder(player,gw.ladders) || player.fly)){
       player.change_y = MOVE_SPEED;
     }
+    
+    if (keyCode == ' ') { // 空格键
+    drawLine = true; // 设置标志
+  }
    
   //}
     if (!gameStarted && !showLeaderboard && !back) {
@@ -24,6 +28,7 @@ void keyPressed() {
     } else if (keyCode == BACKSPACE && playerName.length() > 0) {
       playerName = playerName.substring(0, playerName.length() - 1);
     }
+    
   }
 }
 void keyReleased() {

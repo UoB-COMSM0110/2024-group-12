@@ -1,4 +1,3 @@
-//Add Line Drawing Feature
 public class Sprite{
   PImage image;
   float center_x, center_y;
@@ -137,4 +136,6 @@ public class Sprite{
   public void setImage(PImage image) {
     this.image = image;
   }
+  
+  
 }

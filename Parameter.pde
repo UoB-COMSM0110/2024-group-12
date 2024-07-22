@@ -51,3 +51,5 @@ final static float PUMKINMONSTER_FIND_DIS = 100.0;
 final static int PUMKINMONSTER_SIZE_X = 100;
 final static int PUMKINMONSTER_SIZE_Y = 100;
 final static int CHANGE_TIME = 2;
+
+boolean drawLine = false; // 全局变量，用于标记是否绘制直线
