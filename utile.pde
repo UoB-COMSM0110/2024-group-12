@@ -189,8 +189,10 @@ void updateAll(){
 }
 
 void collideAll(){
+
   solveCollisions(player,gw.platforms);
   mousecollision(currentX,currentY,gw.platforms);
+  
    if(Pumpkins.size()>0)
   pumpkinCollisions(player,Pumpkins);
   if(player.getCenter_y()>800.0){
@@ -242,4 +244,5 @@ void mousecollision(float currentX,float currentY, ArrayList<Sprite> grounds){
             break; // 一旦检测到碰撞，可以退出循环
         }
     }
+    
 }

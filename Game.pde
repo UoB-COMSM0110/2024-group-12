@@ -84,8 +84,8 @@ void draw() {
     }
     
     if (mousecollision){
+     
       drawLine = false;
-    
     }
     
    
@@ -95,6 +95,7 @@ void draw() {
 void mousePressed() {
   // 鼠标按下时启动绘制
   if (gw.isReady && !gameOver){
+  
   startTime = millis();
   drawLine = true;}
   
