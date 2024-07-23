@@ -17,9 +17,7 @@ void keyPressed() {
       player.change_y = MOVE_SPEED;
     }
     
-    if (keyCode == ' ') { // 空格键
-    drawLine = true; // 设置标志
-  }
+   
    
   //}
     if (!gameStarted && !showLeaderboard && !back) {

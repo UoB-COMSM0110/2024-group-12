@@ -34,6 +34,12 @@ void setup() {
   loadLeaderboard();
 }
 
+void updateMousePosition() {
+  // 更新全局变量，计算鼠标在游戏世界中的位置
+  worldMouseX = mouseX + view_x;
+  worldMouseY = mouseY + view_y;
+}
+
 void draw() {
   if (!gameStarted) {
     drawPage();
@@ -50,6 +56,8 @@ void draw() {
     displayAll();
     updateAll();
     collideAll();
+    updateMousePosition();
+    
   }
   else if (gameOver){
     drawRestart();
@@ -60,8 +68,34 @@ void draw() {
    }
   }
   
-  if (drawLine) {
-    player.drawLineTo(mouseX, mouseY);
-    drawLine = false; // 绘制一次后重置标志
+    if (drawLine) {
+    float elapsedTime = (millis() - startTime) / 1000.0; // 已经过的时间，单位为秒
+    float t = constrain(elapsedTime / duration, 0, 1); // 插值参数t，范围在0到1之间
+
+    currentX = lerp(player.center_x, worldMouseX, t);
+    currentY = lerp(player.center_y, worldMouseY, t);
+    
+    
+    player.drawLineTo(currentX, currentY);
+    
+
+    if (t == 1) { // 完成绘制
+      drawLine = false;
+    }
+    
+    if (mousecollision){
+      drawLine = false;
+    
+    }
+    
+   
   }
+}
+
+void mousePressed() {
+  // 鼠标按下时启动绘制
+  if (gw.isReady && !gameOver){
+  startTime = millis();
+  drawLine = true;}
+  
 }

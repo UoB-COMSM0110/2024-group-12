@@ -43,29 +43,13 @@ public class Player extends AnimatedSprite {
             } 
     }
     
-    public void drawLineTo(float mouseX, float mouseY) {
-  // 计算直线的长度（5厘米），将其转换为像素（假设屏幕的像素密度为 96 DPI）
-  float lineLengthInPixels = 5 * 96 / 2.54;
-
-  // 计算从 sprite 中心到鼠标位置的方向
-  float dx = mouseX - change_x;
-  float dy = mouseY - change_y;
-  float length = sqrt(dx * dx + dy * dy);
-
-  // 如果鼠标位置在 sprite 中心正上方
-  if (length > 0) {
-    // 归一化方向向量
-    dx /= length;
-    dy /= length;
-
-    // 计算直线的终点
-    float endX = change_x + dx * lineLengthInPixels;
-    float endY = change_y + dy * lineLengthInPixels;
-
+    
+    public void drawLineTo(float mouseX1, float mouseY1) {
+  
     // 绘制直线
     stroke(255, 0, 0); // 红色直线
-    line(center_x, center_y, endX, endY);
-  }
-}
+    line(center_x, center_y, mouseX1, mouseY1);
+  
+    }
 
 }

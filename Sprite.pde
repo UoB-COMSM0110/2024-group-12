@@ -6,6 +6,7 @@ public class Sprite{
   int size_x,size_y;
   boolean faceto = false;
   boolean fly = false;
+  
   public Sprite(String filename, int size_x, int size_y, float x, float y) {
    image = loadImage(filename);
     w = size_x;

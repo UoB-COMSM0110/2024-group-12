@@ -91,7 +91,7 @@ Add new features to characters, so that they can use zipline props to move upwar
 Zipline props are a unique and practical tool in the game that allows players to reach high or distant locations by zipline. It not only increases the fun and challenge of the game, but also provides players with new ways and strategies to move. Zipline props allow players to quickly move to hard-to-reach places, such as high cliffs, tops of buildings or distant platforms. Players can quickly reach the target location by aiming and launching the zipline. Zipline props are not only a moving tool, but can also be used in battle to avoid enemy attacks or quickly approach enemies. Players need to use ziplines at the right time to get the best results. The use of ziplines includes physical simulation, and players need to consider factors such as the length, angle and gravity of the zipline. This increases the challenge and realism of using ziplines. When using ziplines, the game will show gorgeous visual effects, such as the trajectory of the zipline launch, the animation of the player being pulled towards the target, etc., which enhances the visual impact and experience of the game.
 <br>
 <p align="center">
- <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/104866923/aef13f50-98de-417a-aa9f-402e4b209f9c" alt="Enemies Chase Mechanics" style="width:100%; height:350px;">
+ <video src="https://github.com/UoB-COMSM0110/2024-group-12/blob/summerLu/assets/2024-07-2222.25.54.mov" alt="Enemies Chase Mechanics" style="width:100%; height:350px;">
  <p align="center">Enemies Chase Mechanics </p>
 </p>
 

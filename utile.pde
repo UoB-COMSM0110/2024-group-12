@@ -190,6 +190,7 @@ void updateAll(){
 
 void collideAll(){
   solveCollisions(player,gw.platforms);
+  mousecollision(currentX,currentY,gw.platforms);
    if(Pumpkins.size()>0)
   pumpkinCollisions(player,Pumpkins);
   if(player.getCenter_y()>800.0){
@@ -229,4 +230,16 @@ void ReinforceJump(int start_time){
   else{
     JUMP_SPEED=JUMP_REINFIORCE;
   }
+}
+
+void mousecollision(float currentX,float currentY, ArrayList<Sprite> grounds){
+  // 检测鼠标位置与地面之间的碰撞
+    mousecollision = false; // 初始值为 false
+    for (Sprite ground : grounds) {
+        if (currentX >= ground.getLeft() && currentX <= ground.getRight() &&
+            currentY >= ground.getTop() && currentY <= ground.getBottom()) {
+            mousecollision = true; // 如果鼠标与地面发生碰撞，设置为 true
+            break; // 一旦检测到碰撞，可以退出循环
+        }
+    }
 }
