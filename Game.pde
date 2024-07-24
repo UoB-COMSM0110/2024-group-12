@@ -69,34 +69,66 @@ void draw() {
   }
   
     if (drawLine) {
+      
+      // 计算起点到目标点的距离
+    float dx = worldMouseX - player.center_x;
+    float dy = worldMouseY - player.center_y;
+    float distance = dist(player.center_x, player.center_y, worldMouseX, worldMouseY);
+
+    // 计算10像素长的方向向量
+    float ratio = 200 / distance;
+    
+    endX = player.center_x + dx * ratio;
+    endY = player.center_y + dy * ratio;
+      
     float elapsedTime = (millis() - startTime) / 1000.0; // 已经过的时间，单位为秒
     float t = constrain(elapsedTime / duration, 0, 1); // 插值参数t，范围在0到1之间
 
-    currentX = lerp(player.center_x, worldMouseX, t);
-    currentY = lerp(player.center_y, worldMouseY, t);
+    currentX = lerp(player.center_x, endX, t);
+    currentY = lerp(player.center_y, endY, t);
     
     
     player.drawLineTo(currentX, currentY);
     
-
+    mousecollision(currentX,currentY,gw.platforms);
+    
     if (t == 1) { // 完成绘制
       drawLine = false;
     }
     
     if (mousecollision){
-     
+      playerHook();
       drawLine = false;
     }
     
-   
   }
+  
+  // 在每一帧中逐步移动玩家位置
+  if (isMoving) {
+    player.center_x += playerM;
+    player.center_y += playerN;
+    currentStep++;
+    if (currentStep >= steps) {
+      isMoving = false; // 移动完成
+    }
+  }
+}
+
+void playerHook() {
+  // 计算每一步的移动量
+  playerM = (currentX - player.center_x) / steps;
+  playerN = (currentY - player.center_y) / steps;
+  currentStep = 2;
+  isMoving = true; // 开始移动
 }
 
 void mousePressed() {
   // 鼠标按下时启动绘制
   if (gw.isReady && !gameOver){
   
-  startTime = millis();
-  drawLine = true;}
+    startTime = millis();
+    drawLine = true;
+
+ }
   
 }

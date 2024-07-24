@@ -60,3 +60,13 @@ float duration = 0.5; // 持续时间1秒
 boolean mousecollision = false; // 全局变量
 float currentX;
 float currentY;
+
+float endX;
+float endY;
+
+boolean isMoving = false;
+int steps = 10;
+int currentStep = 0;
+float playerM, playerN;
+
+float angle = 0; // 全局变量，用于记录旋转角度

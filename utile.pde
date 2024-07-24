@@ -191,7 +191,7 @@ void updateAll(){
 void collideAll(){
 
   solveCollisions(player,gw.platforms);
-  mousecollision(currentX,currentY,gw.platforms);
+  
   
    if(Pumpkins.size()>0)
   pumpkinCollisions(player,Pumpkins);
