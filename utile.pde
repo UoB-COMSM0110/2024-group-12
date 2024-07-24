@@ -37,6 +37,7 @@ public ArrayList<Sprite> checkCollisionList(Sprite c, ArrayList<Sprite> list) {
   }
   return listCollision;
 }
+
 public ArrayList<Sprite> checkCollisionList_X(Sprite c, ArrayList<Sprite> list) {
   ArrayList<Sprite> listCollision = new ArrayList<Sprite>();
   for (Sprite element: list) {
@@ -46,6 +47,7 @@ public ArrayList<Sprite> checkCollisionList_X(Sprite c, ArrayList<Sprite> list) 
   }
   return listCollision;
 }
+
 public ArrayList<Sprite> checkCollisionList_Y(Sprite c, ArrayList<Sprite> list) {
   ArrayList<Sprite> listCollision = new ArrayList<Sprite>();
   for (Sprite element: list) {
@@ -195,6 +197,7 @@ void collideAll(){
   
    if(Pumpkins.size()>0)
   pumpkinCollisions(player,Pumpkins);
+  
   if(player.getCenter_y()>800.0){
     player.lives-=1;
     player.setCenter_x(100);
@@ -241,6 +244,20 @@ void mousecollision(float currentX,float currentY, ArrayList<Sprite> grounds){
         if (currentX >= ground.getLeft() && currentX <= ground.getRight() &&
             currentY >= ground.getTop() && currentY <= ground.getBottom()) {
             mousecollision = true; // 如果鼠标与地面发生碰撞，设置为 true
+            break; // 一旦检测到碰撞，可以退出循环
+        }
+    }
+    
+}
+
+void hookpumpkincollision(float currentX,float currentY, ArrayList<Sprite> Pumpkins){
+  // 检测鼠标位置与地面之间的碰撞
+    hookpumpkincollision = false; // 初始值为 false
+    for (Sprite Pumpkin : Pumpkins) {
+        if (currentX >= Pumpkin.getLeft() && currentX <= Pumpkin.getRight() &&
+            currentY >= Pumpkin.getTop() && currentY <= Pumpkin.getBottom()) {
+            hookpumpkincollision = true; // 如果鼠标与地面发生碰撞，设置为 true
+            currentpumpkin = Pumpkin;
             break; // 一旦检测到碰撞，可以退出循环
         }
     }

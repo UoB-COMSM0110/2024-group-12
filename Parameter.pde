@@ -70,3 +70,9 @@ int currentStep = 0;
 float playerM, playerN;
 
 float angle = 0; // 全局变量，用于记录旋转角度
+
+boolean hookpumpkincollision = false;
+
+boolean ispumpkinMoving = false;
+
+Sprite currentpumpkin;

@@ -15,6 +15,10 @@ boolean timeOutHasStarted;
 boolean showLeaderboard = false;
 Player player;
 gameworld gw;
+SoundFile hookSound; // Grappling hook sound effect
+SoundFile collisionSound; // Collision sound effect
+
+
 
 String playerName = ""; // Player's name
 PImage sky;
@@ -22,8 +26,10 @@ PImage heart, emptyheart;
 void setup() {
   gw= new gameworld();
    //bgm
-  bgm = new SoundFile(this, "./data/background/background_music.mp3");
-  bgm.loop();
+  // Load background music
+  //bgm = new SoundFile(this, "./data/background/background_music.mp3");
+  //bgm.loop();
+  //bgm.amp(0.01); // Set background music volume to 30%
   size(800, 600);
   background(100,100,100);
   imageMode(CENTER);
@@ -32,6 +38,15 @@ void setup() {
   emptyheart = loadImage("./data/Player/empytHeart.png");
   sky.resize(width,height);
   loadLeaderboard();
+  
+    // Load grappling hook sound effect
+   // Load grappling hook sound effect
+  hookSound = new SoundFile(this, "./data/sound/hook_launch.mp3");
+  hookSound.amp(2.0); // Set hook launch sound effect volume to 100%
+  
+ // Load collision sound effect
+  collisionSound = new SoundFile(this, "./data/sound/hook_collision.mp3");
+  collisionSound.amp(2.0); // Set collision sound effect volume to 100%
 }
 
 void updateMousePosition() {
@@ -47,7 +62,7 @@ void draw() {
     gw.createMap();
     created = true;
      //bgm loop
-      bgm.loop();
+      //bgm.loop();
   }
   else  if (gw.isReady && !gameOver){
     background(sky);
@@ -62,7 +77,7 @@ void draw() {
   else if (gameOver){
     drawRestart();
      //bgm stop
-     bgm.stop();
+     //bgm.stop();
     if( showLeaderboard){
      LeaderBoard();
    }
@@ -91,13 +106,24 @@ void draw() {
     player.drawLineTo(currentX, currentY);
     
     mousecollision(currentX,currentY,gw.platforms);
-    
-    if (t == 1) { // 完成绘制
-      drawLine = false;
-    }
-    
     if (mousecollision){
       playerHook();
+      drawLine = false;
+            // Play collision sound effect
+      collisionSound.play();
+    }
+    
+    if(Pumpkins.size()>0)
+    hookpumpkincollision(currentX,currentY,Pumpkins);
+    
+    if(hookpumpkincollision){
+      pumpkinHook();
+      drawLine = false;
+            // Play collision sound effect
+      collisionSound.play();
+    }
+    
+    if (t == 1) { // 完成绘制
       drawLine = false;
     }
     
@@ -112,7 +138,28 @@ void draw() {
       isMoving = false; // 移动完成
     }
   }
+  
+  if (ispumpkinMoving) {
+    currentpumpkin.center_x += playerM;
+    currentpumpkin.center_y += playerN;
+    currentStep++;
+    if (currentStep >= steps) {
+      ispumpkinMoving = false; // 移动完成
+    }
+  }
+  
+  
 }
+
+void pumpkinHook(){
+    // 计算每一步的移动量
+  playerM = (player.center_x - currentpumpkin.center_x) / steps;
+  playerN = (player.center_y - currentpumpkin.center_y) / steps;
+  currentStep = 2;
+  ispumpkinMoving = true; // 开始移动
+
+}
+
 
 void playerHook() {
   // 计算每一步的移动量
@@ -125,7 +172,9 @@ void playerHook() {
 void mousePressed() {
   // 鼠标按下时启动绘制
   if (gw.isReady && !gameOver){
-  
+      // Play grappling hook sound effect
+     
+    hookSound.play();
     startTime = millis();
     drawLine = true;
 
