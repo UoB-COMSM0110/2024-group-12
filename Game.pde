@@ -83,29 +83,32 @@ void draw() {
    }
   }
   
-    if (drawLine) {
+  if(returnline){
+    
+      hookposition();
       
-      // 计算起点到目标点的距离
-    float dx = worldMouseX - player.center_x;
-    float dy = worldMouseY - player.center_y;
-    float distance = dist(player.center_x, player.center_y, worldMouseX, worldMouseY);
-
-    // 计算10像素长的方向向量
-    float ratio = 200 / distance;
+      boolean reverse = true;
+      hooktime(reverse);
     
-    endX = player.center_x + dx * ratio;
-    endY = player.center_y + dy * ratio;
+      player.drawLineTo(player.center_x,player.center_y,currentX, currentY);
       
-    float elapsedTime = (millis() - startTime) / 1000.0; // 已经过的时间，单位为秒
-    float t = constrain(elapsedTime / duration, 0, 1); // 插值参数t，范围在0到1之间
-
-    currentX = lerp(player.center_x, endX, t);
-    currentY = lerp(player.center_y, endY, t);
+      if (rt == 0) { // 完成绘制
+        returnline = false;
+      }
+      
+    }
+  
+   if (drawLine) {
+      
+    hookposition();
     
+    boolean reverse = false;
+    hooktime(reverse);
     
-    player.drawLineTo(currentX, currentY);
+    player.drawLineTo(player.center_x,player.center_y,currentX, currentY);
     
     mousecollision(currentX,currentY,gw.platforms);
+    
     if (mousecollision){
       playerHook();
       drawLine = false;
@@ -113,11 +116,21 @@ void draw() {
       collisionSound.play();
     }
     
-    if(Pumpkins.size()>0)
-    hookpumpkincollision(currentX,currentY,Pumpkins);
-    
-    if(hookpumpkincollision){
+    if( hookcollision(currentX,currentY,Pumpkins) ){
+      endX = currentthing.center_x;
+      endY = currentthing.center_y;
       pumpkinHook();
+      drawLine = false;
+            // Play collision sound effect
+      startTime = millis();
+      returnline = true; 
+     
+      collisionSound.play();
+      
+    }
+    
+    if( hookcollision(currentX,currentY,Enemies) ){
+      EnemiesHook();
       drawLine = false;
             // Play collision sound effect
       collisionSound.play();
@@ -125,8 +138,9 @@ void draw() {
     
     if (t == 1) { // 完成绘制
       drawLine = false;
+      startTime = millis();
+      returnline = true;
     }
-    
   }
   
   // 在每一帧中逐步移动玩家位置
@@ -140,26 +154,68 @@ void draw() {
   }
   
   if (ispumpkinMoving) {
-    currentpumpkin.center_x += playerM;
-    currentpumpkin.center_y += playerN;
+    currentthing.center_x += playerM;
+    currentthing.center_y += playerN;
     currentStep++;
     if (currentStep >= steps) {
       ispumpkinMoving = false; // 移动完成
     }
   }
   
-  
+  if (isenemyMoving) {
+    currentthing.center_x += playerM;
+    currentthing.center_y += playerN;
+    currentStep++;
+    if (currentStep >= steps) {
+      isenemyMoving = false; // 移动完成
+    }
+  }
+
 }
+
+void hooktime(boolean isReverse) {
+    float elapsedTime = (millis() - startTime) / 1000.0; // 已经过的时间，单位为秒
+    t = constrain(elapsedTime / duration, 0, 1); // 插值参数t，范围在0到1之间
+
+    if (isReverse) {
+        rt = 1.0 - t;
+        currentX = lerp(player.center_x, endX, rt);
+        currentY = lerp(player.center_y, endY, rt);
+    } else {
+        currentX = lerp(player.center_x, endX, t);
+        currentY = lerp(player.center_y, endY, t);
+    }
+}
+
+void hookposition( ){
+    float dx = worldMouseX - player.center_x;
+    float dy = worldMouseY - player.center_y;
+    float distance = dist(player.center_x, player.center_y, worldMouseX, worldMouseY);
+
+    // 计算10像素长的方向向量
+    float ratio = 200 / distance;
+    
+    endX = player.center_x + dx * ratio;
+    endY = player.center_y + dy * ratio;
+}
+
+
+void EnemiesHook(){
+  playerM = (currentX - currentthing.center_x) / steps;
+  playerN = (currentY - currentthing.center_y) / steps;
+  currentStep = 2;
+  isenemyMoving = true; // 开始移动
+}
+
 
 void pumpkinHook(){
     // 计算每一步的移动量
-  playerM = (player.center_x - currentpumpkin.center_x) / steps;
-  playerN = (player.center_y - currentpumpkin.center_y) / steps;
+  playerM = (player.center_x - currentthing.center_x) / steps;
+  playerN = (player.center_y - currentthing.center_y) / steps;
   currentStep = 2;
   ispumpkinMoving = true; // 开始移动
 
 }
-
 
 void playerHook() {
   // 计算每一步的移动量
@@ -171,9 +227,8 @@ void playerHook() {
 
 void mousePressed() {
   // 鼠标按下时启动绘制
-  if (gw.isReady && !gameOver){
+  if (gw.isReady && !gameOver && !returnline &&!drawLine){
       // Play grappling hook sound effect
-     
     hookSound.play();
     startTime = millis();
     drawLine = true;

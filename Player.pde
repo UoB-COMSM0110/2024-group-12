@@ -44,14 +44,14 @@ public class Player extends AnimatedSprite {
     }
     
     
-  public void drawLineTo(float mouseX1, float mouseY1) {
+  public void drawLineTo(float playercenterx,float playercentery,float mouseX1, float mouseY1) {
     int segments = 50; // 线段数量
     float amplitude = 3; // 振幅，可以调整以改变弹簧的宽度
     float frequency = 5; // 频率，可以调整以改变弹簧的紧密程度
 
     // 计算每段线的长度
-    float dx = (mouseX1 - center_x) / segments;
-    float dy = (mouseY1 - center_y) / segments;
+    float dx = (mouseX1 - playercenterx) / segments;
+    float dy = (mouseY1 - playercentery) / segments;
 
     for (int i = 0; i < segments; i++) {
         // 切换颜色：奇数段为棕色，偶数段为黑色
@@ -63,10 +63,10 @@ public class Player extends AnimatedSprite {
         }
 
         // 计算每段线的起点和终点
-        float startX = center_x + i * dx;
-        float startY = center_y + i * dy;
-        float endX = center_x + (i + 1) * dx;
-        float endY = center_y + (i + 1) * dy;
+        float startX = playercenterx + i * dx;
+        float startY = playercentery + i * dy;
+        float endX = playercenterx + (i + 1) * dx;
+        float endY = playercentery + (i + 1) * dy;
 
         // 在每段线的起点和终点之间添加正弦波动
         startX += amplitude * sin(TWO_PI * frequency * i / segments);

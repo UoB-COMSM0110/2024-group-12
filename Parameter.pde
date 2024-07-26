@@ -75,4 +75,10 @@ boolean hookpumpkincollision = false;
 
 boolean ispumpkinMoving = false;
 
-Sprite currentpumpkin;
+Sprite currentthing;
+
+boolean isenemyMoving = false;
+
+float t;
+float rt;
+boolean returnline = false;

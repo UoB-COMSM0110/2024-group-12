@@ -1,4 +1,4 @@
-boolean collisionTest(Sprite c1, Sprite c2){
+  boolean collisionTest(Sprite c1, Sprite c2){
   boolean checkX1 = c1.getLeft()+5 >= c2.getRight();
   boolean checkX2 = c1.getRight()-5 <= c2.getLeft();
   boolean checkY1 = c1.getBottom() <= c2.getTop();
@@ -9,6 +9,7 @@ boolean collisionTest(Sprite c1, Sprite c2){
     return true;
   }
 }
+
 boolean collisionTest_X(Sprite c1, Sprite c2){
   boolean checkX1 = c1.getLeft()+5 >= c2.getRight();
   boolean checkX2 = c1.getRight()-5 <= c2.getLeft();
@@ -18,6 +19,7 @@ boolean collisionTest_X(Sprite c1, Sprite c2){
     return true;
   }
 }
+
 boolean collisionTest_Y(Sprite c1, Sprite c2){
   boolean checkY1 = c1.getBottom() <= c2.getTop();
   boolean checkY2 = c1.getTop()+5 >= c2.getBottom();
@@ -250,16 +252,17 @@ void mousecollision(float currentX,float currentY, ArrayList<Sprite> grounds){
     
 }
 
-void hookpumpkincollision(float currentX,float currentY, ArrayList<Sprite> Pumpkins){
+boolean hookcollision(float currentX,float currentY, ArrayList<Sprite> things){
   // 检测鼠标位置与地面之间的碰撞
-    hookpumpkincollision = false; // 初始值为 false
-    for (Sprite Pumpkin : Pumpkins) {
-        if (currentX >= Pumpkin.getLeft() && currentX <= Pumpkin.getRight() &&
-            currentY >= Pumpkin.getTop() && currentY <= Pumpkin.getBottom()) {
-            hookpumpkincollision = true; // 如果鼠标与地面发生碰撞，设置为 true
-            currentpumpkin = Pumpkin;
-            break; // 一旦检测到碰撞，可以退出循环
+    boolean hookcollision = false; // 初始值为 false
+    for (Sprite i : things) {
+        if (currentX >= i.getLeft() && currentX <= i.getRight() &&
+            currentY >= i.getTop() && currentY <= i.getBottom()) {
+            hookcollision = true; // 如果鼠标与地面发生碰撞，设置为 true
+            currentthing = i;
+            return hookcollision;
         }
     }
+    return hookcollision;
     
 }
