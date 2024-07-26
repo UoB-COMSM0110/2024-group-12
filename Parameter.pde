@@ -34,7 +34,7 @@ final static int BOSS2_SPEED = 2;
 
 final static int PlayerSprite_LIVES = 3;
 
-float JUMP_SPEED = 9;
+float JUMP_SPEED = 7;
 final static float JUMP_REINFIORCE = 12;
 final static float ORIGIN_JUMP_SPEED = 9;
 final static int REINFIORCE_TIME = 5;
@@ -82,3 +82,6 @@ boolean isenemyMoving = false;
 float t;
 float rt;
 boolean returnline = false;
+boolean playermovehook = false;
+
+ArrayList<Sprite> allenmise = new ArrayList<Sprite>();

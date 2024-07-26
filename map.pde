@@ -3,6 +3,8 @@ ArrayList<Sprite> bosses = new ArrayList<Sprite>();
 ArrayList<Sprite> Orbs = new ArrayList<Sprite>();
 ArrayList<Sprite> Enemies = new ArrayList<Sprite>();
 Sprite End;
+
+
 class gameworld{
   ArrayList<Sprite> platforms = new ArrayList<Sprite>();
   ArrayList<Sprite> bricks = new ArrayList<Sprite>();
@@ -91,8 +93,10 @@ class gameworld{
       Doughnut[i] = loadImage("./data/map/candy/Doughnut/image"+i+".png");
     }
   }
+  
   void restart(){
     Pumpkins = new ArrayList<Sprite>();
+    
     bosses = new ArrayList<Sprite>();
     platforms = new ArrayList<Sprite>();
     bricks = new ArrayList<Sprite>();
@@ -100,9 +104,13 @@ class gameworld{
     Doughnuts = new  ArrayList<Sprite>();
     Orbs = new ArrayList<Sprite>();
     Enemies = new ArrayList<Sprite>();
+    
+    allenmise = new ArrayList<Sprite>();
+  
     isReady = false;
     this.createMap();
   }
+  
   void createMap() {
     if (difficulty.equals("Easy")){
      path = "./data/mapEasy.csv";
@@ -425,8 +433,14 @@ class gameworld{
         }
       }
     }
+    
+    allenmise.addAll(Enemies);
+    allenmise.addAll(bosses);
 
     isReady = true;
+
+        
+    
   }
   
   void display(){
@@ -491,6 +505,7 @@ class gameworld{
       WALL_SIZE_X / 2 + col * WALL_SIZE_X, WALL_SIZE_Y / 2 + row * WALL_SIZE_Y,1,BOSS2_CHASE_DIS,BOSS2_SPEED,PUMKINMONSTER_FIND_DIS);
       bosses.add(boss);
     }
+    
   }
   
   void CreateWhitch(int col, int row){

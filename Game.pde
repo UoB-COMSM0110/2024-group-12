@@ -85,54 +85,54 @@ void draw() {
   
   if(returnline){
     
-      hookposition();
-      
       boolean reverse = true;
       hooktime(reverse);
-    
       player.drawLineTo(player.center_x,player.center_y,currentX, currentY);
-      
+   
       if (rt == 0) { // 完成绘制
         returnline = false;
       }
-      
-    }
+   }
+   
+  
   
    if (drawLine) {
-      
     hookposition();
-    
     boolean reverse = false;
     hooktime(reverse);
-    
     player.drawLineTo(player.center_x,player.center_y,currentX, currentY);
+    hookcollision(currentX,currentY,gw.platforms);
     
-    mousecollision(currentX,currentY,gw.platforms);
-    
-    if (mousecollision){
+    if (hookcollision(currentX,currentY,gw.platforms)){
+      endX = currentthing.center_x;
+      endY = currentthing.center_y;
+  
       playerHook();
       drawLine = false;
-            // Play collision sound effect
+      // Play collision sound effect
       collisionSound.play();
     }
     
     if( hookcollision(currentX,currentY,Pumpkins) ){
+      pumpkinHook();
       endX = currentthing.center_x;
       endY = currentthing.center_y;
-      pumpkinHook();
-      drawLine = false;
-            // Play collision sound effect
+      // Play collision sound effect
       startTime = millis();
       returnline = true; 
-     
+      drawLine = false;
       collisionSound.play();
       
     }
     
-    if( hookcollision(currentX,currentY,Enemies) ){
+    if( hookcollision(currentX,currentY,allenmise) ){
       EnemiesHook();
+      endX = currentthing.center_x;
+      endY = currentthing.center_y;
+      startTime = millis();
+      returnline = true; 
       drawLine = false;
-            // Play collision sound effect
+      // Play collision sound effect
       collisionSound.play();
     }
     
@@ -148,6 +148,7 @@ void draw() {
     player.center_x += playerM;
     player.center_y += playerN;
     currentStep++;
+       player.drawLineTo(endX,endY,player.center_x, player.center_y);
     if (currentStep >= steps) {
       isMoving = false; // 移动完成
     }
@@ -163,6 +164,7 @@ void draw() {
   }
   
   if (isenemyMoving) {
+    
     currentthing.center_x += playerM;
     currentthing.center_y += playerN;
     currentStep++;
@@ -201,8 +203,8 @@ void hookposition( ){
 
 
 void EnemiesHook(){
-  playerM = (currentX - currentthing.center_x) / steps;
-  playerN = (currentY - currentthing.center_y) / steps;
+  playerM = (endX - currentthing.center_x) / steps;
+  playerN = (endY - currentthing.center_y) / steps;
   currentStep = 2;
   isenemyMoving = true; // 开始移动
 }

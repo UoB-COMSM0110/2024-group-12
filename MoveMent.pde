@@ -1,19 +1,19 @@
 void keyPressed() {
   //if (pageNum == 3) { // In game
     // AnimatedSprite 1 controls
-    if (keyCode == RIGHT){
+    if (keyCode == 'd' || keyCode == 'D' ){
       player.change_x = MOVE_SPEED;
     }
-    if (keyCode == LEFT){
+    if (keyCode == 'a' || keyCode == 'A'){
       player.change_x = -MOVE_SPEED;
     } 
-    if (keyCode == UP && (isOnGround(player, gw.platforms) || isOnLadder(player,gw.ladders))){
+    if (keyCode == 'w' || keyCode == 'W' && (isOnGround(player, gw.platforms) || isOnLadder(player,gw.ladders))){
       player.change_y = -JUMP_SPEED;
     } 
-    if (keyCode == UP && player.fly){
+    if (keyCode == 'w' || keyCode == 'W' && player.fly){
       player.change_y = -JUMP_SPEED;
     }
-    if (keyCode == DOWN && (isOnLadder(player,gw.ladders) || player.fly)){
+    if (keyCode == 's' || keyCode == 'S' && (isOnLadder(player,gw.ladders) || player.fly)){
       player.change_y = MOVE_SPEED;
     }
     
@@ -32,9 +32,9 @@ void keyPressed() {
 void keyReleased() {
   //if (pageNum == 3) {
     // AnimatedSprite 1 controls
-    if (keyCode == RIGHT || keyCode == LEFT) {
+    if (keyCode == 'd' || keyCode == 'a' || keyCode == 'D' || keyCode == 'A') {
         player.change_x = 0;
-      } else if (keyCode == UP || keyCode == DOWN) {
+      } else if (keyCode == 'w' || keyCode == 's' || keyCode == 'W' || keyCode == 'S') {
         player.change_y = 0;
       }
   //}
