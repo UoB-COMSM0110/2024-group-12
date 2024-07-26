@@ -14,10 +14,11 @@ String difficulty = "Easy";
 boolean timeOutHasStarted;
 boolean showLeaderboard = false;
 Player player;
+Player player1;
+
 gameworld gw;
 SoundFile hookSound; // Grappling hook sound effect
 SoundFile collisionSound; // Collision sound effect
-
 
 
 String playerName = ""; // Player's name
@@ -56,6 +57,7 @@ void updateMousePosition() {
 }
 
 void draw() {
+  
   if (!gameStarted) {
     drawPage();
   }else if (created == false){
@@ -104,7 +106,13 @@ void draw() {
     hookcollision(currentX,currentY,gw.platforms);
     
     if (hookcollision(currentX,currentY,gw.platforms)){
-      endX = currentthing.center_x;
+      
+      if (player.center_x > currentthing.center_x){
+        endX = currentthing.getRight();
+      }else{
+        endX = currentthing.getLeft();
+      }
+
       endY = currentthing.center_y;
   
       playerHook();
@@ -135,23 +143,55 @@ void draw() {
       // Play collision sound effect
       collisionSound.play();
     }
+   
+    
+    if( hookcollision(currentX,currentY,gw.Doughnuts) ){
+      drawLine = false;
+      playerhookmove();
+      collisionSound.play();
+    }
+    
     
     if (t == 1) { // 完成绘制
       drawLine = false;
       startTime = millis();
       returnline = true;
     }
+    
+    
+  }
+  
+  if (hookmove){
+    
+     player.drawLineTo(player.center_x,player.center_y,currentthing.center_x, currentthing.center_y);
+     player.center_x += playerM;
+     player.center_y = playerN;
+     currentStep++;
+  
+     if (currentStep >= hooksteps) {
+      hookmove = false; // 移动完成
+      currentStep = 0;
+    }  
+
   }
   
   // 在每一帧中逐步移动玩家位置
+  
   if (isMoving) {
-    player.center_x += playerM;
+    if (player.center_x < currentthing.center_x){
+      player.center_x += playerM-2;
+    }else{
+      player.center_x += playerM+2;
+    }
+    
     player.center_y += playerN;
     currentStep++;
-       player.drawLineTo(endX,endY,player.center_x, player.center_y);
+    player.drawLineTo(endX,endY,player.center_x, player.center_y);
+    
     if (currentStep >= steps) {
       isMoving = false; // 移动完成
-    }
+      currentStep = 0;
+    }  
   }
   
   if (ispumpkinMoving) {
@@ -174,6 +214,7 @@ void draw() {
   }
 
 }
+
 
 void hooktime(boolean isReverse) {
     float elapsedTime = (millis() - startTime) / 1000.0; // 已经过的时间，单位为秒
@@ -205,7 +246,7 @@ void hookposition( ){
 void EnemiesHook(){
   playerM = (endX - currentthing.center_x) / steps;
   playerN = (endY - currentthing.center_y) / steps;
-  currentStep = 2;
+  currentStep = 0;
   isenemyMoving = true; // 开始移动
 }
 
@@ -214,7 +255,7 @@ void pumpkinHook(){
     // 计算每一步的移动量
   playerM = (player.center_x - currentthing.center_x) / steps;
   playerN = (player.center_y - currentthing.center_y) / steps;
-  currentStep = 2;
+  currentStep = 0;
   ispumpkinMoving = true; // 开始移动
 
 }
@@ -223,13 +264,22 @@ void playerHook() {
   // 计算每一步的移动量
   playerM = (currentX - player.center_x) / steps;
   playerN = (currentY - player.center_y) / steps;
-  currentStep = 2;
+  currentStep = 0;
   isMoving = true; // 开始移动
 }
 
+void playerhookmove(){
+  playerM = 300 / hooksteps;
+  playerN = player.center_y;
+  currentStep = 0;
+  hookmove = true;
+}
+
+
+
 void mousePressed() {
   // 鼠标按下时启动绘制
-  if (gw.isReady && !gameOver && !returnline &&!drawLine){
+  if (gw.isReady && !gameOver && !returnline &&!drawLine && gameStarted){
       // Play grappling hook sound effect
     hookSound.play();
     startTime = millis();

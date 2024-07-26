@@ -1,4 +1,4 @@
-final static float MOVE_SPEED = 5;
+final static float MOVE_SPEED = 4;
 
 final static int SPRITE_SIZE_X = 30;
 final static int SPRITE_SIZE_Y = 30;
@@ -67,6 +67,7 @@ float endY;
 boolean isMoving = false;
 int steps = 10;
 int currentStep = 0;
+int hooksteps = 20;
 float playerM, playerN;
 
 float angle = 0; // 全局变量，用于记录旋转角度
@@ -85,3 +86,7 @@ boolean returnline = false;
 boolean playermovehook = false;
 
 ArrayList<Sprite> allenmise = new ArrayList<Sprite>();
+
+boolean hookstop = false;
+
+boolean hookmove = false;

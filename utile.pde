@@ -112,24 +112,33 @@ public void solveCollisions(Sprite player, ArrayList<Sprite> grounds) {
    if (!isOnLadder(player,gw.ladders) && !player.fly){
     player.change_y += GRAVITY;
     player.center_y += player.change_y;
-  }
+   }
+   
   ArrayList<Sprite> list = checkCollisionList(player, grounds);
+  
   ArrayList<Sprite> y_list = checkCollisionList_Y(player,list);
+  
   if (y_list.size() > 0 ) {
+    
     Sprite collided = y_list.get(0);
     if (player.change_y > 0) {
+      
       player.setBottom(collided.getTop());
     }
     else if (player.change_y < 0) {
+      
       player.setTop(collided.getBottom());
     }
     player.change_y = 0;
   }
   
   player.center_x += player.change_x;
+  
   list = checkCollisionList(player, grounds);
-  ArrayList<Sprite> x_list = checkCollisionList_Y(player,list);
+  
+  ArrayList<Sprite> x_list = checkCollisionList_X(player,list);
   if (x_list.size() > 0) {
+    
     Sprite collided = x_list.get(0);
     if (player.change_x > 0) {
       player.setRight(collided.getLeft());
@@ -138,6 +147,8 @@ public void solveCollisions(Sprite player, ArrayList<Sprite> grounds) {
       player.setLeft(collided.getRight());
     }
   }
+  
+  
 }
 
 void displayheart() {
@@ -197,7 +208,7 @@ void collideAll(){
   solveCollisions(player,gw.platforms);
   
   
-   if(Pumpkins.size()>0)
+  if(Pumpkins.size()>0)
   pumpkinCollisions(player,Pumpkins);
   
   if(player.getCenter_y()>800.0){
@@ -239,18 +250,7 @@ void ReinforceJump(int start_time){
   }
 }
 
-void mousecollision(float currentX,float currentY, ArrayList<Sprite> grounds){
-  // 检测鼠标位置与地面之间的碰撞
-    mousecollision = false; // 初始值为 false
-    for (Sprite ground : grounds) {
-        if (currentX >= ground.getLeft() && currentX <= ground.getRight() &&
-            currentY >= ground.getTop() && currentY <= ground.getBottom()) {
-            mousecollision = true; // 如果鼠标与地面发生碰撞，设置为 true
-            break; // 一旦检测到碰撞，可以退出循环
-        }
-    }
-    
-}
+
 
 boolean hookcollision(float currentX,float currentY, ArrayList<Sprite> things){
   // 检测鼠标位置与地面之间的碰撞

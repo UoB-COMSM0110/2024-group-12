@@ -16,8 +16,6 @@ void keyPressed() {
     if (keyCode == 's' || keyCode == 'S' && (isOnLadder(player,gw.ladders) || player.fly)){
       player.change_y = MOVE_SPEED;
     }
-    
-   
    
   //}
     if (!gameStarted && !showLeaderboard && !back) {

@@ -10,6 +10,7 @@ class gameworld{
   ArrayList<Sprite> bricks = new ArrayList<Sprite>();
   ArrayList<Sprite> ladders = new  ArrayList<Sprite>();
   ArrayList<Sprite> Doughnuts = new  ArrayList<Sprite>();
+  
   PImage ground1, grass1, grass2, grass3, grass4, grass5, grass6,grass7,ground8,ground9,grass10,ladder11,tree12,
   tree13,tree14,leaf1,leaf2,leaf3,leaf4,leaf5,leaf6,leaf7,leaf8,leaf9,flower1, flower2, flower3,flower4,ladder12,
   ladder13,ladder14,ladder15,ladder16, ground10, ground11,ground12,ground13,ground14, ground15,candytr1,candytr2,
@@ -421,6 +422,10 @@ class gameworld{
           }
           case "player":{
             player = new Player(loadImage("./data/Player/stand1.png"), SPRITE_SIZE_X,SPRITE_SIZE_Y,WALL_SIZE_X / 2 + col * WALL_SIZE_X, WALL_SIZE_Y / 2 + row * WALL_SIZE_Y);
+            break;
+          }
+          case "player1":{
+            player1 = new Player(loadImage("./data/Player/stand1.png"), SPRITE_SIZE_X,SPRITE_SIZE_Y,WALL_SIZE_X / 2 + col * WALL_SIZE_X, WALL_SIZE_Y / 2 + row * WALL_SIZE_Y);
             break;
           }
           case "f": {
