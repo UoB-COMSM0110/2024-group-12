@@ -216,10 +216,13 @@ void collideAll(){
     player.setCenter_x(100);
     player.setCenter_y(100);
   }
+  
   EatDoughnuts();
+  
   if(jump){
     ReinforceJump(jump_ms_start);
   }
+  
   OrbCollisions(player, Orbs);
   if(collisionTest(player, End)){
     gameOver = true;

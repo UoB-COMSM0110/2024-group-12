@@ -146,6 +146,7 @@ void draw() {
    
     
     if( hookcollision(currentX,currentY,gw.Doughnuts) ){
+      palyerpositon = player.center_x;
       drawLine = false;
       playerhookmove();
       collisionSound.play();
@@ -164,13 +165,22 @@ void draw() {
   if (hookmove){
     
      player.drawLineTo(player.center_x,player.center_y,currentthing.center_x, currentthing.center_y);
-     player.center_x += playerM;
+     
+     if(palyerpositon < currentthing.center_x){
+       player.center_x += playerM;
+     }else{
+       player.center_x -= playerM;
+     }
+
      player.center_y = playerN;
      currentStep++;
   
      if (currentStep >= hooksteps) {
       hookmove = false; // 移动完成
       currentStep = 0;
+      startTime = millis();
+      returnline = true;
+      
     }  
 
   }

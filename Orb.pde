@@ -38,6 +38,7 @@ void OrbCollisions(Sprite player, ArrayList<Sprite> Orbs) {
     timeOut(player);
   }
 }
+
 void timeOut(Sprite player) {
   long elapsedTime = millis() - flyStartTime;
   if (elapsedTime < FLY_DURATION) {

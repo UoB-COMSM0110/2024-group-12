@@ -90,3 +90,4 @@ ArrayList<Sprite> allenmise = new ArrayList<Sprite>();
 boolean hookstop = false;
 
 boolean hookmove = false;
+float palyerpositon;
