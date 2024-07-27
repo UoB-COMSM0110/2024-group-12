@@ -84,8 +84,9 @@ void draw() {
      LeaderBoard();
    }
   }
-  
-  if(returnline){
+ 
+
+  if(returnline && PlayerSprite_LIVES>0){
     
       boolean reverse = true;
       hooktime(reverse);
@@ -98,7 +99,7 @@ void draw() {
    
   
   
-   if (drawLine) {
+   if (drawLine && PlayerSprite_LIVES>0) {
     hookposition();
     boolean reverse = false;
     hooktime(reverse);
@@ -162,7 +163,7 @@ void draw() {
     
   }
   
-  if (hookmove){
+  if (hookmove && PlayerSprite_LIVES>0 ){
     
      player.drawLineTo(player.center_x,player.center_y,currentthing.center_x, currentthing.center_y);
      
@@ -187,7 +188,7 @@ void draw() {
   
   // 在每一帧中逐步移动玩家位置
   
-  if (isMoving) {
+  if (isMoving && PlayerSprite_LIVES>0) {
     if (player.center_x < currentthing.center_x){
       player.center_x += playerM-2;
     }else{
@@ -289,7 +290,7 @@ void playerhookmove(){
 
 void mousePressed() {
   // 鼠标按下时启动绘制
-  if (gw.isReady && !gameOver && !returnline &&!drawLine && gameStarted){
+  if (gw.isReady && !gameOver && !returnline &&!drawLine && gameStarted && PlayerSprite_LIVES>0){
       // Play grappling hook sound effect
     hookSound.play();
     startTime = millis();

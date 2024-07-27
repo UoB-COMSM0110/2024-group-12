@@ -8,7 +8,6 @@
 
 
 ## Table of Contents
-- [Team](#team)
 - [How to Donwload and Play](#how-to-download--halloween-adventure)
 - [Introduction](#introduction)
 - [Requirements](#requirements)
@@ -17,44 +16,9 @@
 - [Evaluation](#evaluation)
 - [Process](#process)
 - [Conclusion](#conclusion)
-- [Individual Contribution Table](#individual-contribution-table)
 
-# Team
 
-<figure>
-  <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/9738be08-5bbc-4ed8-9dd3-4c4d29ff4089" alt="Team_photo" style="width:100%">
-</figure>
 
-<table align="center">
-  <thead>
-    <tr>
-      <th style="text-align:center">Name</th>
-      <th style="text-align:center">Email</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:center">Hamza Ahmed</td>
-      <td style="text-align:center"><a href="mailto:io23632@bristol.ac.uk">io23632@bristol.ac.uk</a></td>
-    </tr>
-    <tr>
-      <td style="text-align:center">Yiran Liu</td>
-      <td style="text-align:center"><a href="mailto:fm19201@bristol.ac.uk">fm19201@bristol.ac.uk</a></td>
-    </tr>
-    <tr>
-      <td style="text-align:center">Gunho Ryu</td>
-      <td style="text-align:center"><a href="mailto:jm23986@bristol.ac.uk">jm23986@bristol.ac.uk</a></td>
-    </tr>
-    <tr>
-      <td style="text-align:center">Xiaoqian Lu</td>
-      <td style="text-align:center"><a href="mailto:fd23007@bristol.ac.uk">fd23007@bristol.ac.uk</a></td>
-    </tr>
-    <tr>
-      <td style="text-align:center">Feng Xue</td>
-      <td style="text-align:center"><a href="mailto:zp23769@bristol.ac.uk">zp23769@bristol.ac.uk</a></td>
-    </tr>
-  </tbody>
-</table>
 
 # How to download  Halloween Adventure 
 
@@ -87,19 +51,28 @@ https://processing.org/download
 
 # Introduction
 
-Add new features to characters, so that they can use zipline props to move upwards a greater distance, making it easier to pass levels. That is, characters can use zipline props to move upwards, cross obstacles or reach higher places.
-Zipline props are a unique and practical tool in the game that allows players to reach high or distant locations by zipline. It not only increases the fun and challenge of the game, but also provides players with new ways and strategies to move. Zipline props allow players to quickly move to hard-to-reach places, such as high cliffs, tops of buildings or distant platforms. Players can quickly reach the target location by aiming and launching the zipline. Zipline props are not only a moving tool, but can also be used in battle to avoid enemy attacks or quickly approach enemies. Players need to use ziplines at the right time to get the best results. The use of ziplines includes physical simulation, and players need to consider factors such as the length, angle and gravity of the zipline. This increases the challenge and realism of using ziplines. When using ziplines, the game will show gorgeous visual effects, such as the trajectory of the zipline launch, the animation of the player being pulled towards the target, etc., which enhances the visual impact and experience of the game.
+The feature of my new level is that the character has a hook, which can have different interactive effects with the walls, enemies, and objects in the map.
+
+I mainly designed a new function, the hook launch system. This system includes the hook launch animation and the hook collision animation. To this end, I also introduced three new collision detection algorithms, which handle the following situations respectively:
+
+1.Colliding with a wall: When the hook hits the wall, the character will move to the collision point on the wall.
+
+2.Colliding with an object: When the hook collides with an object, the object will be hooked and move toward the character.
+
+3.Colliding with a monster: When the hook hits a monster, it will bounce the monster in the opposite direction.
+
+4.When hitting a donut: The hook will exist briefly and move the person a certain distance.
+
+The introduction of these collision detection algorithms makes the game more strategic and challenging. Players need to use the hook and props flexibly to pass the level smoothly.
+
+In addition, I redesigned and updated the game map based on these new features of the hook. In certain specific areas, only players who are proficient in using hook props can pass. This design not only increases the difficulty of the game, but also greatly improves the playability and fun of the game. Players need to observe and think carefully to find the best path to pass the level.
 <br>
 <p align="center">
  <video src="https://github.com/UoB-COMSM0110/2024-group-12/blob/summerLu/assets/2024-07-2222.25.54.mov" alt="Enemies Chase Mechanics" style="width:100%; height:350px;">
  <p align="center">Enemies Chase Mechanics </p>
 </p>
 
-<br>
 
-The added twist within our game is the addition of a timed flying mechanic. This ‘power-up’ allows the player to fly for a short period of time, making traversal through the game world easier. 
-
-<br>
 <p align="center">
   <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/104866923/bad4b69e-b302-44f0-8c62-0d49154a1dfe" alt="Flying Mechanics" style="width:100%; height:350px;">
   <p align="center">Flying Mechanics</p>
@@ -108,7 +81,6 @@ The added twist within our game is the addition of a timed flying mechanic. This
 <br>
 <br>
 
-Early on the inspiration for our game was the fondness all team members had towards games like Super Mario, we chose this because it also gave a simple vision to consitantly aim for in the game development process. This was reflected in our initial idea for the game where the twist would be that princess peach would be rescuing Mario. Over time however this evolved, as we sought after our own story line and unique game aesthetic.
 
 <p align="center">
   <img src="https://github.com/UoB-COMSM0110/2024-group-12/assets/104866923/3b29196e-f7c5-4ec3-b1b1-5fcce879aa62" alt="Game Clear" style="width:100%; height:350px;">
@@ -203,23 +175,27 @@ The interaction of the stake holders with this game is designed to be identical 
 
 **User Case Story**
 
-- Control the player / character via intuitive controls
-- Have clear objectives and goals that the user must achieve when playing the game, i.e. a clear incentive
-- Have special power ups and milestones
+
 
 **User Story**
 
-> “Meet Hanna, a novice gamer: As a new gamer, I want to control the characters movements using simple controls that are immediately responsive. These controls should be intuitive so that I can navigate through the game easily and enjoy a immersive gaming experience.”
+> User Story 1: High Mobility
+
+As a player who likes to explore, I hope to use the zipline props to quickly reach hard-to-reach places so that I can discover hidden treasures and secret areas, adding fun and challenges to the game.
 >
 > ![UserStory-Hannah](https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/4ee9813e-1c6b-47ff-851b-b5093551951e)
 > 
 
-> “Meet John, a casual gamer: As a causal player of the game, I want a clear objective that provides a rewarding experience,  I want to unlock special levels or achievements by collecting specific power-ups or achieving certain in-game milestones so that I can explore additional content and challenges. e.g. a method to earn points."
+> User Story 2: Combat Strategy
+
+As a strategic player, I hope to use the zipline props to avoid enemy attacks and quickly approach enemies in battle, so that I can occupy a favorable position in battle and improve my chances of survival and combat efficiency.
 > 
 > ![Jon-CasualGamer](https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/9165a121-7700-49dd-b380-cc792c33df08)
 > 
 
-> “Meet Fenix, a experianced gamer: As an experianced user, I want a challanging game, I want to know I am the best player!!”
+> User Story 3: Environmental Interaction
+
+As a puzzle enthusiast player, I hope to use the zipline props to interact with the environment, such as pulling distant objects or triggering mobile switches, so that I can solve puzzles in the game, open new areas or hidden levels, and increase the depth and complexity of the game.
 >
 > ![Fenix-_ExperiancedGamer](https://github.com/UoB-COMSM0110/2024-group-12/assets/153836423/680a512a-2bf7-4e21-993b-408c7feabaa6)
 > 
@@ -227,6 +203,10 @@ The interaction of the stake holders with this game is designed to be identical 
 
 <br>
 <br>
+
+The grappling hook allows players to easily reach areas that were originally out of reach, stimulating their curiosity and desire to explore. The grappling hook allows players to move quickly in battle, avoid enemy attacks or quickly approach enemies, and occupy a favorable position in battle. The high mobility of the grappling hook can help players dodge enemy attacks more effectively, reduce damage received, and increase their chances of survival. The hook can be used to pull distant objects or trigger switches, adding puzzle elements to the game, requiring players to think more and use more skills when solving puzzles. The multiple uses of the hook make the gameplay more diverse and complex, attracting puzzle enthusiasts who like challenges.
+
+The development of the hook function can meet the needs of different types of players. Whether they like to explore, pursue combat strategies, or are keen on puzzle solving, they can experience more diverse and deeper game content through the hook. This not only improves the overall playability of the game, but also increases the player's sense of participation and satisfaction.
 
 | Use Case Section | Easy Mode | Hard Mode | 
 | ------------- | ------------- | ------------- |
@@ -250,15 +230,13 @@ The interaction of the stake holders with this game is designed to be identical 
 
 **System Architecture**
 
-The architecture of the game consists of largely three main components: Game Manager, UI and In-Game Components. It was of critical importance for all components to be fully integrated to develop a functioning game. 
+After the introduction of the grappling hook function, the following changes have taken place in the game system architecture: A new grappling hook launch function and its animation effects have been added, including calculation of the grappling hook's trajectory and real-time position updates. Three new collision detection algorithms have been introduced, one for the collision of the grappling hook with walls, objects, and monsters. Added sound processing for grappling hook launch and collision. The map structure has been redesigned based on the grappling hook function. In some areas, only the grappling hook can be used to pass through, which increases the depth and complexity of the game. Added grappling hook-based player movement logic, including the player's pulling movement after hooking an object and strategic movement after hooking an enemy. Added management of different states such as grappling hook launch, hooking, and returning to ensure the correct performance of the grappling hook in different situations.
 
-Game Manager corresponds to the default main.pde file of the newly created Processing Project, implying that the file manages the overall flow of the game and renders the UI and In-Game Components only under relevant situations. It overrides most built-in functions from Processing in which its keyboard and mouse actions are then controlled by this Game Manager. 
+For collision detection of objects, hooking different objects will produce different reactions.
 
-To display the right UI and perhaps the In-Game components, main.pde has to identify current state of the game. For instance, if it is on start state, it may display the Game Start Page with a lot of helper features (Start, Intro, Levels, Name) while at game-play state, it may display what is relevant for the play state (the player, enemies, and maps).
+In general, the first thing is to design the launch animation of the hook rope. First, use a straight line to simulate the launch of the hook rope, then use the method of gradual interpolation to complete the overall animation, use segmented drawing to simulate the color of the rope, and then use sine and cosine waves to complete the appearance of the hook rope.
 
-User Interfaces corresponds to all the user-friendly components including the start button, intro, leader board, difficulty levels, and a back button. They are designed to be well recognisable by users by their names without requiring understandings from the users on what to do and how to use these. 
-
-In-Game Components includes all the game related objects from a player, platforms, enemies, and score relevant collectables. Each of these game components are of a separate object with unique methods, and properties and if relevant may inherit from an identical parent class. It might be also important to find appealing visuals for each in-game components in which they may all look visually appealing. 
+The second is the return animation of the hook rope if nothing is hit. Here, the transpose of the interpolation t in the launch animation is used. If the character moves when hitting a wall, the end of the hook rope remains stationary, the start end moves toward the end end, and the character follows the start end. If it hits a pumpkin, the start end remains stationary, and the pumpkin moves with the end end of the hook rope to the start end. If it hits a monster, the rope returns and the monster moves to the end end. If it hits a donut, the end end is bound to the donut, the character starts to move, and the end end is retracted after the movement ends. 
 
 **CLASS DIAGRAM**
 
@@ -274,11 +252,11 @@ To have a common static view of the game, our group devised a class diagram wher
 
 # Implementation
   
-  Our game features an intricate system centered around the creation of "AnimatedSprite," a class housing the base character animations responsible for loading and executing various actions. Built upon this foundation, we implement the attributes of the player character, enhancing their functionality atop the AnimatedSprite framework. The core logic governing the behavior of boss characters takes precedence in our game, encompassing elements such as damage calculation, pursuit tactics, movement speed, and engagement range. Notably, classes like "PumpkinMonster," "RedSmile," and "RedSprite" derive from the original Boss class, loading distinct actions to diversify gameplay.
+  At the beginning, how to design and implement the effect of the hook rope, how to add a hook rope launching function based on the original character, there are two solutions, the first is similar to the gold miner, when the player presses a button, the hook rope appears and swings like the gold miner, and when it is pressed again, the hook rope is launched. The second design is to use the mouse directly to launch the hook rope directly from the center of the character to the mouse position. I adopted the second design. The main challenge here is how to use a straight line to simulate the animation of launching the hook rope. The solution is that I used sine and cosine waves to simulate the appearance of the rope and segmented drawing of straight lines to simulate the color of the rope and added a hook to make it more realistic.
 
-  To orchestrate the game's mechanics and level progression, we utilize the "Game" class for initializing maps, characters, and classes, while employing "Map" to dynamically generate environments and adversaries. Meanwhile, "PlayPage" facilitates seamless transitions between various game states, encompassing the start screen, end screen, and leaderboard interfaces. Additionally, the "Movement" class governs character movement logic and key mappings, ensuring fluid player control.
- 
-  Throughout the development journey, we encountered a myriad of challenges, ranging from optimizing character animations to managing the intricacies of boss logic and crafting dynamic game maps. Moreover, implementing interactions between players and enemies presented its own set of obstacles. In our pursuit of refining the game's quality and enhancing user experience, we'll delve into the specific challenges encountered and detail our strategies for overcoming them, ultimately fortifying our game development process.
+I mainly designed a new function, the hook line launch system. This system includes the hook line launch animation and the hook collision animation. For the hook line, I used straight lines and sine and cosine waves to simulate the hook line launch animation. In addition, I used the translate and rotate methods at one end of the hook line to realize the rotation animation of the hook.
+
+Collision bug, when the character hooks the wall, due to the problem of x-axis collision detection, the character will be directly brought to the top of the object that collided. My current solution is to first move the collision detection of the rope and the wall from the center of the wall to the edge of the wall. The second step is to subtract the distance from the center of the character to the edge from the total length of the rope to represent the distance the character moves. In fact, this problem is caused by the original collision algorithm. A better solution is to rewrite the detection method of the x-axis collision between the character and the wall, so that the character will automatically stop when it hits the wall. However, rewriting all the collision detection methods is very time-consuming, so it was not done. I adopted a simpler solution.
 
 ### Challenge 1
 
@@ -501,24 +479,13 @@ During Easter, we held sprint days, refining features and incorporating feedback
 
 - Bugs and a scattered focus delayed narrative development.
 
-**Solution:**
-We decided against a detailed narrative, opting instead to enhance the gameplay and visual elements. Unimplemented ideas included gameplay mechanics like collecting donuts for extra lives and transforming the ghost into a human.
+The difference from teamwork is that I have to find ways to complete the design and development of these functions by myself, and I have no way to discuss them. A person's energy may be limited, and there is no way to come up with more solutions for this implementation, because although it is an effect, everyone must have different experimental plans for each person. If there are more people, this effect may be made more perfect.
+
+In team development, good communication and collaboration are the key to ensuring the smooth progress of the project. Lack of effective communication and collaboration may lead to delayed development progress and code conflicts. Therefore, an effective communication mechanism and collaboration process should be established to ensure smooth information flow between team members. Recognize the importance of communication. Recognize the importance of communication in teamwork, whether in leading a team or participating in a work team, communication is necessary. Be patient and listen to the feedback of team members.
 
 # Conclusion
-In conclusion, our journey in developing this 2D platform game has been a testament to the power of collaboration, iteration, and user-centric design. Through the Agile methodology, we navigated various challenges, from refining our initial concept to addressing technical hurdles and user feedback. Our commitment to regular communication, role clarity, and task prioritization helped us stay on track despite the complexities of game development.
+User stories can help clarify development goals and user needs. By analyzing three user stories (high mobility, combat strategy, and environmental interaction), I learned about the needs of different types of players, and then designed and implemented the hook function to adapt to these needs. Ignoring user stories may lead to the development of features that are inconsistent with user needs, affecting user experience and satisfaction. Therefore, detailed requirements analysis and user story writing before development is crucial.
 
-As we progressed, user feedback played a pivotal role in shaping our game's direction. Whether it was tweaking mechanics for smoother gameplay or refining visual elements for better immersion, every iteration brought us closer to our goal of creating a compelling gaming experience.
+The modular design makes the code structure clear and easy to maintain and expand. In this project, the different functions of the hook (such as hook launch, collision detection, etc.) are designed as independent modules, so that each module can be tested and debugged independently. If the code is not modularized, later maintenance and expansion will become very difficult, and modifying one function may affect the stability of the entire system. Therefore, you should try to follow modular and object-oriented design principles when developing.
 
-While not without its challenges, our journey reinforced the importance of adaptability and resilience in the face of setbacks. By embracing feedback, iterating on our designs, and remaining focused on our objectives, we were able to overcome obstacles and deliver a game we're proud of.
-
-In the end, our game stands as a testament to the power of teamwork, creativity, and perseverance. Our adherence to Agile practices such as pair programming and iterative testing was instrumental in creating a game that was both enjoyable and aesthetically pleasing. This project underscored the importance of user feedback and continuous iteration, and taught us effective use of tools like Kanban boards and GitHub. These experiences will undoubtedly benefit our future projects, as we apply the lessons learned to new challenges and endeavors in the world of game development and beyond.
-
-# Individual Contribution Table
-
-| Name            | Role                                        | Individual Weight |
-|------------     |---------------------------------------------|-------------------|
-| Yiran           | Lead Developer and Coder                    |       1           |
-| Hamza           | Project Manager and Coder                   |       1           |
-| GunHo           | Secondary Developer and Designer            |       1           |
-| Feng            | null                                        |       1           |
-| Lu              | null                                        |       1           |
+During the development of the hook function, a significant problem arose, that is, the data loading process was too long. This is mainly due to the delay in starting, restarting and returning the game when looping the CSV file. When the game starts, restarts or returns to the main interface, a large amount of game data needs to be loaded. This data is typically stored in CSV files and loaded via a loop operation. When the CSV file has a large amount of data, it takes a long time to read and process the data in a loop, causing the overall loading process to slow down.
