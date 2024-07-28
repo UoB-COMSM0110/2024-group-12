@@ -64,6 +64,9 @@ I mainly designed a new function, the hook launch system. This system includes t
 
 </p>
 
+[Demo Video](./assets/2024-07-28%2017.18.13.mov)<br>
+Please click the link above to download and watch the video.
+
 2.Colliding with an object: When the hook collides with an object, the object will be hooked and move toward the character.
 
 <p align="center">
@@ -73,6 +76,9 @@ I mainly designed a new function, the hook launch system. This system includes t
 </video>
 
 </p>
+
+[Demo Video](./assets/2024-07-28%2017.15.06.mov)<br>
+Please click the link above to download and watch the video.
 
 3.Colliding with a monster: When the hook hits a monster, it will bounce the monster in the opposite direction.
 
@@ -84,6 +90,9 @@ I mainly designed a new function, the hook launch system. This system includes t
 
 </p>
 
+[Demo Video](./assets/2024-07-28%2017.19.25.mov)<br>
+Please click the link above to download and watch the video.
+
 4.When hitting a donut: The hook will exist briefly and move the person a certain distance.
 
 <p align="center">
@@ -93,6 +102,9 @@ I mainly designed a new function, the hook launch system. This system includes t
 </video>
 
 </p>
+
+[Demo Video](./assets/2024-07-28%2017.17.03.mov)<br>
+Please click the link above to download and watch the video.
 
 The introduction of these collision detection algorithms makes the game more strategic and challenging. Players need to use the hook and props flexibly to pass the level smoothly.
 
@@ -156,6 +168,9 @@ For collision detection of objects, hooking different objects will produce diffe
 
 </p>
 
+[Demo Video](./assets/2024-07-2222.25.54.mov)<br>
+Please click the link above to download and watch the video.
+
 In general, the first thing is to design the launch animation of the hook rope. First, use a straight line to simulate the launch of the hook rope, then use the method of gradual interpolation to complete the overall animation, use segmented drawing to simulate the color of the rope, and then use <b>sine and cosine</b> waves to complete the appearance of the hook rope.
 
 The second is the return animation of the hook rope if nothing is hit. Here, the transpose of the interpolation t in the launch animation is used. If the character moves when hitting a wall, the end of the hook rope remains stationary, the start end moves toward the end end, and the character follows the start end. If it hits a pumpkin, the start end remains stationary, and the pumpkin moves with the end end of the hook rope to the start end. If it hits a monster, the rope returns and the monster moves to the end end. If it hits a donut, the end end is bound to the donut, the character starts to move, and the end end is retracted after the movement ends. 
@@ -178,6 +193,9 @@ I mainly designed a new function, the hook line launch system. This system inclu
 </video>
 
 </p>
+
+[Demo Video](./assets/2024-07-24%2020.02.49.mov)<br>
+Please click the link above to download and watch the video.
 
 Collision bug, when the character hooks the wall, due to the problem of x-axis collision detection, the character will be directly brought to the top of the object that collided. My current solution is to first move the collision detection of the rope and the wall from the center of the wall to the edge of the wall. The second step is to subtract the distance from the center of the character to the edge from the total length of the rope to represent the distance the character moves. In fact, this problem is caused by the original collision algorithm. A better solution is to rewrite the detection method of the x-axis collision between the character and the wall, so that the character will automatically stop when it hits the wall. However, rewriting all the collision detection methods is very time-consuming, so it was not done. I adopted a simpler solution.
 
